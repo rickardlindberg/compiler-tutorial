@@ -1,6 +1,7 @@
 main.StageParsing
 
 The first transformation is often parsing. Working with raw text is difficult.
+We want a parse tree.
 
 ## Continue
 
