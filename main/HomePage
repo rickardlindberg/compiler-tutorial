@@ -5,4 +5,4 @@ are difficult to implement, but as we will see in this tutorial, writing a
 compiler for a small language does not require that much.
 
 WhyWriteACompiler
-IntroductionToCompilers
+WhatIsACompiler
