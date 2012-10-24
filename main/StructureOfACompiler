@@ -10,6 +10,9 @@ text is not always straight forward.
 
     show how going direct is hard
 
+Different compilers have different stages. Follow along to see what stages are
+involved in the compiler for this tutorial.
+
 ## Continue
 
 ConOverview
