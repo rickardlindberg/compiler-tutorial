@@ -8,5 +8,7 @@ understand the execution model of the source program. Let's look at an example:
     let facIter = \(n, result, k) ->
         isZero n
             (\() -> k result)
-            (\() -> minus n 1
-                (\(n2) -> facIter n2 partial2 k))
+            (\() ->
+                minus n 1 \(newN) ->
+                times n result \(newResult) ->
+                facIter newN newResult k)
