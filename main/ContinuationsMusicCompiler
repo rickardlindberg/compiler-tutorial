@@ -1,0 +1,8 @@
+main.ContinuationsMusicCompiler
+
+In this tutorial, we are going to write a compiler from a custom source
+language inspired by continuation passing style to the target language C. The C
+code that is generated can then be 
+
+If you are unfamiliar with continuation passing style, you want to check out
+ContinuationPassingStyle before continuing.
