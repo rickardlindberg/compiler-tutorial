@@ -13,3 +13,12 @@ understand the execution model of the source program. Let's look at an example:
                 minus n 1 \(newN) ->
                 times n result \(newResult) ->
                 facAccumulate newN newResult k)
+
+Let's try to run this function with n = 3:
+
+    fac 3 k             -->
+    facAccumulate 3 1 k -->
+    facAccumulate 2 3 k -->
+    facAccumulate 1 6 k -->
+    facAccumulate 0 6 k -->
+    k 6
