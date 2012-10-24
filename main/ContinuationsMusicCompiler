@@ -1,7 +1,7 @@
 main.ContinuationsMusicCompiler
 
 In this tutorial, we are going to write a compiler that enables us to program
-an ArduinoUno in our custom language.
+an ArduinoUno in our custom language that we will call CON.
 
 The custom language is a general-purpose programming language based on
 ContinuationPassingStyle. We will implement primitives to control 
