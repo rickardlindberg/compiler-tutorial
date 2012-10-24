@@ -1,7 +1,7 @@
 main.ContinuationsMusicCompiler
 
 In this tutorial, we are going to write a compiler that enables us to program
-an Arduino in our custom language.
+an ArduinoUno in our custom language.
 
 In this tutorial, we are going to write a compiler from a custom source
 language inspired by continuation passing style to the target language C. The C
