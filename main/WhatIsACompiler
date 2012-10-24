@@ -3,4 +3,6 @@ main.WhatIsACompiler
 A compiler is a program that transforms code from a source language to a target
 language. The source and the target languages can be any languages.
 
-Continue: WhyWriteACompiler
+## Continue
+
+WhyWriteACompiler
