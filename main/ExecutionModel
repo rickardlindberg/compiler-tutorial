@@ -1,0 +1,12 @@
+main.ExecutionModel
+
+Before we can transform the parse tree to the target language, we need to
+understand the execution model of the source program. Let's look at an example:
+
+    let fac = \(n, k) -> facIter n 1 k
+
+    let facIter = \(n, partialRes, k) ->
+        isZero n
+            (\() -> k partialRes)
+            (\() -> minus n 1
+                (\(n2) -> facIter n2 partial2 k))
