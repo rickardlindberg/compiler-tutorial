@@ -5,8 +5,6 @@ understand the execution model of the source program. Let's look at an example:
 
     let fac = \(n, k) -> facIter n 1 k
 
-    let fac = \(n, k) -> facIter n 1 k
-
     let facIter = \(n, result, k) ->
         isZero n
             (\() -> k result)
