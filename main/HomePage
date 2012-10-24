@@ -4,4 +4,6 @@ In this tutorial we are going to write a compiler. Many people think compilers
 are difficult to implement, but as we will see in this tutorial, writing a
 compiler for a small language does not require that much.
 
-Continue: WhatIsACompiler
+## Continue
+
+WhatIsACompiler
