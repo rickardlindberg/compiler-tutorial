@@ -22,3 +22,5 @@ Let's try to run this function with n = 3:
     facAccumulate 1 6 k -->
     facAccumulate 0 6 k -->
     k 6
+
+`facAccumulate` is obviusly called multiple times
