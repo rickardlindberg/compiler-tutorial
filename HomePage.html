@@ -24,11 +24,11 @@
         <hr />
 <svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
 <script type="text/javascript">
-    var g = new Graph("canvas", 800, 300);
-    // reduce repulsion and spring length for more compact layout
-g.createVertex("HomePage", "#ff0000");
-g.createVertex("WhatIsCompiler", "#00ff00");
-g.createVertex("WhyWriteCompiler", "#0000ff");
+    var g = new Graph("canvas", 800, 400);
+    g.repulsion = g.repulsion / 2;
+g.createVertex("HomePage", "#fcaf3e", "#ab7423", function () { location.href = "HomePage.html"; });
+g.createVertex("WhatIsCompiler", "#fce94f", "#c4a000", function () { location.href = "WhatIsCompiler.html"; });
+g.createVertex("WhyWriteCompiler", "#8ae234", "#425d26", function () { location.href = "WhyWriteCompiler.html"; });
 g.createEdge("HomePage", "WhatIsCompiler");
 g.createEdge("WhatIsCompiler", "WhyWriteCompiler");
 

@@ -25,15 +25,18 @@
         <hr />
 <svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
 <script type="text/javascript">
-    var g = new Graph("canvas", 800, 300);
-    // reduce repulsion and spring length for more compact layout
-g.createVertex("ConOverview", "#ff0000");
-g.createVertex("StageParsing", "#00ff00");
-g.createVertex("StructureOfCompiler", "#00ff00");
-g.createVertex("ContinuationsMusicCompiler", "#0000ff");
-g.createVertex("ExecutionModel", "#0000ff");
+    var g = new Graph("canvas", 800, 400);
+    g.repulsion = g.repulsion / 2;
+g.createVertex("ConOverview", "#fcaf3e", "#ab7423", function () { location.href = "ConOverview.html"; });
+g.createVertex("StageParsing", "#fce94f", "#c4a000", function () { location.href = "StageParsing.html"; });
+g.createVertex("StructureOfCompiler", "#fce94f", "#c4a000", function () { location.href = "StructureOfCompiler.html"; });
+g.createVertex("ContinuationsMusicCompiler", "#8ae234", "#425d26", function () { location.href = "ContinuationsMusicCompiler.html"; });
+g.createVertex("ExecutionModel", "#8ae234", "#425d26", function () { location.href = "ExecutionModel.html"; });
+g.createVertex("ParseTree", "#8ae234", "#425d26", function () { location.href = "ParseTree.html"; });
 g.createEdge("ConOverview", "StageParsing");
 g.createEdge("StageParsing", "ExecutionModel");
+g.createEdge("StructureOfCompiler", "ParseTree");
+g.createEdge("StructureOfCompiler", "ParseTree");
 g.createEdge("StructureOfCompiler", "ConOverview");
 g.createEdge("ContinuationsMusicCompiler", "StructureOfCompiler");
 

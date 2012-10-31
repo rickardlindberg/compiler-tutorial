@@ -22,11 +22,11 @@
         <hr />
 <svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
 <script type="text/javascript">
-    var g = new Graph("canvas", 800, 300);
-    // reduce repulsion and spring length for more compact layout
-g.createVertex("GeneratingCode", "#ff0000");
-g.createVertex("CodeGenerationFramework", "#00ff00");
-g.createVertex("ExecutionModel", "#0000ff");
+    var g = new Graph("canvas", 800, 400);
+    g.repulsion = g.repulsion / 2;
+g.createVertex("GeneratingCode", "#fcaf3e", "#ab7423", function () { location.href = "GeneratingCode.html"; });
+g.createVertex("CodeGenerationFramework", "#fce94f", "#c4a000", function () { location.href = "CodeGenerationFramework.html"; });
+g.createVertex("ExecutionModel", "#8ae234", "#425d26", function () { location.href = "ExecutionModel.html"; });
 g.createEdge("CodeGenerationFramework", "GeneratingCode");
 g.createEdge("ExecutionModel", "CodeGenerationFramework");
 

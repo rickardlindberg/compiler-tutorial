@@ -19,17 +19,20 @@
       <div class="span-20 prepend-2 append-2">
         <h1>WhatIsCompiler</h1>
 <p>A compiler is a program that transforms code from a source language to a target language. The source and the target languages can be any languages.</p>
+<div class="figure">
+<img src=".//static/images/compiler.png" alt="A compiler." /><p class="caption">A compiler.</p>
+</div>
 <h2 id="continue">Continue</h2>
 <p><a href="WhyWriteCompiler.html" title="WhyWriteCompiler">WhyWriteCompiler</a></p>
         <hr />
 <svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
 <script type="text/javascript">
-    var g = new Graph("canvas", 800, 300);
-    // reduce repulsion and spring length for more compact layout
-g.createVertex("WhatIsCompiler", "#ff0000");
-g.createVertex("HomePage", "#00ff00");
-g.createVertex("WhyWriteCompiler", "#00ff00");
-g.createVertex("ContinuationsMusicCompiler", "#0000ff");
+    var g = new Graph("canvas", 800, 400);
+    g.repulsion = g.repulsion / 2;
+g.createVertex("WhatIsCompiler", "#fcaf3e", "#ab7423", function () { location.href = "WhatIsCompiler.html"; });
+g.createVertex("HomePage", "#fce94f", "#c4a000", function () { location.href = "HomePage.html"; });
+g.createVertex("WhyWriteCompiler", "#fce94f", "#c4a000", function () { location.href = "WhyWriteCompiler.html"; });
+g.createVertex("ContinuationsMusicCompiler", "#8ae234", "#425d26", function () { location.href = "ContinuationsMusicCompiler.html"; });
 g.createEdge("WhatIsCompiler", "WhyWriteCompiler");
 g.createEdge("HomePage", "WhatIsCompiler");
 g.createEdge("WhyWriteCompiler", "ContinuationsMusicCompiler");

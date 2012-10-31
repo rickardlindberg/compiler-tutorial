@@ -24,13 +24,13 @@
         <hr />
 <svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
 <script type="text/javascript">
-    var g = new Graph("canvas", 800, 300);
-    // reduce repulsion and spring length for more compact layout
-g.createVertex("CodeGenerationFramework", "#ff0000");
-g.createVertex("ExecutionModel", "#00ff00");
-g.createVertex("GeneratingCode", "#00ff00");
-g.createVertex("RuntimeSupport", "#0000ff");
-g.createVertex("StageParsing", "#0000ff");
+    var g = new Graph("canvas", 800, 400);
+    g.repulsion = g.repulsion / 2;
+g.createVertex("CodeGenerationFramework", "#fcaf3e", "#ab7423", function () { location.href = "CodeGenerationFramework.html"; });
+g.createVertex("ExecutionModel", "#fce94f", "#c4a000", function () { location.href = "ExecutionModel.html"; });
+g.createVertex("GeneratingCode", "#fce94f", "#c4a000", function () { location.href = "GeneratingCode.html"; });
+g.createVertex("RuntimeSupport", "#8ae234", "#425d26", function () { location.href = "RuntimeSupport.html"; });
+g.createVertex("StageParsing", "#8ae234", "#425d26", function () { location.href = "StageParsing.html"; });
 g.createEdge("CodeGenerationFramework", "GeneratingCode");
 g.createEdge("ExecutionModel", "RuntimeSupport");
 g.createEdge("ExecutionModel", "CodeGenerationFramework");

@@ -17,26 +17,28 @@ function Graph( canvas_name, width, height ) {
 	this.spring_length = 20; // base resting length of springs
 }
 
-Graph.prototype.createVertex = function( name, color ) { // XXX -- should support separate id and name 
+Graph.prototype.createVertex = function( name, color, stroke, clickFn ) { // XXX -- should support separate id and name 
 	// create an SVG rectangle, attach additional attributed to it
 	var vertex = document.createElementNS(this.svg, "rect");
 	if( color === undefined ) {
 		color = "#222";
 	}
-	vertex.setAttribute("style", "fill: "+color+"; stroke-width: 1px;");
+	vertex.setAttribute("style", "fill: "+color+"; stroke: "+stroke+"; stroke-width: 1px;");
 	vertex.setAttribute("rx", "10px"); // round the edges
 	// random placement with a 10% margin at the edges
 	vertex.posx = Math.random() * (this.width * 0.8) + (this.width * 0.1);
 	vertex.posy = (Math.random() * (this.height * 0.8)) + (this.height * 0.1);
 	vertex.setAttribute("x", vertex.posx );
 	vertex.setAttribute("y", vertex.posy );
+	vertex.onclick = clickFn;
 	vertex.edges = new Array();
 	this.canvas.appendChild(vertex);
 	
 	// text label
 	vertex.name = name;
 	vertex.textLabel = document.createElementNS(this.svg, "text");
-	vertex.textLabel.setAttribute("style", "fill: #fff; stroke-width: 1px;");
+	vertex.textLabel.setAttribute("style", "fill: #555753; stroke-width: 1px;");
+	vertex.textLabel.onclick = clickFn;
 	vertex.textLabel.appendChild( document.createTextNode( name ) );	
 	this.canvas.appendChild( vertex.textLabel );
 	

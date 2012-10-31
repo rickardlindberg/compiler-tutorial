@@ -45,14 +45,14 @@ k 6</code></pre>
         <hr />
 <svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
 <script type="text/javascript">
-    var g = new Graph("canvas", 800, 300);
-    // reduce repulsion and spring length for more compact layout
-g.createVertex("ExecutionModel", "#ff0000");
-g.createVertex("CodeGenerationFramework", "#00ff00");
-g.createVertex("RuntimeSupport", "#00ff00");
-g.createVertex("StageParsing", "#00ff00");
-g.createVertex("ConOverview", "#0000ff");
-g.createVertex("GeneratingCode", "#0000ff");
+    var g = new Graph("canvas", 800, 400);
+    g.repulsion = g.repulsion / 2;
+g.createVertex("ExecutionModel", "#fcaf3e", "#ab7423", function () { location.href = "ExecutionModel.html"; });
+g.createVertex("CodeGenerationFramework", "#fce94f", "#c4a000", function () { location.href = "CodeGenerationFramework.html"; });
+g.createVertex("RuntimeSupport", "#fce94f", "#c4a000", function () { location.href = "RuntimeSupport.html"; });
+g.createVertex("StageParsing", "#fce94f", "#c4a000", function () { location.href = "StageParsing.html"; });
+g.createVertex("ConOverview", "#8ae234", "#425d26", function () { location.href = "ConOverview.html"; });
+g.createVertex("GeneratingCode", "#8ae234", "#425d26", function () { location.href = "GeneratingCode.html"; });
 g.createEdge("ExecutionModel", "RuntimeSupport");
 g.createEdge("ExecutionModel", "CodeGenerationFramework");
 g.createEdge("CodeGenerationFramework", "GeneratingCode");

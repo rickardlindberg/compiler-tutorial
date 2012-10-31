@@ -2,7 +2,7 @@
 "http://www.w3.org/TR/html4/strict.dtd">
 <html>
   <head>
-    <title>WhyWriteCompiler</title>
+    <title>PiezoSpeakers</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="./static/css/blueprint/screen.css" type="text/css" media="screen, projection">
     <link rel="stylesheet" href="./static/css/blueprint/print.css" type="text/css" media="print"> 
@@ -17,33 +17,27 @@
   <body>
     <div class="container noshowgrid">
       <div class="span-20 prepend-2 append-2">
-        <h1>WhyWriteCompiler</h1>
-<p>There are many reasons why one would want to write a compiler. Here are some of them.</p>
-<h2 id="learn-how-programs-execute">Learn how programs execute</h2>
-<h2 id="make-more-powerful-construct">Make more powerful construct</h2>
-<h2 id="continue">Continue</h2>
-<p><a href="ContinuationsMusicCompiler.html" title="ContinuationsMusicCompiler">ContinuationsMusicCompiler</a></p>
+        <h1>PiezoSpeakers</h1>
+<p>A piezo speaker is a primitive speaker. Have a look at the video in <a href="ContinuationsMusicCompiler.html" title="ContinuationsMusicCompiler">ContinuationsMusicCompiler</a> to see how they are used.</p>
         <hr />
 <svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
 <script type="text/javascript">
     var g = new Graph("canvas", 800, 400);
     g.repulsion = g.repulsion / 2;
-g.createVertex("WhyWriteCompiler", "#fcaf3e", "#ab7423", function () { location.href = "WhyWriteCompiler.html"; });
+g.createVertex("PiezoSpeakers", "#fcaf3e", "#ab7423", function () { location.href = "PiezoSpeakers.html"; });
+g.createVertex("ConLanguage", "#fce94f", "#c4a000", function () { location.href = "ConLanguage.html"; });
 g.createVertex("ContinuationsMusicCompiler", "#fce94f", "#c4a000", function () { location.href = "ContinuationsMusicCompiler.html"; });
-g.createVertex("WhatIsCompiler", "#fce94f", "#c4a000", function () { location.href = "WhatIsCompiler.html"; });
 g.createVertex("ArduinoUno", "#8ae234", "#425d26", function () { location.href = "ArduinoUno.html"; });
-g.createVertex("ConLanguage", "#8ae234", "#425d26", function () { location.href = "ConLanguage.html"; });
-g.createVertex("HomePage", "#8ae234", "#425d26", function () { location.href = "HomePage.html"; });
-g.createVertex("PiezoSpeakers", "#8ae234", "#425d26", function () { location.href = "PiezoSpeakers.html"; });
+g.createVertex("ContinuationPassingStyle", "#8ae234", "#425d26", function () { location.href = "ContinuationPassingStyle.html"; });
 g.createVertex("StructureOfCompiler", "#8ae234", "#425d26", function () { location.href = "StructureOfCompiler.html"; });
-g.createEdge("WhyWriteCompiler", "ContinuationsMusicCompiler");
+g.createVertex("WhyWriteCompiler", "#8ae234", "#425d26", function () { location.href = "WhyWriteCompiler.html"; });
+g.createEdge("PiezoSpeakers", "ContinuationsMusicCompiler");
+g.createEdge("ConLanguage", "ContinuationPassingStyle");
+g.createEdge("ConLanguage", "PiezoSpeakers");
 g.createEdge("ContinuationsMusicCompiler", "ArduinoUno");
 g.createEdge("ContinuationsMusicCompiler", "ConLanguage");
 g.createEdge("ContinuationsMusicCompiler", "StructureOfCompiler");
-g.createEdge("WhatIsCompiler", "WhyWriteCompiler");
-g.createEdge("ConLanguage", "PiezoSpeakers");
-g.createEdge("HomePage", "WhatIsCompiler");
-g.createEdge("PiezoSpeakers", "ContinuationsMusicCompiler");
+g.createEdge("WhyWriteCompiler", "ContinuationsMusicCompiler");
 
     g.go();
 </script>

@@ -1,0 +1,79 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>ConLanguage</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="./static/css/blueprint/screen.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="./static/css/blueprint/print.css" type="text/css" media="print"> 
+    <!--[if lt IE 8]>
+      <link rel="stylesheet" href="./static/css/blueprint/ie.css" type="text/css" media="screen, projection">
+    <![endif]-->
+    <link rel="stylesheet" href="./static/css/pygments/syntax.css" type="text/css"> 
+    <link rel="stylesheet" href="./static/css/layout.css" type="text/css"> 
+    <link rel="stylesheet" href="./static/css/colors.css" type="text/css"> 
+    <script type="text/javascript" src="./static/js/graph.js"></script>
+  </head>
+  <body>
+    <div class="container noshowgrid">
+      <div class="span-20 prepend-2 append-2">
+        <h1>ConLanguage</h1>
+<p>Con is a general-purpose programming language based on <a href="ContinuationPassingStyle.html" title="ContinuationPassingStyle">ContinuationPassingStyle</a>.</p>
+<p>Depending on which primitives are implemented in the language, it can do different things. We will implement primitives to control a set of <a href="PiezoSpeakers.html" title="PiezoSpeakers">PiezoSpeakers</a> connected to the Arduino. They are: <code>setTempo</code> and <code>setBeat</code>.</p>
+<p>A program that plays the C-scale looks like this:</p>
+<pre><code>let main =
+    \() -&gt; cScale
+    exit
+
+let cScale =
+    \(k) -&gt; setTempo 100
+    \()  -&gt; setBeat C4
+    \()  -&gt; setBeat D4
+    \()  -&gt; setBeat E4
+    \()  -&gt; setBeat F4
+    \()  -&gt; setBeat G4
+    \()  -&gt; setBeat A4
+    \()  -&gt; setBeat B4
+    \()  -&gt; setBeat C5
+    k
+
+let C4 = 262
+let D4 = 294
+let E4 = 330
+let F4 = 349
+let G4 = 392
+let A4 = 440
+let B4 = 494
+let C5 = 523</code></pre>
+<p>A con program is a list of let-expressions. A let-expression binds a value to a name. Values can be numbers or functions. The name <code>main</code> must be bound to a function which takes no arguments. That function is the starting point.</p>
+<p>A function is written using the following syntax: <code>\(arg1, arg2) -&gt; body</code>. The body must be a call to a function.</p>
+<p>In the example above a function which takes no arguments is assigned to the name <code>main</code>. The body calls the function <code>cScale</code> passing one argument: <code>exit</code>. Exit is a built in function which terminates the execution of the program.</p>
+<p>The <code>cScale</code> function is defined to take one argument, <code>k</code>, which in this example will be the <code>exit</code> function. In the body, it calls the <code>setTempo</code> function passing two arguments: first a number, and then a function. The function starts like this: <code>\() -&gt; setBeat C4 ...</code>.</p>
+<p>When the last <code>setBeat</code> function is called, we pass in <code>k</code> to be the next function to call. Since <code>k</code> is bound to the <code>exit</code> function, the program will terminate here.</p>
+        <hr />
+<svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
+<script type="text/javascript">
+    var g = new Graph("canvas", 800, 400);
+    g.repulsion = g.repulsion / 2;
+g.createVertex("ConLanguage", "#fcaf3e", "#ab7423", function () { location.href = "ConLanguage.html"; });
+g.createVertex("ContinuationPassingStyle", "#fce94f", "#c4a000", function () { location.href = "ContinuationPassingStyle.html"; });
+g.createVertex("ContinuationsMusicCompiler", "#fce94f", "#c4a000", function () { location.href = "ContinuationsMusicCompiler.html"; });
+g.createVertex("PiezoSpeakers", "#fce94f", "#c4a000", function () { location.href = "PiezoSpeakers.html"; });
+g.createVertex("ArduinoUno", "#8ae234", "#425d26", function () { location.href = "ArduinoUno.html"; });
+g.createVertex("StructureOfCompiler", "#8ae234", "#425d26", function () { location.href = "StructureOfCompiler.html"; });
+g.createVertex("WhyWriteCompiler", "#8ae234", "#425d26", function () { location.href = "WhyWriteCompiler.html"; });
+g.createEdge("ConLanguage", "ContinuationPassingStyle");
+g.createEdge("ConLanguage", "PiezoSpeakers");
+g.createEdge("ContinuationsMusicCompiler", "ArduinoUno");
+g.createEdge("ContinuationsMusicCompiler", "ConLanguage");
+g.createEdge("ContinuationsMusicCompiler", "StructureOfCompiler");
+g.createEdge("PiezoSpeakers", "ContinuationsMusicCompiler");
+g.createEdge("WhyWriteCompiler", "ContinuationsMusicCompiler");
+
+    g.go();
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>
