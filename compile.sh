@@ -1,5 +1,5 @@
 #!/bin/sh
-rm -r html-export
+rm -fr html-export
 mkdir html-export
 cp -r static html-export
 cd ~/projects/markdown-wiki/
