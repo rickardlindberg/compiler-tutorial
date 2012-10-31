@@ -11,19 +11,20 @@ publish_rev=$(git log -1 --oneline)
 
 # Move the generated stuff out of repo
 TMP_DEST=/tmp/compiler-tutorial-html-export
-mv "html-export" $TMP_DEST
+cp -r "html-export" $TMP_DEST
+rm -r "html-export"
 
 # Checkout pages branch and clean it
 git checkout gh-pages
 git rm -rf .
 
 # Copy over generated and commit
-mv $TMP_DEST/* .
+cp -r $TMP_DEST/* .
 git add .
 git commit -m "publishing $publish_rev"
 
 # Delete tmp dir
-rmdir $TMP_DEST
+rm -r $TMP_DEST
 
 # Go back to master
 git checkout master
