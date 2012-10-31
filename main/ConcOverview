@@ -13,6 +13,7 @@ transforms con source code to C source code.
 In order to make the generated C source code run on the Arduino, we have to
 compiler it with a C compiler.
 
+![Environment in which conc is used.]($ROOT/static/images/conc-environment.png)
 
 show the surrounding environment
 
