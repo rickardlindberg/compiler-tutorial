@@ -17,7 +17,7 @@ function Graph( canvas_name, width, height ) {
 	this.spring_length = 20; // base resting length of springs
 }
 
-Graph.prototype.createVertex = function( name, color ) { // XXX -- should support separate id and name 
+Graph.prototype.createVertex = function( name, color, clickFn ) { // XXX -- should support separate id and name 
 	// create an SVG rectangle, attach additional attributed to it
 	var vertex = document.createElementNS(this.svg, "rect");
 	if( color === undefined ) {
@@ -30,6 +30,7 @@ Graph.prototype.createVertex = function( name, color ) { // XXX -- should suppor
 	vertex.posy = (Math.random() * (this.height * 0.8)) + (this.height * 0.1);
 	vertex.setAttribute("x", vertex.posx );
 	vertex.setAttribute("y", vertex.posy );
+	vertex.onclick = clickFn;
 	vertex.edges = new Array();
 	this.canvas.appendChild(vertex);
 	
@@ -37,6 +38,7 @@ Graph.prototype.createVertex = function( name, color ) { // XXX -- should suppor
 	vertex.name = name;
 	vertex.textLabel = document.createElementNS(this.svg, "text");
 	vertex.textLabel.setAttribute("style", "fill: #fff; stroke-width: 1px;");
+	vertex.textLabel.onclick = clickFn;
 	vertex.textLabel.appendChild( document.createTextNode( name ) );	
 	this.canvas.appendChild( vertex.textLabel );
 	
