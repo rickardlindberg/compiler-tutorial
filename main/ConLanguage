@@ -5,7 +5,7 @@ ContinuationPassingStyle.
 
 Depending on which primitives are implemented in the language, it can do
 different things. We will implement primitives to control a set of
-PiezoSpeakers connected to the Arduino.
+PiezoSpeakers connected to the Arduino. They are: `setTempo` and `setBeat`.
 
 A program that plays the C-scale looks like this:
 
@@ -15,14 +15,14 @@ A program that plays the C-scale looks like this:
 
     let cScale =
         \(k) -> setTempo 100
-        \()  -> setBeat1 C4
-        \()  -> setBeat1 D4
-        \()  -> setBeat1 E4
-        \()  -> setBeat1 F4
-        \()  -> setBeat1 G4
-        \()  -> setBeat1 A4
-        \()  -> setBeat1 B4
-        \()  -> setBeat1 C5
+        \()  -> setBeat C4
+        \()  -> setBeat D4
+        \()  -> setBeat E4
+        \()  -> setBeat F4
+        \()  -> setBeat G4
+        \()  -> setBeat A4
+        \()  -> setBeat B4
+        \()  -> setBeat C5
         k
 
     let C4 = 262
@@ -34,9 +34,9 @@ A program that plays the C-scale looks like this:
     let B4 = 494
     let C5 = 523
 
-A con program is a list of let-expressions. A let-expression just binds a value
-to a name. Values can be numbers or functions. The name `main` must be bound to
-a function which takes no argument. That function is the starting point.
+A con program is a list of let-expressions. A let-expression binds a value to a
+name. Values can be numbers or functions. The name `main` must be bound to a
+function which takes no arguments. That function is the starting point.
 
 A function is written using the following syntax: `\(arg1, arg2) -> body`. The
 body must be a call to a function.
@@ -48,8 +48,8 @@ Exit is a built in function which terminates the execution of the program.
 The `cScale` function is defined to take one argument, `k`, which in this
 example will be the `exit` function. In the body, it calls the `setTempo`
 function passing two arguments: first a number, and then a function. The
-function starts like this: `\() -> setBeat1 C4 ...`.
+function starts like this: `\() -> setBeat C4 ...`.
 
-When the last `setBeat1` function is called, we pass in `k` to be the next
+When the last `setBeat` function is called, we pass in `k` to be the next
 function to call. Since `k` is bound to the `exit` function, the program will
 terminate here.
