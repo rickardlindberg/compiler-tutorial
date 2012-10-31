@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>StageParsing</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="./static/css/blueprint/screen.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="./static/css/blueprint/print.css" type="text/css" media="print"> 
+    <!--[if lt IE 8]>
+      <link rel="stylesheet" href="./static/css/blueprint/ie.css" type="text/css" media="screen, projection">
+    <![endif]-->
+    <link rel="stylesheet" href="./static/css/pygments/syntax.css" type="text/css"> 
+    <link rel="stylesheet" href="./static/css/layout.css" type="text/css"> 
+    <link rel="stylesheet" href="./static/css/colors.css" type="text/css"> 
+    <script type="text/javascript" src="./static/js/graph.js"></script>
+  </head>
+  <body>
+    <div class="container noshowgrid">
+      <div class="span-20 prepend-2 append-2">
+        <h1>StageParsing</h1>
+<pre><code>show stages for con with parsing highlighted</code></pre>
+<p>The first transformation is often parsing. Working with raw text is difficult. We want a parse tree.</p>
+<ul>
+<li>different parsing methods</li>
+<li>parsec introduction</li>
+</ul>
+<h2 id="continue">Continue</h2>
+<p><a href="ExecutionModel.html" title="ExecutionModel">ExecutionModel</a></p>
+        <hr />
+<svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
+<script type="text/javascript">
+    var g = new Graph("canvas", 800, 300);
+    // reduce repulsion and spring length for more compact layout
+g.createVertex("StageParsing", "#ff0000");
+g.createVertex("ConOverview", "#00ff00");
+g.createVertex("ExecutionModel", "#00ff00");
+g.createVertex("CodeGenerationFramework", "#0000ff");
+g.createVertex("RuntimeSupport", "#0000ff");
+g.createVertex("StructureOfCompiler", "#0000ff");
+g.createEdge("StageParsing", "ExecutionModel");
+g.createEdge("ConOverview", "StageParsing");
+g.createEdge("ExecutionModel", "RuntimeSupport");
+g.createEdge("ExecutionModel", "CodeGenerationFramework");
+g.createEdge("StructureOfCompiler", "ConOverview");
+
+    g.go();
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>

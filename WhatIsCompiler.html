@@ -1,0 +1,43 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>WhatIsCompiler</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="./static/css/blueprint/screen.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="./static/css/blueprint/print.css" type="text/css" media="print"> 
+    <!--[if lt IE 8]>
+      <link rel="stylesheet" href="./static/css/blueprint/ie.css" type="text/css" media="screen, projection">
+    <![endif]-->
+    <link rel="stylesheet" href="./static/css/pygments/syntax.css" type="text/css"> 
+    <link rel="stylesheet" href="./static/css/layout.css" type="text/css"> 
+    <link rel="stylesheet" href="./static/css/colors.css" type="text/css"> 
+    <script type="text/javascript" src="./static/js/graph.js"></script>
+  </head>
+  <body>
+    <div class="container noshowgrid">
+      <div class="span-20 prepend-2 append-2">
+        <h1>WhatIsCompiler</h1>
+<p>A compiler is a program that transforms code from a source language to a target language. The source and the target languages can be any languages.</p>
+<h2 id="continue">Continue</h2>
+<p><a href="WhyWriteCompiler.html" title="WhyWriteCompiler">WhyWriteCompiler</a></p>
+        <hr />
+<svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
+<script type="text/javascript">
+    var g = new Graph("canvas", 800, 300);
+    // reduce repulsion and spring length for more compact layout
+g.createVertex("WhatIsCompiler", "#ff0000");
+g.createVertex("HomePage", "#00ff00");
+g.createVertex("WhyWriteCompiler", "#00ff00");
+g.createVertex("ContinuationsMusicCompiler", "#0000ff");
+g.createEdge("WhatIsCompiler", "WhyWriteCompiler");
+g.createEdge("HomePage", "WhatIsCompiler");
+g.createEdge("WhyWriteCompiler", "ContinuationsMusicCompiler");
+
+    g.go();
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>

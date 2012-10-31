@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>GeneratingCode</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="./static/css/blueprint/screen.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="./static/css/blueprint/print.css" type="text/css" media="print"> 
+    <!--[if lt IE 8]>
+      <link rel="stylesheet" href="./static/css/blueprint/ie.css" type="text/css" media="screen, projection">
+    <![endif]-->
+    <link rel="stylesheet" href="./static/css/pygments/syntax.css" type="text/css"> 
+    <link rel="stylesheet" href="./static/css/layout.css" type="text/css"> 
+    <link rel="stylesheet" href="./static/css/colors.css" type="text/css"> 
+    <script type="text/javascript" src="./static/js/graph.js"></script>
+  </head>
+  <body>
+    <div class="container noshowgrid">
+      <div class="span-20 prepend-2 append-2">
+        <h1>GeneratingCode</h1>
+<p>transforming parse tree to c code</p>
+        <hr />
+<svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
+<script type="text/javascript">
+    var g = new Graph("canvas", 800, 300);
+    // reduce repulsion and spring length for more compact layout
+g.createVertex("GeneratingCode", "#ff0000");
+g.createVertex("CodeGenerationFramework", "#00ff00");
+g.createVertex("ExecutionModel", "#0000ff");
+g.createEdge("CodeGenerationFramework", "GeneratingCode");
+g.createEdge("ExecutionModel", "CodeGenerationFramework");
+
+    g.go();
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>WhyWriteCompiler</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="./static/css/blueprint/screen.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="./static/css/blueprint/print.css" type="text/css" media="print"> 
+    <!--[if lt IE 8]>
+      <link rel="stylesheet" href="./static/css/blueprint/ie.css" type="text/css" media="screen, projection">
+    <![endif]-->
+    <link rel="stylesheet" href="./static/css/pygments/syntax.css" type="text/css"> 
+    <link rel="stylesheet" href="./static/css/layout.css" type="text/css"> 
+    <link rel="stylesheet" href="./static/css/colors.css" type="text/css"> 
+    <script type="text/javascript" src="./static/js/graph.js"></script>
+  </head>
+  <body>
+    <div class="container noshowgrid">
+      <div class="span-20 prepend-2 append-2">
+        <h1>WhyWriteCompiler</h1>
+<p>There are many reasons why one would want to write a compiler. Here are some of them.</p>
+<h2 id="learn-how-programs-execute">Learn how programs execute</h2>
+<h2 id="make-more-powerful-construct">Make more powerful construct</h2>
+<h2 id="continue">Continue</h2>
+<p><a href="ContinuationsMusicCompiler.html" title="ContinuationsMusicCompiler">ContinuationsMusicCompiler</a></p>
+        <hr />
+<svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
+<script type="text/javascript">
+    var g = new Graph("canvas", 800, 300);
+    // reduce repulsion and spring length for more compact layout
+g.createVertex("WhyWriteCompiler", "#ff0000");
+g.createVertex("ContinuationsMusicCompiler", "#00ff00");
+g.createVertex("WhatIsCompiler", "#00ff00");
+g.createVertex("ArduinoUno", "#0000ff");
+g.createVertex("ContinuationPassingStyle", "#0000ff");
+g.createVertex("HomePage", "#0000ff");
+g.createVertex("PiezoSpeakers", "#0000ff");
+g.createVertex("StructureOfCompiler", "#0000ff");
+g.createEdge("WhyWriteCompiler", "ContinuationsMusicCompiler");
+g.createEdge("ContinuationsMusicCompiler", "ArduinoUno");
+g.createEdge("ContinuationsMusicCompiler", "ContinuationPassingStyle");
+g.createEdge("ContinuationsMusicCompiler", "PiezoSpeakers");
+g.createEdge("ContinuationsMusicCompiler", "StructureOfCompiler");
+g.createEdge("WhatIsCompiler", "WhyWriteCompiler");
+g.createEdge("HomePage", "WhatIsCompiler");
+
+    g.go();
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>
