@@ -8,9 +8,11 @@ In the first stage we have the con source code. That gets transformed into a
 parse tree. Since con is a quite simple language, there is no need for extra
 stages. So from the parse tree, we can generate the target output directly. In
 the case of the con compiler, it is C source code. So the con compiler
-transforms con source code to c source code.
+transforms con source code to C source code.
 
-show stages in con
+In order to make the generated C source code run on the Arduino, we have to
+compiler it with a C compiler.
+
 
 show the surrounding environment
 
