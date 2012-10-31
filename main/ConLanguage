@@ -1,0 +1,9 @@
+main.ConLanguage
+
+Con is a general-purpose programming language based on
+ContinuationPassingStyle.
+
+Depending on which primitives are implemented in the language, it can do
+different things. We will implement primitives to control a set of
+PiezoSpeakers connected to the Arduino.
+
