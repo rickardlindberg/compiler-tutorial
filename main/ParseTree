@@ -4,7 +4,9 @@ A parse tree is a tree representing the program.
 
 Program:
 
-    
+    let main =
+        \() -> cScale
+        exit
 
 Parse tree:
 
