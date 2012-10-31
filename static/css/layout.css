@@ -1,0 +1,24 @@
+/*
+ * Blueprint default font size: 12px (75% of 16px)
+ *   -> 18px line height (1.5 * 12px)
+ *
+ * Desired font-size in px/16px = % value
+ */
+
+body {
+    font-size: 87.5%; /* 14px -> line-height (x1.5) = 21px */
+}
+
+p, li {
+    font-family: serif;
+}
+
+.container {
+  margin-top: 21px;
+  margin-bottom: 21px;
+}
+
+hr {
+    height: 1px;
+    margin: 0 0 20px;
+}
