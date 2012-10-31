@@ -3,6 +3,8 @@ main.WhatIsCompiler
 A compiler is a program that transforms code from a source language to a target
 language. The source and the target languages can be any languages.
 
+![Alt text]($ROOT/static/images/compiler.png)
+
 ## Continue
 
 WhyWriteCompiler
