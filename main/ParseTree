@@ -4,4 +4,8 @@ A parse tree is a tree representing the program.
 
 Program:
 
+    
+
 Parse tree:
+
+![Parse tree.]($ROOT/static/images/parse-tree.png)
