@@ -1,3 +1,14 @@
 main.ContinuationPassingStyle
 
-aha
+Continuation passing style is a style of programming in which functions never
+return. Instead they keep calling functions.
+
+Let's look at a simple example: addition. A function that adds two numbers
+might look like this:
+
+    def add(first, second):
+        return first + second
+
+And you might use the function like this:
+
+    result = add(4, 5)
