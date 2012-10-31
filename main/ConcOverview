@@ -15,8 +15,6 @@ compiler it with a C compiler.
 
 ![Environment in which conc is used.]($ROOT/static/images/conc-environment.png)
 
-show the surrounding environment
-
 ## Continue
 
 StageParsing
