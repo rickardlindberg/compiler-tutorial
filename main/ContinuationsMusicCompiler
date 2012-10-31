@@ -1,13 +1,18 @@
 main.ContinuationsMusicCompiler
 
 In this tutorial, we are going to write a compiler that enables us to program
-an ArduinoUno in our custom language that we will call ACon.
+an ArduinoUno in our custom language that we will call *con*.
 
-ACon is a general-purpose programming language based on
+![The **con** **c**ompiler.]($ROOT/static/images/acon-compiler.png)
+
+Con is a general-purpose programming language based on
 ContinuationPassingStyle. We will implement primitives to control a set of
 PiezoSpeakers connected to the Arduino.
 
-    picture with boxes and lines
+The goal is to be able to compose music in con and have it play on the Arduino
+as shown in the video below.
+
+<iframe src="http://player.vimeo.com/video/49970291?badge=0" width="500" height="281" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 
 ## Continue
 
