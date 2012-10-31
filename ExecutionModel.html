@@ -51,13 +51,13 @@ g.createVertex("ExecutionModel", "#fcaf3e", "#ab7423", function () { location.hr
 g.createVertex("CodeGenerationFramework", "#fce94f", "#c4a000", function () { location.href = "CodeGenerationFramework.html"; });
 g.createVertex("RuntimeSupport", "#fce94f", "#c4a000", function () { location.href = "RuntimeSupport.html"; });
 g.createVertex("StageParsing", "#fce94f", "#c4a000", function () { location.href = "StageParsing.html"; });
-g.createVertex("ConOverview", "#8ae234", "#425d26", function () { location.href = "ConOverview.html"; });
+g.createVertex("ConcOverview", "#8ae234", "#425d26", function () { location.href = "ConcOverview.html"; });
 g.createVertex("GeneratingCode", "#8ae234", "#425d26", function () { location.href = "GeneratingCode.html"; });
 g.createEdge("ExecutionModel", "RuntimeSupport");
 g.createEdge("ExecutionModel", "CodeGenerationFramework");
 g.createEdge("CodeGenerationFramework", "GeneratingCode");
 g.createEdge("StageParsing", "ExecutionModel");
-g.createEdge("ConOverview", "StageParsing");
+g.createEdge("ConcOverview", "StageParsing");
 
     g.go();
 </script>

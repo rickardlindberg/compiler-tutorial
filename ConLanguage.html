@@ -46,9 +46,9 @@ let A4 = 440
 let B4 = 494
 let C5 = 523</code></pre>
 <p>A con program is a list of let-expressions. A let-expression binds a value to a name. Values can be numbers or functions. The name <code>main</code> must be bound to a function which takes no arguments. That function is the starting point.</p>
-<p>A function is written using the following syntax: <code>\(arg1, arg2) -&gt; body</code>. The body must be a call to a function.</p>
+<p>A function is written using the following syntax: <code>\(arg1, arg2, ...) -&gt; body</code>. The body must be a call to a function.</p>
 <p>In the example above a function which takes no arguments is assigned to the name <code>main</code>. The body calls the function <code>cScale</code> passing one argument: <code>exit</code>. Exit is a built in function which terminates the execution of the program.</p>
-<p>The <code>cScale</code> function is defined to take one argument, <code>k</code>, which in this example will be the <code>exit</code> function. In the body, it calls the <code>setTempo</code> function passing two arguments: first a number, and then a function. The function starts like this: <code>\() -&gt; setBeat C4 ...</code>.</p>
+<p>The <code>cScale</code> function is defined to take one argument, <code>k</code>, which in this example will be the <code>exit</code> function. In the body, it calls the <code>setTempo</code> function passing two arguments: first a number, and then a function. The function starts like this: <code>\() -&gt; setBeat C4 ...</code> The subsequent lines nest functions and pass them along to the next one.</p>
 <p>When the last <code>setBeat</code> function is called, we pass in <code>k</code> to be the next function to call. Since <code>k</code> is bound to the <code>exit</code> function, the program will terminate here.</p>
         <hr />
 <svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
@@ -68,6 +68,7 @@ g.createEdge("ContinuationsMusicCompiler", "ArduinoUno");
 g.createEdge("ContinuationsMusicCompiler", "ConLanguage");
 g.createEdge("ContinuationsMusicCompiler", "StructureOfCompiler");
 g.createEdge("PiezoSpeakers", "ContinuationsMusicCompiler");
+g.createEdge("ArduinoUno", "ContinuationsMusicCompiler");
 g.createEdge("WhyWriteCompiler", "ContinuationsMusicCompiler");
 
     g.go();

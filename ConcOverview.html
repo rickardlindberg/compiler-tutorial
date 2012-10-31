@@ -1,0 +1,55 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <title>ConcOverview</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="./static/css/blueprint/screen.css" type="text/css" media="screen, projection">
+    <link rel="stylesheet" href="./static/css/blueprint/print.css" type="text/css" media="print"> 
+    <!--[if lt IE 8]>
+      <link rel="stylesheet" href="./static/css/blueprint/ie.css" type="text/css" media="screen, projection">
+    <![endif]-->
+    <link rel="stylesheet" href="./static/css/pygments/syntax.css" type="text/css"> 
+    <link rel="stylesheet" href="./static/css/layout.css" type="text/css"> 
+    <link rel="stylesheet" href="./static/css/colors.css" type="text/css"> 
+    <script type="text/javascript" src="./static/js/graph.js"></script>
+  </head>
+  <body>
+    <div class="container noshowgrid">
+      <div class="span-20 prepend-2 append-2">
+        <h1>ConcOverview</h1>
+<p>The con compiler (conc) is quite simple and has only three stages.</p>
+<div class="figure">
+<img src=".//static/images/stages-conc.png" alt="Stages in con compiler." /><p class="caption">Stages in con compiler.</p>
+</div>
+<p>In the first stage we have the con source code. That gets transformed into a parse tree. Since con is a quite simple language, there is no need for extra stages. So from the parse tree, we can generate the target output directly. In the case of the con compiler, it is C source code. So the con compiler transforms con source code to C source code.</p>
+<p>In order to make the generated C source code run on the Arduino, we have to compiler it with a C compiler.</p>
+<div class="figure">
+<img src=".//static/images/conc-environment.png" alt="Environment in which conc is used." /><p class="caption">Environment in which conc is used.</p>
+</div>
+<h2 id="continue">Continue</h2>
+<p><a href="StageParsing.html" title="StageParsing">StageParsing</a></p>
+        <hr />
+<svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
+<script type="text/javascript">
+    var g = new Graph("canvas", 800, 400);
+    g.repulsion = g.repulsion / 2;
+g.createVertex("ConcOverview", "#fcaf3e", "#ab7423", function () { location.href = "ConcOverview.html"; });
+g.createVertex("StageParsing", "#fce94f", "#c4a000", function () { location.href = "StageParsing.html"; });
+g.createVertex("StructureOfCompiler", "#fce94f", "#c4a000", function () { location.href = "StructureOfCompiler.html"; });
+g.createVertex("ContinuationsMusicCompiler", "#8ae234", "#425d26", function () { location.href = "ContinuationsMusicCompiler.html"; });
+g.createVertex("ExecutionModel", "#8ae234", "#425d26", function () { location.href = "ExecutionModel.html"; });
+g.createVertex("ParseTree", "#8ae234", "#425d26", function () { location.href = "ParseTree.html"; });
+g.createEdge("ConcOverview", "StageParsing");
+g.createEdge("StageParsing", "ExecutionModel");
+g.createEdge("StructureOfCompiler", "ParseTree");
+g.createEdge("StructureOfCompiler", "ConcOverview");
+g.createEdge("ContinuationsMusicCompiler", "StructureOfCompiler");
+
+    g.go();
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>

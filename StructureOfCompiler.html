@@ -20,23 +20,23 @@
         <h1>StructureOfCompiler</h1>
 <p>A compiler is usually written by doing a sequence of transformations to the source program until the target program is obtained.</p>
 <div class="figure">
-<img src=".//static/images/stages.png" alt="Stages in a copmiler." /><p class="caption">Stages in a copmiler.</p>
+<img src=".//static/images/stages.png" alt="Stages in a compiler." /><p class="caption">Stages in a compiler.</p>
 </div>
-<p>The first step is usually parsing which transforms the source text to a <a href="ParseTree.html" title="ParseTree">ParseTree</a>. A <a href="ParseTree.html" title="ParseTree">ParseTree</a> is much easier to work with than strings. The last stage generates the target program from some internal represenation.</p>
+<p>The first step is usually parsing which transforms the source text to a <a href="ParseTree.html" title="ParseTree">ParseTree</a>. A parse tree is much easier to work with than strings. The last stage generates the target program from some internal representation.</p>
 <p>Transforming source text into target text without any intermediate steps is not always trivial and is therefore avoided:</p>
 <div class="figure">
-<img src=".//static/images/stages-shortcut.png" alt="Stages in a copmiler." /><p class="caption">Stages in a copmiler.</p>
+<img src=".//static/images/stages-shortcut.png" alt="Stages in a compiler." /><p class="caption">Stages in a compiler.</p>
 </div>
 <p>Different compilers have different stages. More complex compilers have more stages. Follow along to see what stages are involved in the compiler for this tutorial.</p>
 <h2 id="continue">Continue</h2>
-<p><a href="ConOverview.html" title="ConOverview">ConOverview</a></p>
+<p><a href="ConcOverview.html" title="ConcOverview">ConcOverview</a></p>
         <hr />
 <svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
 <script type="text/javascript">
     var g = new Graph("canvas", 800, 400);
     g.repulsion = g.repulsion / 2;
 g.createVertex("StructureOfCompiler", "#fcaf3e", "#ab7423", function () { location.href = "StructureOfCompiler.html"; });
-g.createVertex("ConOverview", "#fce94f", "#c4a000", function () { location.href = "ConOverview.html"; });
+g.createVertex("ConcOverview", "#fce94f", "#c4a000", function () { location.href = "ConcOverview.html"; });
 g.createVertex("ContinuationsMusicCompiler", "#fce94f", "#c4a000", function () { location.href = "ContinuationsMusicCompiler.html"; });
 g.createVertex("ParseTree", "#fce94f", "#c4a000", function () { location.href = "ParseTree.html"; });
 g.createVertex("ArduinoUno", "#8ae234", "#425d26", function () { location.href = "ArduinoUno.html"; });
@@ -45,12 +45,12 @@ g.createVertex("PiezoSpeakers", "#8ae234", "#425d26", function () { location.hre
 g.createVertex("StageParsing", "#8ae234", "#425d26", function () { location.href = "StageParsing.html"; });
 g.createVertex("WhyWriteCompiler", "#8ae234", "#425d26", function () { location.href = "WhyWriteCompiler.html"; });
 g.createEdge("StructureOfCompiler", "ParseTree");
-g.createEdge("StructureOfCompiler", "ParseTree");
-g.createEdge("StructureOfCompiler", "ConOverview");
-g.createEdge("ConOverview", "StageParsing");
+g.createEdge("StructureOfCompiler", "ConcOverview");
+g.createEdge("ConcOverview", "StageParsing");
 g.createEdge("ContinuationsMusicCompiler", "ArduinoUno");
 g.createEdge("ContinuationsMusicCompiler", "ConLanguage");
 g.createEdge("ContinuationsMusicCompiler", "StructureOfCompiler");
+g.createEdge("ArduinoUno", "ContinuationsMusicCompiler");
 g.createEdge("ConLanguage", "PiezoSpeakers");
 g.createEdge("PiezoSpeakers", "ContinuationsMusicCompiler");
 g.createEdge("WhyWriteCompiler", "ContinuationsMusicCompiler");

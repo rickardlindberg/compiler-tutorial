@@ -32,16 +32,16 @@
     var g = new Graph("canvas", 800, 400);
     g.repulsion = g.repulsion / 2;
 g.createVertex("StageParsing", "#fcaf3e", "#ab7423", function () { location.href = "StageParsing.html"; });
-g.createVertex("ConOverview", "#fce94f", "#c4a000", function () { location.href = "ConOverview.html"; });
+g.createVertex("ConcOverview", "#fce94f", "#c4a000", function () { location.href = "ConcOverview.html"; });
 g.createVertex("ExecutionModel", "#fce94f", "#c4a000", function () { location.href = "ExecutionModel.html"; });
 g.createVertex("CodeGenerationFramework", "#8ae234", "#425d26", function () { location.href = "CodeGenerationFramework.html"; });
 g.createVertex("RuntimeSupport", "#8ae234", "#425d26", function () { location.href = "RuntimeSupport.html"; });
 g.createVertex("StructureOfCompiler", "#8ae234", "#425d26", function () { location.href = "StructureOfCompiler.html"; });
 g.createEdge("StageParsing", "ExecutionModel");
-g.createEdge("ConOverview", "StageParsing");
+g.createEdge("ConcOverview", "StageParsing");
 g.createEdge("ExecutionModel", "RuntimeSupport");
 g.createEdge("ExecutionModel", "CodeGenerationFramework");
-g.createEdge("StructureOfCompiler", "ConOverview");
+g.createEdge("StructureOfCompiler", "ConcOverview");
 
     g.go();
 </script>

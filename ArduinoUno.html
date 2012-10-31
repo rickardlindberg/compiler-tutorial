@@ -2,7 +2,7 @@
 "http://www.w3.org/TR/html4/strict.dtd">
 <html>
   <head>
-    <title>ConOverview</title>
+    <title>ArduinoUno</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="./static/css/blueprint/screen.css" type="text/css" media="screen, projection">
     <link rel="stylesheet" href="./static/css/blueprint/print.css" type="text/css" media="print"> 
@@ -17,28 +17,26 @@
   <body>
     <div class="container noshowgrid">
       <div class="span-20 prepend-2 append-2">
-        <h1>ConOverview</h1>
-<p>show stages in con</p>
-<p>show the surrounding environment</p>
-<h2 id="continue">Continue</h2>
-<p><a href="StageParsing.html" title="StageParsing">StageParsing</a></p>
+        <h1>ArduinoUno</h1>
+<p>Have a look at the video in <a href="ContinuationsMusicCompiler.html" title="ContinuationsMusicCompiler">ContinuationsMusicCompiler</a> to see how it is used.</p>
         <hr />
 <svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
 <script type="text/javascript">
     var g = new Graph("canvas", 800, 400);
     g.repulsion = g.repulsion / 2;
-g.createVertex("ConOverview", "#fcaf3e", "#ab7423", function () { location.href = "ConOverview.html"; });
-g.createVertex("StageParsing", "#fce94f", "#c4a000", function () { location.href = "StageParsing.html"; });
-g.createVertex("StructureOfCompiler", "#fce94f", "#c4a000", function () { location.href = "StructureOfCompiler.html"; });
-g.createVertex("ContinuationsMusicCompiler", "#8ae234", "#425d26", function () { location.href = "ContinuationsMusicCompiler.html"; });
-g.createVertex("ExecutionModel", "#8ae234", "#425d26", function () { location.href = "ExecutionModel.html"; });
-g.createVertex("ParseTree", "#8ae234", "#425d26", function () { location.href = "ParseTree.html"; });
-g.createEdge("ConOverview", "StageParsing");
-g.createEdge("StageParsing", "ExecutionModel");
-g.createEdge("StructureOfCompiler", "ParseTree");
-g.createEdge("StructureOfCompiler", "ParseTree");
-g.createEdge("StructureOfCompiler", "ConOverview");
+g.createVertex("ArduinoUno", "#fcaf3e", "#ab7423", function () { location.href = "ArduinoUno.html"; });
+g.createVertex("ContinuationsMusicCompiler", "#fce94f", "#c4a000", function () { location.href = "ContinuationsMusicCompiler.html"; });
+g.createVertex("ConLanguage", "#8ae234", "#425d26", function () { location.href = "ConLanguage.html"; });
+g.createVertex("PiezoSpeakers", "#8ae234", "#425d26", function () { location.href = "PiezoSpeakers.html"; });
+g.createVertex("StructureOfCompiler", "#8ae234", "#425d26", function () { location.href = "StructureOfCompiler.html"; });
+g.createVertex("WhyWriteCompiler", "#8ae234", "#425d26", function () { location.href = "WhyWriteCompiler.html"; });
+g.createEdge("ArduinoUno", "ContinuationsMusicCompiler");
+g.createEdge("ContinuationsMusicCompiler", "ArduinoUno");
+g.createEdge("ContinuationsMusicCompiler", "ConLanguage");
 g.createEdge("ContinuationsMusicCompiler", "StructureOfCompiler");
+g.createEdge("ConLanguage", "PiezoSpeakers");
+g.createEdge("PiezoSpeakers", "ContinuationsMusicCompiler");
+g.createEdge("WhyWriteCompiler", "ContinuationsMusicCompiler");
 
     g.go();
 </script>
