@@ -2,7 +2,7 @@ main.ConcOverview
 
 The con compiler (conc) is quite simple and has only three stages.
 
-![Stages in con compiler.]($ROOT/static/images/stages-shortcut.png)
+![Stages in con compiler.]($ROOT/static/images/stages-conc.png)
 
 show stages in con
 
