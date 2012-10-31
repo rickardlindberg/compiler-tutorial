@@ -5,13 +5,18 @@ source program until the target program is obtained.
 
 ![Stages in a copmiler.]($ROOT/static/images/stages.png)
 
-The reason is to handle the complexity. Transforming source text into target
-text is not always straight forward.
+The first step is usually parsing which transforms the source text to a
+ParseTree. A ParseTree is much easier to work with than strings. The last stage
+generates the target program from some internal represenation.
+
+Transforming source text into target text without any intermediate steps is not
+always trivial and is therefore avoided:
 
 ![Stages in a copmiler.]($ROOT/static/images/stages-shortcut.png)
 
-Different compilers have different stages. Follow along to see what stages are
-involved in the compiler for this tutorial.
+Different compilers have different stages. More complex compilers have more
+stages. Follow along to see what stages are involved in the compiler for this
+tutorial.
 
 ## Continue
 
