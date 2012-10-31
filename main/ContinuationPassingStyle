@@ -14,8 +14,8 @@ And you might use the function like this:
     result = add(4, 5)
 
 This is how most languages work. But in continuation passing style, we can't
-return the result. Instead we need to pass an extra function to add, knows as
-the continuation, to take the result and do something with it:
+return the result. Instead we need to pass an extra function to add (known as
+the continuation) to take the result and do something with it:
 
     def add(first, second, k):
         k(first + second)
