@@ -6,3 +6,50 @@ ContinuationPassingStyle.
 Depending on which primitives are implemented in the language, it can do
 different things. We will implement primitives to control a set of
 PiezoSpeakers connected to the Arduino.
+
+A program that plays the C-scale looks like this:
+
+    let main =
+        \() -> cScale
+        exit
+
+    let cScale =
+        \(k) -> setTempo 100
+        \()  -> setBeat1 C4
+        \()  -> setBeat1 D4
+        \()  -> setBeat1 E4
+        \()  -> setBeat1 F4
+        \()  -> setBeat1 G4
+        \()  -> setBeat1 A4
+        \()  -> setBeat1 B4
+        \()  -> setBeat1 C5
+        k
+
+    let C4 = 262
+    let D4 = 294
+    let E4 = 330
+    let F4 = 349
+    let G4 = 392
+    let A4 = 440
+    let B4 = 494
+    let C5 = 523
+
+A con program is a list of let-expressions. A let-expression just binds a value
+to a name. Values can be numbers or functions. The name `main` must be bound to
+a function which takes no argument. That function is the starting point.
+
+A function is written using the following syntax: `\(arg1, arg2) -> body`. The
+body must be a call to a function.
+
+In the example above a function which takes no arguments is assigned to the
+name `main`. The body calls the function `cScale` passing one argument: `exit`.
+Exit is a built in function which terminates the execution of the program.
+
+The `cScale` function is defined to take one argument, `k`, which in this
+example will be the `exit` function. In the body, it calls the `setTempo`
+function passing two arguments: first a number, and then a function. The
+function starts like this: `\() -> setBeat1 C4 ...`.
+
+When the last `setBeat1` function is called, we pass in `k` to be the next
+function to call. Since `k` is bound to the `exit` function, the program will
+terminate here.
