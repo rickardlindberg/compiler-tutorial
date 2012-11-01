@@ -2,10 +2,10 @@ main.ParsecIntroduction
 
 Parsec is a parser combinator library for Haskell.
 
-The manual is pretty nice. Over here:
+The manual is pretty nice:
 [http://legacy.cs.uu.nl/daan/download/parsec/parsec.html](http://legacy.cs.uu.nl/daan/download/parsec/parsec.html).
 
-To get you started with Parsec, try this:
+The following code snipped can be used to play around with parsec:
 
     import Text.ParserCombinators.Parsec
 
@@ -15,15 +15,6 @@ To get you started with Parsec, try this:
         run parseNumber "12b345"
         run parseNumber "b12b345"
 
-    parseNumber :: Parser Int
-    parseNumber = do
-        numbersAsString <- many  (  char '0' <|> char '1' <|> char '2'
-                                <|> char '3' <|> char '4' <|> char '5'
-                                <|> char '6' <|> char '7' <|> char '8'
-                                <|> char '9'
-                                 )
-        return (read numbersAsString)
-
     run :: Show a => Parser a -> String -> IO ()
     run p input =
         case (parse p "" input) of
@@ -31,3 +22,20 @@ To get you started with Parsec, try this:
                             putStr "parse error at "
                             print err
             Right x  -> print x
+
+    parseNumber :: Parser Int
+    parseNumber = do
+        numbersAsString <- many  (  char '0' <|> char '1' <|> char '2'
+                                <|> char '3' <|> char '4' <|> char '5'
+                                <|> char '6' <|> char '7' <|> char '8'
+                                <|> char '9'
+                                 )
+        --eof
+        return (read numbersAsString)
+
+It uses the following Parsec functions:
+
+* [parse](http://legacy.cs.uu.nl/daan/download/parsec/parsec.html#parse)
+* [many](http://legacy.cs.uu.nl/daan/download/parsec/parsec.html#many)
+* [char](http://legacy.cs.uu.nl/daan/download/parsec/parsec.html#char)
+* [eof](http://legacy.cs.uu.nl/daan/download/parsec/parsec.html#eof)

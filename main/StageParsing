@@ -45,14 +45,23 @@ Has the following parse tree:
 
 The top level parse function has the following type:
 
-    parseCon :: String -> Either Error Program
+    parseCon :: String -> Either ParseError Program
 
 And is implemented like this ([`Parser.hs`](https://github.com/rickardlindberg/compiler-tutorial/blob/master/src/Parser.hs)):
 
-    parseCon input =
-        case parse programParser "" input of
-            Left  error   -> print error
-            Right program -> program
+    parseCon input = parse programParser "" input
+
+We use Parsec's
+[parse](http://legacy.cs.uu.nl/daan/download/parsec/parsec.html#parse) function
+and pass along `programParser` which defines how a con program should be
+parsed. Its type is this:
+
+    programParser :: Parser Program
+
+## Exercise
+
+Fill in the implementation of `programParser` so that can parse arbitrary con
+programs.
 
 ## Continue
 
