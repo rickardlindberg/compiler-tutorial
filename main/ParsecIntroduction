@@ -11,3 +11,22 @@ To get you started with Parsec, try this:
 
     main :: IO ()
     main = do
+        run parseNumber "12345"
+        run parseNumber "12b345"
+        run parseNumber "b12b345"
+
+    parseNumber :: Parser Int
+    parseNumber = do
+        numbersAsString <- many (   char '0' <|> char '1' <|> char '2'
+                                <|> char '3' <|> char '4' <|> char '5'
+                                <|> char '6' <|> char '7' <|> char '8'
+                                <|> char '9')
+        return (read numbersAsString)
+
+    run :: Show a => Parser a -> String -> IO ()
+    run p input =
+        case (parse p "" input) of
+            Left err -> do
+                            putStr "parse error at "
+                            print err
+            Right x  -> print x
