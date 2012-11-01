@@ -2,11 +2,14 @@ main.StageParsing
 
 ![Parsing.]($ROOT/static/images/stage-parsing.png)
 
-The first transformation is often parsing. Working with raw text is difficult.
-We want a parse tree.
+The first transformation in a compiler is often parsing. Working with raw text
+is difficult, so we convert it to a ParseTree which is easier to work with.
+
+## Parsing methods
 
 * different parsing methods
-* parsec introduction
+
+ParsecIntroduction
 
 ## Continue
 
