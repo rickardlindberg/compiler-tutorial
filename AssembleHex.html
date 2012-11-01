@@ -2,7 +2,7 @@
 "http://www.w3.org/TR/html4/strict.dtd">
 <html>
   <head>
-    <title>CodeGenerationFramework</title>
+    <title>AssembleHex</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="./static/css/blueprint/screen.css" type="text/css" media="screen, projection">
     <link rel="stylesheet" href="./static/css/blueprint/print.css" type="text/css" media="print"> 
@@ -17,29 +17,30 @@
   <body>
     <div class="container noshowgrid">
       <div class="span-20 prepend-2 append-2">
-        <h1>CodeGenerationFramework</h1>
-<p>state monad stuff</p>
-<h2 id="continue">Continue</h2>
-<p><a href="CodeGeneration.html" title="CodeGeneration">CodeGeneration</a></p>
+        <h1>AssembleHex</h1>
+<div class="figure">
+<img src=".//static/images/assemble.png" alt="Assemble HEX." /><p class="caption">Assemble HEX.</p>
+</div>
+<p>Now that we've implemented the C runtime in <a href="RuntimeSupport.html" title="RuntimeSupport">RuntimeSupport</a> and the generation of C code in <a href="CodeGeneration.html" title="CodeGeneration">CodeGeneration</a>, it's time to assemble all files with avr-gcc.</p>
         <hr />
 <svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
 <script type="text/javascript">
     var g = new Graph("canvas", 800, 400);
     g.repulsion = g.repulsion / 2;
-g.createVertex("CodeGenerationFramework", "#fcaf3e", "#ab7423", function () { location.href = "CodeGenerationFramework.html"; });
+g.createVertex("AssembleHex", "#fcaf3e", "#ab7423", function () { location.href = "AssembleHex.html"; });
 g.createVertex("CodeGeneration", "#fce94f", "#c4a000", function () { location.href = "CodeGeneration.html"; });
-g.createVertex("AssembleHex", "#8ae234", "#425d26", function () { location.href = "AssembleHex.html"; });
+g.createVertex("RuntimeSupport", "#fce94f", "#c4a000", function () { location.href = "RuntimeSupport.html"; });
+g.createVertex("CodeGenerationFramework", "#8ae234", "#425d26", function () { location.href = "CodeGenerationFramework.html"; });
 g.createVertex("ExecutionModel", "#8ae234", "#425d26", function () { location.href = "ExecutionModel.html"; });
-g.createVertex("RuntimeSupport", "#8ae234", "#425d26", function () { location.href = "RuntimeSupport.html"; });
-g.createEdge("CodeGenerationFramework", "CodeGeneration");
+g.createEdge("AssembleHex", "RuntimeSupport");
+g.createEdge("AssembleHex", "CodeGeneration");
 g.createEdge("CodeGeneration", "RuntimeSupport");
 g.createEdge("CodeGeneration", "CodeGenerationFramework");
 g.createEdge("CodeGeneration", "AssembleHex");
-g.createEdge("AssembleHex", "RuntimeSupport");
-g.createEdge("AssembleHex", "CodeGeneration");
+g.createEdge("RuntimeSupport", "ExecutionModel");
+g.createEdge("CodeGenerationFramework", "CodeGeneration");
 g.createEdge("ExecutionModel", "RuntimeSupport");
 g.createEdge("ExecutionModel", "CodeGeneration");
-g.createEdge("RuntimeSupport", "ExecutionModel");
 
     g.go();
 </script>

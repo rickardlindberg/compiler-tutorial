@@ -29,6 +29,7 @@ g.createVertex("ConLanguage", "#fce94f", "#c4a000", function () { location.href 
 g.createVertex("ContinuationsMusicCompiler", "#fce94f", "#c4a000", function () { location.href = "ContinuationsMusicCompiler.html"; });
 g.createVertex("ArduinoUno", "#8ae234", "#425d26", function () { location.href = "ArduinoUno.html"; });
 g.createVertex("ContinuationPassingStyle", "#8ae234", "#425d26", function () { location.href = "ContinuationPassingStyle.html"; });
+g.createVertex("StageParsing", "#8ae234", "#425d26", function () { location.href = "StageParsing.html"; });
 g.createVertex("StructureOfCompiler", "#8ae234", "#425d26", function () { location.href = "StructureOfCompiler.html"; });
 g.createVertex("WhyWriteCompiler", "#8ae234", "#425d26", function () { location.href = "WhyWriteCompiler.html"; });
 g.createEdge("PiezoSpeakers", "ContinuationsMusicCompiler");
@@ -38,11 +39,13 @@ g.createEdge("ContinuationsMusicCompiler", "ArduinoUno");
 g.createEdge("ContinuationsMusicCompiler", "ConLanguage");
 g.createEdge("ContinuationsMusicCompiler", "StructureOfCompiler");
 g.createEdge("ArduinoUno", "ContinuationsMusicCompiler");
+g.createEdge("StageParsing", "ConLanguage");
 g.createEdge("WhyWriteCompiler", "ContinuationsMusicCompiler");
 
     g.go();
 </script>
 
+        <hr />
       </div>
     </div>
   </body>

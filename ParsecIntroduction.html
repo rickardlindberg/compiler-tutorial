@@ -2,7 +2,7 @@
 "http://www.w3.org/TR/html4/strict.dtd">
 <html>
   <head>
-    <title>ParseTree</title>
+    <title>ParsecIntroduction</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="./static/css/blueprint/screen.css" type="text/css" media="screen, projection">
     <link rel="stylesheet" href="./static/css/blueprint/print.css" type="text/css" media="print"> 
@@ -17,38 +17,50 @@
   <body>
     <div class="container noshowgrid">
       <div class="span-20 prepend-2 append-2">
-        <h1>ParseTree</h1>
-<p>A parse tree is a tree representing a program.</p>
-<p>Program:</p>
-<pre><code>let main =
-    \() -&gt; cScale
-    exit</code></pre>
-<p>Parse tree:</p>
-<div class="figure">
-<img src=".//static/images/parse-tree.png" alt="Parse tree." /><p class="caption">Parse tree.</p>
-</div>
+        <h1>ParsecIntroduction</h1>
+<p>Parsec is a parser combinator library for Haskell.</p>
+<p>The manual is pretty nice. Over here: <a href="http://legacy.cs.uu.nl/daan/download/parsec/parsec.html">http://legacy.cs.uu.nl/daan/download/parsec/parsec.html</a>.</p>
+<p>To get you started with Parsec, try this:</p>
+<pre><code>import Text.ParserCombinators.Parsec
+
+main :: IO ()
+main = do
+    run parseNumber &quot;12345&quot;
+    run parseNumber &quot;12b345&quot;
+    run parseNumber &quot;b12b345&quot;
+
+parseNumber :: Parser Int
+parseNumber = do
+    numbersAsString &lt;- many  (  char &#39;0&#39; &lt;|&gt; char &#39;1&#39; &lt;|&gt; char &#39;2&#39;
+                            &lt;|&gt; char &#39;3&#39; &lt;|&gt; char &#39;4&#39; &lt;|&gt; char &#39;5&#39;
+                            &lt;|&gt; char &#39;6&#39; &lt;|&gt; char &#39;7&#39; &lt;|&gt; char &#39;8&#39;
+                            &lt;|&gt; char &#39;9&#39;
+                             )
+    return (read numbersAsString)
+
+run :: Show a =&gt; Parser a -&gt; String -&gt; IO ()
+run p input =
+    case (parse p &quot;&quot; input) of
+        Left err -&gt; do
+                        putStr &quot;parse error at &quot;
+                        print err
+        Right x  -&gt; print x</code></pre>
         <hr />
 <svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
 <script type="text/javascript">
     var g = new Graph("canvas", 800, 400);
     g.repulsion = g.repulsion / 2;
-g.createVertex("ParseTree", "#fcaf3e", "#ab7423", function () { location.href = "ParseTree.html"; });
+g.createVertex("ParsecIntroduction", "#fcaf3e", "#ab7423", function () { location.href = "ParsecIntroduction.html"; });
 g.createVertex("StageParsing", "#fce94f", "#c4a000", function () { location.href = "StageParsing.html"; });
-g.createVertex("StructureOfCompiler", "#fce94f", "#c4a000", function () { location.href = "StructureOfCompiler.html"; });
 g.createVertex("ConLanguage", "#8ae234", "#425d26", function () { location.href = "ConLanguage.html"; });
 g.createVertex("ConcOverview", "#8ae234", "#425d26", function () { location.href = "ConcOverview.html"; });
-g.createVertex("ContinuationsMusicCompiler", "#8ae234", "#425d26", function () { location.href = "ContinuationsMusicCompiler.html"; });
 g.createVertex("ExecutionModel", "#8ae234", "#425d26", function () { location.href = "ExecutionModel.html"; });
-g.createVertex("ParsecIntroduction", "#8ae234", "#425d26", function () { location.href = "ParsecIntroduction.html"; });
+g.createVertex("ParseTree", "#8ae234", "#425d26", function () { location.href = "ParseTree.html"; });
 g.createEdge("StageParsing", "ParseTree");
 g.createEdge("StageParsing", "ParsecIntroduction");
 g.createEdge("StageParsing", "ConLanguage");
 g.createEdge("StageParsing", "ExecutionModel");
-g.createEdge("StructureOfCompiler", "ParseTree");
-g.createEdge("StructureOfCompiler", "ConcOverview");
 g.createEdge("ConcOverview", "StageParsing");
-g.createEdge("ContinuationsMusicCompiler", "ConLanguage");
-g.createEdge("ContinuationsMusicCompiler", "StructureOfCompiler");
 g.createEdge("ExecutionModel", "StageParsing");
 
     g.go();

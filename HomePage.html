@@ -18,7 +18,8 @@
     <div class="container noshowgrid">
       <div class="span-20 prepend-2 append-2">
         <h1>HomePage</h1>
-<p>In this tutorial we are going to write a compiler. Many people think compilers are difficult to implement, but as we will see in this tutorial, writing a compiler for a small language does not require that much.</p>
+<p>In this tutorial we are going to write a compiler. We will implement the compiler using Haskell (<a href="HaskellLanguage.html" title="HaskellLanguage">HaskellLanguage</a>) and C.</p>
+<p>As we will discover in this tutorial, implementing a compiler for a small language is not that difficult.</p>
 <h2 id="continue">Continue</h2>
 <p><a href="WhatIsCompiler.html" title="WhatIsCompiler">WhatIsCompiler</a></p>
         <hr />
@@ -27,14 +28,17 @@
     var g = new Graph("canvas", 800, 400);
     g.repulsion = g.repulsion / 2;
 g.createVertex("HomePage", "#fcaf3e", "#ab7423", function () { location.href = "HomePage.html"; });
+g.createVertex("HaskellLanguage", "#fce94f", "#c4a000", function () { location.href = "HaskellLanguage.html"; });
 g.createVertex("WhatIsCompiler", "#fce94f", "#c4a000", function () { location.href = "WhatIsCompiler.html"; });
 g.createVertex("WhyWriteCompiler", "#8ae234", "#425d26", function () { location.href = "WhyWriteCompiler.html"; });
+g.createEdge("HomePage", "HaskellLanguage");
 g.createEdge("HomePage", "WhatIsCompiler");
 g.createEdge("WhatIsCompiler", "WhyWriteCompiler");
 
     g.go();
 </script>
 
+        <hr />
       </div>
     </div>
   </body>

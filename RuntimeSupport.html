@@ -18,23 +18,37 @@
     <div class="container noshowgrid">
       <div class="span-20 prepend-2 append-2">
         <h1>RuntimeSupport</h1>
-<p>hello</p>
+<div class="figure">
+<img src=".//static/images/runtime.png" alt="C runtime." /><p class="caption">C runtime.</p>
+</div>
+<p>Now that we've figured out the <a href="ExecutionModel.html" title="ExecutionModel">ExecutionModel</a> of con, we need to implement a C library that compiled con programs can use.</p>
         <hr />
 <svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
 <script type="text/javascript">
     var g = new Graph("canvas", 800, 400);
     g.repulsion = g.repulsion / 2;
 g.createVertex("RuntimeSupport", "#fcaf3e", "#ab7423", function () { location.href = "RuntimeSupport.html"; });
+g.createVertex("AssembleHex", "#fce94f", "#c4a000", function () { location.href = "AssembleHex.html"; });
+g.createVertex("CodeGeneration", "#fce94f", "#c4a000", function () { location.href = "CodeGeneration.html"; });
 g.createVertex("ExecutionModel", "#fce94f", "#c4a000", function () { location.href = "ExecutionModel.html"; });
 g.createVertex("CodeGenerationFramework", "#8ae234", "#425d26", function () { location.href = "CodeGenerationFramework.html"; });
 g.createVertex("StageParsing", "#8ae234", "#425d26", function () { location.href = "StageParsing.html"; });
+g.createEdge("RuntimeSupport", "ExecutionModel");
+g.createEdge("AssembleHex", "RuntimeSupport");
+g.createEdge("AssembleHex", "CodeGeneration");
+g.createEdge("CodeGeneration", "RuntimeSupport");
+g.createEdge("CodeGeneration", "CodeGenerationFramework");
+g.createEdge("CodeGeneration", "AssembleHex");
+g.createEdge("ExecutionModel", "StageParsing");
 g.createEdge("ExecutionModel", "RuntimeSupport");
-g.createEdge("ExecutionModel", "CodeGenerationFramework");
+g.createEdge("ExecutionModel", "CodeGeneration");
+g.createEdge("CodeGenerationFramework", "CodeGeneration");
 g.createEdge("StageParsing", "ExecutionModel");
 
     g.go();
 </script>
 
+        <hr />
       </div>
     </div>
   </body>

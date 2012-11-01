@@ -33,13 +33,16 @@ g.createVertex("WhatIsCompiler", "#fcaf3e", "#ab7423", function () { location.hr
 g.createVertex("HomePage", "#fce94f", "#c4a000", function () { location.href = "HomePage.html"; });
 g.createVertex("WhyWriteCompiler", "#fce94f", "#c4a000", function () { location.href = "WhyWriteCompiler.html"; });
 g.createVertex("ContinuationsMusicCompiler", "#8ae234", "#425d26", function () { location.href = "ContinuationsMusicCompiler.html"; });
+g.createVertex("HaskellLanguage", "#8ae234", "#425d26", function () { location.href = "HaskellLanguage.html"; });
 g.createEdge("WhatIsCompiler", "WhyWriteCompiler");
+g.createEdge("HomePage", "HaskellLanguage");
 g.createEdge("HomePage", "WhatIsCompiler");
 g.createEdge("WhyWriteCompiler", "ContinuationsMusicCompiler");
 
     g.go();
 </script>
 
+        <hr />
       </div>
     </div>
   </body>

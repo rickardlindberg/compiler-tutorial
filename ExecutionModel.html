@@ -18,7 +18,11 @@
     <div class="container noshowgrid">
       <div class="span-20 prepend-2 append-2">
         <h1>ExecutionModel</h1>
-<p>Before we can transform the parse tree to the target language, we need to understand the execution model of the source program. Let's look at an example:</p>
+<div class="figure">
+<img src=".//static/images/stage-pre-code-gen.png" alt="Pre code generation." /><p class="caption">Pre code generation.</p>
+</div>
+<p>At this point we have a parser (<a href="StageParsing.html" title="StageParsing">StageParsing</a>) that transforms the con source code to a parse tree. Before we can transform the parse tree to C code, we need to understand the execution model of the source program. We need to figure out how to run con programs in C. This is probably the most difficult part in writing this compiler.</p>
+<p>Let's look at an example:</p>
 <pre><code>let fac = \(n, k) -&gt;
     facAccumulate n 1 k
 
@@ -41,27 +45,42 @@ k 6</code></pre>
 <li>environment model</li>
 </ul>
 <h2 id="continue">Continue</h2>
-<p><a href="RuntimeSupport.html" title="RuntimeSupport">RuntimeSupport</a> <a href="CodeGenerationFramework.html" title="CodeGenerationFramework">CodeGenerationFramework</a></p>
+<p><a href="RuntimeSupport.html" title="RuntimeSupport">RuntimeSupport</a> or <a href="CodeGeneration.html" title="CodeGeneration">CodeGeneration</a></p>
         <hr />
 <svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
 <script type="text/javascript">
     var g = new Graph("canvas", 800, 400);
     g.repulsion = g.repulsion / 2;
 g.createVertex("ExecutionModel", "#fcaf3e", "#ab7423", function () { location.href = "ExecutionModel.html"; });
-g.createVertex("CodeGenerationFramework", "#fce94f", "#c4a000", function () { location.href = "CodeGenerationFramework.html"; });
+g.createVertex("CodeGeneration", "#fce94f", "#c4a000", function () { location.href = "CodeGeneration.html"; });
 g.createVertex("RuntimeSupport", "#fce94f", "#c4a000", function () { location.href = "RuntimeSupport.html"; });
 g.createVertex("StageParsing", "#fce94f", "#c4a000", function () { location.href = "StageParsing.html"; });
+g.createVertex("AssembleHex", "#8ae234", "#425d26", function () { location.href = "AssembleHex.html"; });
+g.createVertex("CodeGenerationFramework", "#8ae234", "#425d26", function () { location.href = "CodeGenerationFramework.html"; });
+g.createVertex("ConLanguage", "#8ae234", "#425d26", function () { location.href = "ConLanguage.html"; });
 g.createVertex("ConcOverview", "#8ae234", "#425d26", function () { location.href = "ConcOverview.html"; });
-g.createVertex("GeneratingCode", "#8ae234", "#425d26", function () { location.href = "GeneratingCode.html"; });
+g.createVertex("ParseTree", "#8ae234", "#425d26", function () { location.href = "ParseTree.html"; });
+g.createVertex("ParsecIntroduction", "#8ae234", "#425d26", function () { location.href = "ParsecIntroduction.html"; });
+g.createEdge("ExecutionModel", "StageParsing");
 g.createEdge("ExecutionModel", "RuntimeSupport");
-g.createEdge("ExecutionModel", "CodeGenerationFramework");
-g.createEdge("CodeGenerationFramework", "GeneratingCode");
+g.createEdge("ExecutionModel", "CodeGeneration");
+g.createEdge("CodeGeneration", "RuntimeSupport");
+g.createEdge("CodeGeneration", "CodeGenerationFramework");
+g.createEdge("CodeGeneration", "AssembleHex");
+g.createEdge("RuntimeSupport", "ExecutionModel");
+g.createEdge("StageParsing", "ParseTree");
+g.createEdge("StageParsing", "ParsecIntroduction");
+g.createEdge("StageParsing", "ConLanguage");
 g.createEdge("StageParsing", "ExecutionModel");
+g.createEdge("AssembleHex", "RuntimeSupport");
+g.createEdge("AssembleHex", "CodeGeneration");
+g.createEdge("CodeGenerationFramework", "CodeGeneration");
 g.createEdge("ConcOverview", "StageParsing");
 
     g.go();
 </script>
 
+        <hr />
       </div>
     </div>
   </body>

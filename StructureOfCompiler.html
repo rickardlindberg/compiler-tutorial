@@ -53,11 +53,14 @@ g.createEdge("ContinuationsMusicCompiler", "StructureOfCompiler");
 g.createEdge("ArduinoUno", "ContinuationsMusicCompiler");
 g.createEdge("ConLanguage", "PiezoSpeakers");
 g.createEdge("PiezoSpeakers", "ContinuationsMusicCompiler");
+g.createEdge("StageParsing", "ParseTree");
+g.createEdge("StageParsing", "ConLanguage");
 g.createEdge("WhyWriteCompiler", "ContinuationsMusicCompiler");
 
     g.go();
 </script>
 
+        <hr />
       </div>
     </div>
   </body>

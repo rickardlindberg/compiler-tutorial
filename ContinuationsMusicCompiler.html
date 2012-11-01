@@ -41,6 +41,7 @@ g.createVertex("WhyWriteCompiler", "#fce94f", "#c4a000", function () { location.
 g.createVertex("ConcOverview", "#8ae234", "#425d26", function () { location.href = "ConcOverview.html"; });
 g.createVertex("ContinuationPassingStyle", "#8ae234", "#425d26", function () { location.href = "ContinuationPassingStyle.html"; });
 g.createVertex("ParseTree", "#8ae234", "#425d26", function () { location.href = "ParseTree.html"; });
+g.createVertex("StageParsing", "#8ae234", "#425d26", function () { location.href = "StageParsing.html"; });
 g.createVertex("WhatIsCompiler", "#8ae234", "#425d26", function () { location.href = "WhatIsCompiler.html"; });
 g.createEdge("ContinuationsMusicCompiler", "ArduinoUno");
 g.createEdge("ContinuationsMusicCompiler", "ConLanguage");
@@ -52,11 +53,15 @@ g.createEdge("PiezoSpeakers", "ContinuationsMusicCompiler");
 g.createEdge("StructureOfCompiler", "ParseTree");
 g.createEdge("StructureOfCompiler", "ConcOverview");
 g.createEdge("WhyWriteCompiler", "ContinuationsMusicCompiler");
+g.createEdge("ConcOverview", "StageParsing");
+g.createEdge("StageParsing", "ParseTree");
+g.createEdge("StageParsing", "ConLanguage");
 g.createEdge("WhatIsCompiler", "WhyWriteCompiler");
 
     g.go();
 </script>
 
+        <hr />
       </div>
     </div>
   </body>

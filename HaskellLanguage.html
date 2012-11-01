@@ -2,7 +2,7 @@
 "http://www.w3.org/TR/html4/strict.dtd">
 <html>
   <head>
-    <title>GeneratingCode</title>
+    <title>HaskellLanguage</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="./static/css/blueprint/screen.css" type="text/css" media="screen, projection">
     <link rel="stylesheet" href="./static/css/blueprint/print.css" type="text/css" media="print"> 
@@ -17,22 +17,23 @@
   <body>
     <div class="container noshowgrid">
       <div class="span-20 prepend-2 append-2">
-        <h1>GeneratingCode</h1>
-<p>transforming parse tree to c code</p>
+        <h1>HaskellLanguage</h1>
+<p>Haskell is a purely functional programming language. Since it is not widely known we will explain it in more detail in this tutorial.</p>
         <hr />
 <svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
 <script type="text/javascript">
     var g = new Graph("canvas", 800, 400);
     g.repulsion = g.repulsion / 2;
-g.createVertex("GeneratingCode", "#fcaf3e", "#ab7423", function () { location.href = "GeneratingCode.html"; });
-g.createVertex("CodeGenerationFramework", "#fce94f", "#c4a000", function () { location.href = "CodeGenerationFramework.html"; });
-g.createVertex("ExecutionModel", "#8ae234", "#425d26", function () { location.href = "ExecutionModel.html"; });
-g.createEdge("CodeGenerationFramework", "GeneratingCode");
-g.createEdge("ExecutionModel", "CodeGenerationFramework");
+g.createVertex("HaskellLanguage", "#fcaf3e", "#ab7423", function () { location.href = "HaskellLanguage.html"; });
+g.createVertex("HomePage", "#fce94f", "#c4a000", function () { location.href = "HomePage.html"; });
+g.createVertex("WhatIsCompiler", "#8ae234", "#425d26", function () { location.href = "WhatIsCompiler.html"; });
+g.createEdge("HomePage", "HaskellLanguage");
+g.createEdge("HomePage", "WhatIsCompiler");
 
     g.go();
 </script>
 
+        <hr />
       </div>
     </div>
   </body>

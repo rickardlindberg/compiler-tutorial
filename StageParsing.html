@@ -18,12 +18,46 @@
     <div class="container noshowgrid">
       <div class="span-20 prepend-2 append-2">
         <h1>StageParsing</h1>
-<pre><code>show stages for con with parsing highlighted</code></pre>
-<p>The first transformation is often parsing. Working with raw text is difficult. We want a parse tree.</p>
+<div class="figure">
+<img src=".//static/images/stage-parsing.png" alt="Parsing." /><p class="caption">Parsing.</p>
+</div>
+<p>The first transformation in a compiler is often parsing. Working with raw text is difficult, so we convert it to a <a href="ParseTree.html" title="ParseTree">ParseTree</a> which is easier to work with.</p>
+<h2 id="parsing-methods">Parsing methods</h2>
 <ul>
 <li>different parsing methods</li>
-<li>parsec introduction</li>
+<li><a href="ParsecIntroduction.html" title="ParsecIntroduction">ParsecIntroduction</a></li>
 </ul>
+<p>TODO: fill in stuff here</p>
+<h2 id="data-structure-for-parse-tree">Data structure for parse tree</h2>
+<p>We define the parse tree data structure like this (<a href="https://github.com/rickardlindberg/compiler-tutorial/blob/master/src/ParseTree.hs"><code>ParseTree.hs</code></a>):</p>
+<pre><code>data Program = Program [Let]
+
+data Let     = Let String Term
+
+data Term    = Identifier String
+             | Number     Integer
+             | Lambda     [String] [Term]</code></pre>
+<p>This data structure should match the description of con in <a href="ConLanguage.html" title="ConLanguage">ConLanguage</a> pretty well.</p>
+<p>Example program (assumes that <code>print</code> is a built-in function):</p>
+<pre><code>let ANSWER = 42
+
+let main = \() -&gt;
+    printAnswer exit
+
+let printAnswer = \(k) -&gt;
+    print ANSWER k</code></pre>
+<p>Has the following parse tree:</p>
+<div class="figure">
+<img src=".//static/images/con-parse-tree.png" alt="Parse tree." /><p class="caption">Parse tree.</p>
+</div>
+<h2 id="the-parse-function">The parse function</h2>
+<p>The top level parse function has the following type:</p>
+<pre><code>parseCon :: String -&gt; Either Error Program</code></pre>
+<p>And is implemented like this (<a href="https://github.com/rickardlindberg/compiler-tutorial/blob/master/src/Parser.hs"><code>Parser.hs</code></a>):</p>
+<pre><code>parseCon input =
+    case parse programParser &quot;&quot; input of
+        Left  error   -&gt; print error
+        Right program -&gt; program</code></pre>
 <h2 id="continue">Continue</h2>
 <p><a href="ExecutionModel.html" title="ExecutionModel">ExecutionModel</a></p>
         <hr />
@@ -32,20 +66,39 @@
     var g = new Graph("canvas", 800, 400);
     g.repulsion = g.repulsion / 2;
 g.createVertex("StageParsing", "#fcaf3e", "#ab7423", function () { location.href = "StageParsing.html"; });
+g.createVertex("ConLanguage", "#fce94f", "#c4a000", function () { location.href = "ConLanguage.html"; });
 g.createVertex("ConcOverview", "#fce94f", "#c4a000", function () { location.href = "ConcOverview.html"; });
 g.createVertex("ExecutionModel", "#fce94f", "#c4a000", function () { location.href = "ExecutionModel.html"; });
-g.createVertex("CodeGenerationFramework", "#8ae234", "#425d26", function () { location.href = "CodeGenerationFramework.html"; });
+g.createVertex("ParseTree", "#fce94f", "#c4a000", function () { location.href = "ParseTree.html"; });
+g.createVertex("ParsecIntroduction", "#fce94f", "#c4a000", function () { location.href = "ParsecIntroduction.html"; });
+g.createVertex("CodeGeneration", "#8ae234", "#425d26", function () { location.href = "CodeGeneration.html"; });
+g.createVertex("ContinuationPassingStyle", "#8ae234", "#425d26", function () { location.href = "ContinuationPassingStyle.html"; });
+g.createVertex("ContinuationsMusicCompiler", "#8ae234", "#425d26", function () { location.href = "ContinuationsMusicCompiler.html"; });
+g.createVertex("PiezoSpeakers", "#8ae234", "#425d26", function () { location.href = "PiezoSpeakers.html"; });
 g.createVertex("RuntimeSupport", "#8ae234", "#425d26", function () { location.href = "RuntimeSupport.html"; });
 g.createVertex("StructureOfCompiler", "#8ae234", "#425d26", function () { location.href = "StructureOfCompiler.html"; });
+g.createEdge("StageParsing", "ParseTree");
+g.createEdge("StageParsing", "ParsecIntroduction");
+g.createEdge("StageParsing", "ConLanguage");
 g.createEdge("StageParsing", "ExecutionModel");
+g.createEdge("ConLanguage", "ContinuationPassingStyle");
+g.createEdge("ConLanguage", "PiezoSpeakers");
 g.createEdge("ConcOverview", "StageParsing");
+g.createEdge("ExecutionModel", "StageParsing");
 g.createEdge("ExecutionModel", "RuntimeSupport");
-g.createEdge("ExecutionModel", "CodeGenerationFramework");
+g.createEdge("ExecutionModel", "CodeGeneration");
+g.createEdge("CodeGeneration", "RuntimeSupport");
+g.createEdge("ContinuationsMusicCompiler", "ConLanguage");
+g.createEdge("ContinuationsMusicCompiler", "StructureOfCompiler");
+g.createEdge("PiezoSpeakers", "ContinuationsMusicCompiler");
+g.createEdge("RuntimeSupport", "ExecutionModel");
+g.createEdge("StructureOfCompiler", "ParseTree");
 g.createEdge("StructureOfCompiler", "ConcOverview");
 
     g.go();
 </script>
 
+        <hr />
       </div>
     </div>
   </body>

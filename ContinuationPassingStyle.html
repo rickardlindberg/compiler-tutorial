@@ -19,7 +19,7 @@
       <div class="span-20 prepend-2 append-2">
         <h1>ContinuationPassingStyle</h1>
 <p>Continuation passing style is a style of programming in which functions never return. Instead they keep calling functions.</p>
-<p>Let's look at a simple example: addition. A function that adds two numbers might look like this:</p>
+<p>Let's look at a simple example in a traditional language: addition. A function that adds two numbers might look like this:</p>
 <pre><code>def add(first, second):
     return first + second</code></pre>
 <p>And you might use the function like this:</p>
@@ -32,6 +32,8 @@
     ...
 
 add(4, 5, handle_result)</code></pre>
+<h2 id="exercises">Exercises</h2>
+<p>...to help grok continuation passing style...</p>
         <hr />
 <svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
 <script type="text/javascript">
@@ -41,14 +43,17 @@ g.createVertex("ContinuationPassingStyle", "#fcaf3e", "#ab7423", function () { l
 g.createVertex("ConLanguage", "#fce94f", "#c4a000", function () { location.href = "ConLanguage.html"; });
 g.createVertex("ContinuationsMusicCompiler", "#8ae234", "#425d26", function () { location.href = "ContinuationsMusicCompiler.html"; });
 g.createVertex("PiezoSpeakers", "#8ae234", "#425d26", function () { location.href = "PiezoSpeakers.html"; });
+g.createVertex("StageParsing", "#8ae234", "#425d26", function () { location.href = "StageParsing.html"; });
 g.createEdge("ConLanguage", "ContinuationPassingStyle");
 g.createEdge("ConLanguage", "PiezoSpeakers");
 g.createEdge("ContinuationsMusicCompiler", "ConLanguage");
 g.createEdge("PiezoSpeakers", "ContinuationsMusicCompiler");
+g.createEdge("StageParsing", "ConLanguage");
 
     g.go();
 </script>
 
+        <hr />
       </div>
     </div>
   </body>
