@@ -1,7 +1,10 @@
 main.ExecutionModel
 
+![Pre code generation.]($ROOT/static/images/stage-parsing.png)
+
 Before we can transform the parse tree to the target language, we need to
 understand the execution model of the source program. Let's look at an example:
+
 
     let fac = \(n, k) ->
         facAccumulate n 1 k
