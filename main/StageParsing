@@ -11,6 +11,32 @@ is difficult, so we convert it to a ParseTree which is easier to work with.
 
 ParsecIntroduction
 
+## Data structure for parse tree
+
+We define the parse tree data structure like this:
+
+    data Program = Program [Let]
+
+    data Let     = Let String Term
+
+    data Term    = Identifier String
+                 | Number     Integer
+                 | Lambda     [Let] [String] [Term]
+
+Example program:
+
+    let ANSWER = 14
+
+    let main = \() ->
+        printAnswer exit
+
+    let printAnswer = \(k) ->
+        print ANSWER k
+
+Parse tree:
+
+![Parse tree.]($ROOT/static/images/con-parse-tree.png)
+
 ## Continue
 
 ExecutionModel
