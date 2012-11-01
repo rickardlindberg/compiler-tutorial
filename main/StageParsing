@@ -1,6 +1,6 @@
 main.StageParsing
 
-    show stages for con with parsing highlighted
+![Parsing.]($ROOT/static/images/conc-environment.png)
 
 The first transformation is often parsing. Working with raw text is difficult.
 We want a parse tree.
