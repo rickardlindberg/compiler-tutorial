@@ -1,6 +1,6 @@
 main.StageParsing
 
-![Parsing.]($ROOT/static/images/conc-environment.png)
+![Parsing.]($ROOT/static/images/stage-parsing.png)
 
 The first transformation is often parsing. Working with raw text is difficult.
 We want a parse tree.
