@@ -15,6 +15,8 @@ compiler it with a C compiler.
 
 ![Environment in which conc is used.]($ROOT/static/images/conc-environment.png)
 
+The C runtime contains files that support executing con in C.
+
 ## Continue
 
 StageParsing
