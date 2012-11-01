@@ -2,4 +2,5 @@ main.ParsecIntroduction
 
 Parsec is a parser combinator library for Haskell.
 
-The manual is pretty nice. Over here: .
+The manual is pretty nice. Over here:
+http://legacy.cs.uu.nl/daan/download/parsec/parsec.html.
