@@ -15,7 +15,8 @@ compiler it with a C compiler.
 
 ![Environment in which conc is used.]($ROOT/static/images/conc-environment.png)
 
-The C runtime contains files that support executing con in C.
+The C runtime contains files that support executing con in C. We will see later
+why and how it's used.
 
 ## Continue
 
