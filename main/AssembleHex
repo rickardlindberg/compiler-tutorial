@@ -1,3 +1,6 @@
 main.AssembleHex
 
-![C runtime.]($ROOT/static/images/assemble.png)
+![Assemble HEX.]($ROOT/static/images/assemble.png)
+
+Now that we've implemented the C runtime in RuntimeSupport and the generation
+of C code in CodeGeneration, it's time to assemble all files with avr-gcc.
