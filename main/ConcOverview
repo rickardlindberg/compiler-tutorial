@@ -6,7 +6,7 @@ The con compiler (conc) is quite simple and has only three stages.
 
 In the first stage we have the con source code. That gets transformed into a
 parse tree. Since con is a quite simple language, there is no need for extra
-stages. So from the parse tree, we can generate the target output directly. In
+stages. So from the parse tree, we can generate the target code directly. In
 the case of the con compiler, it is C source code. So the con compiler
 transforms con source code to C source code.
 
