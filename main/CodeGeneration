@@ -2,4 +2,12 @@ main.CodeGeneration
 
 ![Code generation.]($ROOT/static/images/stage-code-gen.png)
 
-CodeGenerationFramework
+Now it's time to generate C code that uses the RuntimeSupport library.
+
+Generating code in Haskell means generating a string that contains C code and
+then write it to a file. In CodeGenerationFramework we make a small framework
+that allows us to generate that string in a more elegant way.
+
+## Continue
+
+AssembleHex
