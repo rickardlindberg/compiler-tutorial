@@ -1,7 +1,7 @@
 main.HomePage
 
 In this tutorial we are going to write a compiler. We will implement the
-compiler using Haskell and C.
+compiler using Haskell (HaskellLanguage) and C.
 
 As we will discover in this tutorial, implementing a compiler for a small
 language is not that difficult.
