@@ -5,20 +5,20 @@
     <title>ConLanguage</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="./static/css/blueprint/screen.css" type="text/css" media="screen, projection">
-    <link rel="stylesheet" href="./static/css/blueprint/print.css" type="text/css" media="print"> 
+    <link rel="stylesheet" href="./static/css/blueprint/print.css" type="text/css" media="print">
     <!--[if lt IE 8]>
       <link rel="stylesheet" href="./static/css/blueprint/ie.css" type="text/css" media="screen, projection">
     <![endif]-->
-    <link rel="stylesheet" href="./static/css/pygments/syntax.css" type="text/css"> 
-    <link rel="stylesheet" href="./static/css/layout.css" type="text/css"> 
-    <link rel="stylesheet" href="./static/css/colors.css" type="text/css"> 
+    <link rel="stylesheet" href="./static/css/pygments/syntax.css" type="text/css">
+    <link rel="stylesheet" href="./static/css/layout.css" type="text/css">
+    <link rel="stylesheet" href="./static/css/colors.css" type="text/css">
     <script type="text/javascript" src="./static/js/graph.js"></script>
   </head>
   <body>
     <div class="container noshowgrid">
       <div class="span-20 prepend-2 append-2">
         <h1>ConLanguage</h1>
-<p>Con is a general-purpose programming language based on <a href="ContinuationPassingStyle.html" title="ContinuationPassingStyle">ContinuationPassingStyle</a>.</p>
+        <p>Con is a general-purpose programming language based on <a href="ContinuationPassingStyle.html" title="ContinuationPassingStyle">ContinuationPassingStyle</a>.</p>
 <p>Depending on which primitives are implemented in the language, it can do different things. We will implement primitives to control a set of <a href="PiezoSpeakers.html" title="PiezoSpeakers">PiezoSpeakers</a> connected to the Arduino. They are: <code>setTempo</code> and <code>setBeat</code>.</p>
 <p>A program that plays the C-scale looks like this:</p>
 <pre><code>let main =
@@ -54,42 +54,52 @@ let C5 = 523</code></pre>
 <p>The reason that <code>k</code> is available to the last function is that</p>
 <p>TODO:</p>
         <hr />
-<svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
-<script type="text/javascript">
-    var g = new Graph("canvas", 800, 400);
-    g.repulsion = g.repulsion / 2;
-g.createVertex("ConLanguage", "#fcaf3e", "#ab7423", function () { location.href = "ConLanguage.html"; });
-g.createVertex("ContinuationPassingStyle", "#fce94f", "#c4a000", function () { location.href = "ContinuationPassingStyle.html"; });
-g.createVertex("ContinuationsMusicCompiler", "#fce94f", "#c4a000", function () { location.href = "ContinuationsMusicCompiler.html"; });
-g.createVertex("PiezoSpeakers", "#fce94f", "#c4a000", function () { location.href = "PiezoSpeakers.html"; });
-g.createVertex("StageParsing", "#fce94f", "#c4a000", function () { location.href = "StageParsing.html"; });
-g.createVertex("ArduinoUno", "#8ae234", "#425d26", function () { location.href = "ArduinoUno.html"; });
-g.createVertex("ConcOverview", "#8ae234", "#425d26", function () { location.href = "ConcOverview.html"; });
-g.createVertex("ExecutionModel", "#8ae234", "#425d26", function () { location.href = "ExecutionModel.html"; });
-g.createVertex("ParseTree", "#8ae234", "#425d26", function () { location.href = "ParseTree.html"; });
-g.createVertex("ParsecIntroduction", "#8ae234", "#425d26", function () { location.href = "ParsecIntroduction.html"; });
-g.createVertex("StructureOfCompiler", "#8ae234", "#425d26", function () { location.href = "StructureOfCompiler.html"; });
-g.createVertex("WhyWriteCompiler", "#8ae234", "#425d26", function () { location.href = "WhyWriteCompiler.html"; });
-g.createEdge("ConLanguage", "ContinuationPassingStyle");
-g.createEdge("ConLanguage", "PiezoSpeakers");
-g.createEdge("ContinuationsMusicCompiler", "ArduinoUno");
-g.createEdge("ContinuationsMusicCompiler", "ConLanguage");
-g.createEdge("ContinuationsMusicCompiler", "StructureOfCompiler");
-g.createEdge("PiezoSpeakers", "ContinuationsMusicCompiler");
-g.createEdge("StageParsing", "ParseTree");
-g.createEdge("StageParsing", "ParsecIntroduction");
-g.createEdge("StageParsing", "ConLanguage");
-g.createEdge("StageParsing", "ExecutionModel");
-g.createEdge("ArduinoUno", "ContinuationsMusicCompiler");
-g.createEdge("ConcOverview", "StageParsing");
-g.createEdge("ExecutionModel", "StageParsing");
-g.createEdge("StructureOfCompiler", "ParseTree");
-g.createEdge("StructureOfCompiler", "ConcOverview");
-g.createEdge("WhyWriteCompiler", "ContinuationsMusicCompiler");
-
-    g.go();
-</script>
-
+        <svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
+        <script type="text/javascript">
+            var colors = function (level) {
+                if (level == 1) {
+                    return {
+                        color: "#fcaf3e",
+                        stroke: "#ab7423"
+                    };
+                } else if (level == 2) {
+                    return {
+                        color: "#fce94f",
+                        stroke: "#c4a000"
+                    };
+                } else if (level == 3) {
+                    return {
+                        color: "#8ae234",
+                        stroke: "#425d26"
+                    };
+                }
+            };
+            var goToPageFn = function(page) {
+                return function() {
+                    location.href = page + ".html";
+                };
+            };
+            var g = new Graph("canvas", 800, 400);
+            g.repulsion = g.repulsion / 2;
+            //g.spring_length = 8;
+            g.createVertex("ConLanguage", colors(1), goToPageFn("ConLanguage"));g.createVertex("ContinuationPassingStyle", colors(2), goToPageFn("ContinuationPassingStyle"));g.createVertex("ContinuationsMusicCompiler", colors(2), goToPageFn("ContinuationsMusicCompiler"));g.createVertex("PiezoSpeakers", colors(2), goToPageFn("PiezoSpeakers"));g.createVertex("StageParsing", colors(2), goToPageFn("StageParsing"));g.createVertex("ArduinoUno", colors(3), goToPageFn("ArduinoUno"));g.createVertex("ConcOverview", colors(3), goToPageFn("ConcOverview"));g.createVertex("ExecutionModel", colors(3), goToPageFn("ExecutionModel"));g.createVertex("ParseTree", colors(3), goToPageFn("ParseTree"));g.createVertex("ParsecIntroduction", colors(3), goToPageFn("ParsecIntroduction"));g.createVertex("StructureOfCompiler", colors(3), goToPageFn("StructureOfCompiler"));g.createVertex("WhyWriteCompiler", colors(3), goToPageFn("WhyWriteCompiler"));
+            g.createEdge("ConLanguage", "ContinuationPassingStyle");g.createEdge("ConLanguage", "PiezoSpeakers");g.createEdge("ContinuationsMusicCompiler", "ArduinoUno");g.createEdge("ContinuationsMusicCompiler", "ConLanguage");g.createEdge("ContinuationsMusicCompiler", "StructureOfCompiler");g.createEdge("PiezoSpeakers", "ContinuationsMusicCompiler");g.createEdge("StageParsing", "ParseTree");g.createEdge("StageParsing", "ParsecIntroduction");g.createEdge("StageParsing", "ConLanguage");g.createEdge("StageParsing", "ExecutionModel");g.createEdge("ArduinoUno", "ContinuationsMusicCompiler");g.createEdge("ConcOverview", "StageParsing");g.createEdge("ExecutionModel", "StageParsing");g.createEdge("StructureOfCompiler", "ParseTree");g.createEdge("StructureOfCompiler", "ConcOverview");g.createEdge("WhyWriteCompiler", "ContinuationsMusicCompiler");
+            g.go();
+        </script>
+        <hr />
+        <p>
+        <center>
+        1. <a href="HomePage.html">HomePage</a>
+        |
+        2. <a href="StageParsing.html">StageParsing</a>
+        |
+        3. <a href="RuntimeSupport.html">RuntimeSupport</a>
+        |
+        4. <a href="CodeGeneration.html">CodeGeneration</a>
+        |
+        5. <a href="AssembleHex.html">AssembleHex</a>
+        </center>
+        </p>
         <hr />
       </div>
     </div>

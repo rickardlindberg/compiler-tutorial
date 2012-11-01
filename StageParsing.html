@@ -5,21 +5,21 @@
     <title>StageParsing</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="./static/css/blueprint/screen.css" type="text/css" media="screen, projection">
-    <link rel="stylesheet" href="./static/css/blueprint/print.css" type="text/css" media="print"> 
+    <link rel="stylesheet" href="./static/css/blueprint/print.css" type="text/css" media="print">
     <!--[if lt IE 8]>
       <link rel="stylesheet" href="./static/css/blueprint/ie.css" type="text/css" media="screen, projection">
     <![endif]-->
-    <link rel="stylesheet" href="./static/css/pygments/syntax.css" type="text/css"> 
-    <link rel="stylesheet" href="./static/css/layout.css" type="text/css"> 
-    <link rel="stylesheet" href="./static/css/colors.css" type="text/css"> 
+    <link rel="stylesheet" href="./static/css/pygments/syntax.css" type="text/css">
+    <link rel="stylesheet" href="./static/css/layout.css" type="text/css">
+    <link rel="stylesheet" href="./static/css/colors.css" type="text/css">
     <script type="text/javascript" src="./static/js/graph.js"></script>
   </head>
   <body>
     <div class="container noshowgrid">
       <div class="span-20 prepend-2 append-2">
         <h1>StageParsing</h1>
-<div class="figure">
-<img src=".//static/images/stage-parsing.png" alt="Parsing." /><p class="caption">Parsing.</p>
+        <div class="figure">
+<img src="./static/images/stage-parsing.png" alt="Parsing." /><p class="caption">Parsing.</p>
 </div>
 <p>The first transformation in a compiler is often parsing. Working with raw text is difficult, so we convert it to a <a href="ParseTree.html" title="ParseTree">ParseTree</a> which is easier to work with.</p>
 <h2 id="parsing-methods">Parsing methods</h2>
@@ -48,56 +48,66 @@ let printAnswer = \(k) -&gt;
     print ANSWER k</code></pre>
 <p>Has the following parse tree:</p>
 <div class="figure">
-<img src=".//static/images/con-parse-tree.png" alt="Parse tree." /><p class="caption">Parse tree.</p>
+<img src="./static/images/con-parse-tree.png" alt="Parse tree." /><p class="caption">Parse tree.</p>
 </div>
 <h2 id="the-parse-function">The parse function</h2>
 <p>The top level parse function has the following type:</p>
-<pre><code>parseCon :: String -&gt; Either Error Program</code></pre>
+<pre><code>parseCon :: String -&gt; Either ParseError Program</code></pre>
 <p>And is implemented like this (<a href="https://github.com/rickardlindberg/compiler-tutorial/blob/master/src/Parser.hs"><code>Parser.hs</code></a>):</p>
-<pre><code>parseCon input =
-    case parse programParser &quot;&quot; input of
-        Left  error   -&gt; print error
-        Right program -&gt; program</code></pre>
+<pre><code>parseCon input = parse programParser &quot;&quot; input</code></pre>
+<p>We use Parsec's <a href="http://legacy.cs.uu.nl/daan/download/parsec/parsec.html#parse">parse</a> function and pass along <code>programParser</code> which defines how a con program should be parsed. Its type is this:</p>
+<pre><code>programParser :: Parser Program</code></pre>
+<h2 id="exercise">Exercise</h2>
+<p>Fill in the implementation of <code>programParser</code> so that can parse arbitrary con programs.</p>
 <h2 id="continue">Continue</h2>
 <p><a href="ExecutionModel.html" title="ExecutionModel">ExecutionModel</a></p>
         <hr />
-<svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
-<script type="text/javascript">
-    var g = new Graph("canvas", 800, 400);
-    g.repulsion = g.repulsion / 2;
-g.createVertex("StageParsing", "#fcaf3e", "#ab7423", function () { location.href = "StageParsing.html"; });
-g.createVertex("ConLanguage", "#fce94f", "#c4a000", function () { location.href = "ConLanguage.html"; });
-g.createVertex("ConcOverview", "#fce94f", "#c4a000", function () { location.href = "ConcOverview.html"; });
-g.createVertex("ExecutionModel", "#fce94f", "#c4a000", function () { location.href = "ExecutionModel.html"; });
-g.createVertex("ParseTree", "#fce94f", "#c4a000", function () { location.href = "ParseTree.html"; });
-g.createVertex("ParsecIntroduction", "#fce94f", "#c4a000", function () { location.href = "ParsecIntroduction.html"; });
-g.createVertex("CodeGeneration", "#8ae234", "#425d26", function () { location.href = "CodeGeneration.html"; });
-g.createVertex("ContinuationPassingStyle", "#8ae234", "#425d26", function () { location.href = "ContinuationPassingStyle.html"; });
-g.createVertex("ContinuationsMusicCompiler", "#8ae234", "#425d26", function () { location.href = "ContinuationsMusicCompiler.html"; });
-g.createVertex("PiezoSpeakers", "#8ae234", "#425d26", function () { location.href = "PiezoSpeakers.html"; });
-g.createVertex("RuntimeSupport", "#8ae234", "#425d26", function () { location.href = "RuntimeSupport.html"; });
-g.createVertex("StructureOfCompiler", "#8ae234", "#425d26", function () { location.href = "StructureOfCompiler.html"; });
-g.createEdge("StageParsing", "ParseTree");
-g.createEdge("StageParsing", "ParsecIntroduction");
-g.createEdge("StageParsing", "ConLanguage");
-g.createEdge("StageParsing", "ExecutionModel");
-g.createEdge("ConLanguage", "ContinuationPassingStyle");
-g.createEdge("ConLanguage", "PiezoSpeakers");
-g.createEdge("ConcOverview", "StageParsing");
-g.createEdge("ExecutionModel", "StageParsing");
-g.createEdge("ExecutionModel", "RuntimeSupport");
-g.createEdge("ExecutionModel", "CodeGeneration");
-g.createEdge("CodeGeneration", "RuntimeSupport");
-g.createEdge("ContinuationsMusicCompiler", "ConLanguage");
-g.createEdge("ContinuationsMusicCompiler", "StructureOfCompiler");
-g.createEdge("PiezoSpeakers", "ContinuationsMusicCompiler");
-g.createEdge("RuntimeSupport", "ExecutionModel");
-g.createEdge("StructureOfCompiler", "ParseTree");
-g.createEdge("StructureOfCompiler", "ConcOverview");
-
-    g.go();
-</script>
-
+        <svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
+        <script type="text/javascript">
+            var colors = function (level) {
+                if (level == 1) {
+                    return {
+                        color: "#fcaf3e",
+                        stroke: "#ab7423"
+                    };
+                } else if (level == 2) {
+                    return {
+                        color: "#fce94f",
+                        stroke: "#c4a000"
+                    };
+                } else if (level == 3) {
+                    return {
+                        color: "#8ae234",
+                        stroke: "#425d26"
+                    };
+                }
+            };
+            var goToPageFn = function(page) {
+                return function() {
+                    location.href = page + ".html";
+                };
+            };
+            var g = new Graph("canvas", 800, 400);
+            g.repulsion = g.repulsion / 2;
+            //g.spring_length = 8;
+            g.createVertex("StageParsing", colors(1), goToPageFn("StageParsing"));g.createVertex("ConLanguage", colors(2), goToPageFn("ConLanguage"));g.createVertex("ConcOverview", colors(2), goToPageFn("ConcOverview"));g.createVertex("ExecutionModel", colors(2), goToPageFn("ExecutionModel"));g.createVertex("ParseTree", colors(2), goToPageFn("ParseTree"));g.createVertex("ParsecIntroduction", colors(2), goToPageFn("ParsecIntroduction"));g.createVertex("CodeGeneration", colors(3), goToPageFn("CodeGeneration"));g.createVertex("ContinuationPassingStyle", colors(3), goToPageFn("ContinuationPassingStyle"));g.createVertex("ContinuationsMusicCompiler", colors(3), goToPageFn("ContinuationsMusicCompiler"));g.createVertex("PiezoSpeakers", colors(3), goToPageFn("PiezoSpeakers"));g.createVertex("RuntimeSupport", colors(3), goToPageFn("RuntimeSupport"));g.createVertex("StructureOfCompiler", colors(3), goToPageFn("StructureOfCompiler"));
+            g.createEdge("StageParsing", "ParseTree");g.createEdge("StageParsing", "ParsecIntroduction");g.createEdge("StageParsing", "ConLanguage");g.createEdge("StageParsing", "ExecutionModel");g.createEdge("ConLanguage", "ContinuationPassingStyle");g.createEdge("ConLanguage", "PiezoSpeakers");g.createEdge("ConcOverview", "StageParsing");g.createEdge("ExecutionModel", "StageParsing");g.createEdge("ExecutionModel", "RuntimeSupport");g.createEdge("ExecutionModel", "CodeGeneration");g.createEdge("CodeGeneration", "RuntimeSupport");g.createEdge("ContinuationsMusicCompiler", "ConLanguage");g.createEdge("ContinuationsMusicCompiler", "StructureOfCompiler");g.createEdge("PiezoSpeakers", "ContinuationsMusicCompiler");g.createEdge("RuntimeSupport", "ExecutionModel");g.createEdge("StructureOfCompiler", "ParseTree");g.createEdge("StructureOfCompiler", "ConcOverview");
+            g.go();
+        </script>
+        <hr />
+        <p>
+        <center>
+        1. <a href="HomePage.html">HomePage</a>
+        |
+        2. <a href="StageParsing.html">StageParsing</a>
+        |
+        3. <a href="RuntimeSupport.html">RuntimeSupport</a>
+        |
+        4. <a href="CodeGeneration.html">CodeGeneration</a>
+        |
+        5. <a href="AssembleHex.html">AssembleHex</a>
+        </center>
+        </p>
         <hr />
       </div>
     </div>

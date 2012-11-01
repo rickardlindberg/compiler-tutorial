@@ -5,58 +5,78 @@
     <title>ConcOverview</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="./static/css/blueprint/screen.css" type="text/css" media="screen, projection">
-    <link rel="stylesheet" href="./static/css/blueprint/print.css" type="text/css" media="print"> 
+    <link rel="stylesheet" href="./static/css/blueprint/print.css" type="text/css" media="print">
     <!--[if lt IE 8]>
       <link rel="stylesheet" href="./static/css/blueprint/ie.css" type="text/css" media="screen, projection">
     <![endif]-->
-    <link rel="stylesheet" href="./static/css/pygments/syntax.css" type="text/css"> 
-    <link rel="stylesheet" href="./static/css/layout.css" type="text/css"> 
-    <link rel="stylesheet" href="./static/css/colors.css" type="text/css"> 
+    <link rel="stylesheet" href="./static/css/pygments/syntax.css" type="text/css">
+    <link rel="stylesheet" href="./static/css/layout.css" type="text/css">
+    <link rel="stylesheet" href="./static/css/colors.css" type="text/css">
     <script type="text/javascript" src="./static/js/graph.js"></script>
   </head>
   <body>
     <div class="container noshowgrid">
       <div class="span-20 prepend-2 append-2">
         <h1>ConcOverview</h1>
-<p>The con compiler (conc) is quite simple and has only three stages.</p>
+        <p>The con compiler (conc) is quite simple and has only three stages.</p>
 <div class="figure">
-<img src=".//static/images/stages-conc.png" alt="Stages in con compiler." /><p class="caption">Stages in con compiler.</p>
+<img src="./static/images/stages-conc.png" alt="Stages in con compiler." /><p class="caption">Stages in con compiler.</p>
 </div>
 <p>In the first stage we have the con source code. That gets transformed into a parse tree. Since con is a quite simple language, there is no need for extra stages. So from the parse tree, we can generate the target code directly. In the case of the con compiler, it is C source code. So the con compiler transforms con source code to C source code.</p>
 <p>In order to make the generated C source code run on the Arduino, we have to compiler it with a C compiler.</p>
 <div class="figure">
-<img src=".//static/images/conc-environment.png" alt="Environment in which conc is used." /><p class="caption">Environment in which conc is used.</p>
+<img src="./static/images/conc-environment.png" alt="Environment in which conc is used." /><p class="caption">Environment in which conc is used.</p>
 </div>
 <p>The C runtime contains files that support executing con in C. We will see later why and how it's used.</p>
 <h2 id="continue">Continue</h2>
 <p><a href="StageParsing.html" title="StageParsing">StageParsing</a></p>
         <hr />
-<svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
-<script type="text/javascript">
-    var g = new Graph("canvas", 800, 400);
-    g.repulsion = g.repulsion / 2;
-g.createVertex("ConcOverview", "#fcaf3e", "#ab7423", function () { location.href = "ConcOverview.html"; });
-g.createVertex("StageParsing", "#fce94f", "#c4a000", function () { location.href = "StageParsing.html"; });
-g.createVertex("StructureOfCompiler", "#fce94f", "#c4a000", function () { location.href = "StructureOfCompiler.html"; });
-g.createVertex("ConLanguage", "#8ae234", "#425d26", function () { location.href = "ConLanguage.html"; });
-g.createVertex("ContinuationsMusicCompiler", "#8ae234", "#425d26", function () { location.href = "ContinuationsMusicCompiler.html"; });
-g.createVertex("ExecutionModel", "#8ae234", "#425d26", function () { location.href = "ExecutionModel.html"; });
-g.createVertex("ParseTree", "#8ae234", "#425d26", function () { location.href = "ParseTree.html"; });
-g.createVertex("ParsecIntroduction", "#8ae234", "#425d26", function () { location.href = "ParsecIntroduction.html"; });
-g.createEdge("ConcOverview", "StageParsing");
-g.createEdge("StageParsing", "ParseTree");
-g.createEdge("StageParsing", "ParsecIntroduction");
-g.createEdge("StageParsing", "ConLanguage");
-g.createEdge("StageParsing", "ExecutionModel");
-g.createEdge("StructureOfCompiler", "ParseTree");
-g.createEdge("StructureOfCompiler", "ConcOverview");
-g.createEdge("ContinuationsMusicCompiler", "ConLanguage");
-g.createEdge("ContinuationsMusicCompiler", "StructureOfCompiler");
-g.createEdge("ExecutionModel", "StageParsing");
-
-    g.go();
-</script>
-
+        <svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
+        <script type="text/javascript">
+            var colors = function (level) {
+                if (level == 1) {
+                    return {
+                        color: "#fcaf3e",
+                        stroke: "#ab7423"
+                    };
+                } else if (level == 2) {
+                    return {
+                        color: "#fce94f",
+                        stroke: "#c4a000"
+                    };
+                } else if (level == 3) {
+                    return {
+                        color: "#8ae234",
+                        stroke: "#425d26"
+                    };
+                }
+            };
+            var goToPageFn = function(page) {
+                return function() {
+                    location.href = page + ".html";
+                };
+            };
+            var g = new Graph("canvas", 800, 400);
+            g.repulsion = g.repulsion / 2;
+            //g.spring_length = 8;
+            g.createVertex("ConcOverview", colors(1), goToPageFn("ConcOverview"));g.createVertex("StageParsing", colors(2), goToPageFn("StageParsing"));g.createVertex("StructureOfCompiler", colors(2), goToPageFn("StructureOfCompiler"));g.createVertex("ConLanguage", colors(3), goToPageFn("ConLanguage"));g.createVertex("ContinuationsMusicCompiler", colors(3), goToPageFn("ContinuationsMusicCompiler"));g.createVertex("ExecutionModel", colors(3), goToPageFn("ExecutionModel"));g.createVertex("ParseTree", colors(3), goToPageFn("ParseTree"));g.createVertex("ParsecIntroduction", colors(3), goToPageFn("ParsecIntroduction"));
+            g.createEdge("ConcOverview", "StageParsing");g.createEdge("StageParsing", "ParseTree");g.createEdge("StageParsing", "ParsecIntroduction");g.createEdge("StageParsing", "ConLanguage");g.createEdge("StageParsing", "ExecutionModel");g.createEdge("StructureOfCompiler", "ParseTree");g.createEdge("StructureOfCompiler", "ConcOverview");g.createEdge("ContinuationsMusicCompiler", "ConLanguage");g.createEdge("ContinuationsMusicCompiler", "StructureOfCompiler");g.createEdge("ExecutionModel", "StageParsing");
+            g.go();
+        </script>
+        <hr />
+        <p>
+        <center>
+        1. <a href="HomePage.html">HomePage</a>
+        |
+        2. <a href="StageParsing.html">StageParsing</a>
+        |
+        3. <a href="RuntimeSupport.html">RuntimeSupport</a>
+        |
+        4. <a href="CodeGeneration.html">CodeGeneration</a>
+        |
+        5. <a href="AssembleHex.html">AssembleHex</a>
+        </center>
+        </p>
         <hr />
       </div>
     </div>
