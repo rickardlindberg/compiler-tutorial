@@ -8,12 +8,13 @@ is difficult, so we convert it to a ParseTree which is easier to work with.
 ## Parsing methods
 
 * different parsing methods
+* ParsecIntroduction
 
-ParsecIntroduction
+TODO: fill in stuff here
 
 ## Data structure for parse tree
 
-We define the parse tree data structure like this:
+We define the parse tree data structure like this ([`ParseTree.hs`](https://github.com/rickardlindberg/compiler-tutorial/blob/master/src/ParseTree.hs)):
 
     data Program = Program [Let]
 
@@ -23,9 +24,12 @@ We define the parse tree data structure like this:
                  | Number     Integer
                  | Lambda     [String] [Term]
 
-Example program:
+This data structure should match the description of con in ConLanguage pretty
+well.
 
-    let ANSWER = 14
+Example program (assumes that `print` is a built-in function):
+
+    let ANSWER = 42
 
     let main = \() ->
         printAnswer exit
@@ -33,9 +37,22 @@ Example program:
     let printAnswer = \(k) ->
         print ANSWER k
 
-Parse tree:
+Has the following parse tree:
 
 ![Parse tree.]($ROOT/static/images/con-parse-tree.png)
+
+## The parse function
+
+The top level parse function has the following type:
+
+    parseCon :: String -> Either Error Program
+
+And is implemented like this ([`Parser.hs`](https://github.com/rickardlindberg/compiler-tutorial/blob/master/src/Parser.hs)):
+
+    parseCon input =
+        case parse programParser "" input of
+            Left  error   -> print error
+            Right program -> program
 
 ## Continue
 

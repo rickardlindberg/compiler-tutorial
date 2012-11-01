@@ -1,6 +1,6 @@
 main.ParseTree
 
-A parse tree is a tree representing the program.
+A parse tree is a tree representing a program.
 
 Program:
 
