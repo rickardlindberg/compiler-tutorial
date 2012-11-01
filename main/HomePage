@@ -1,8 +1,10 @@
 main.HomePage
 
-In this tutorial we are going to write a compiler. Many people think compilers
-are difficult to implement, but as we will see in this tutorial, writing a
-compiler for a small language does not require that much.
+In this tutorial we are going to write a compiler. We will implement the
+compiler using Haskell and C.
+
+As we will discover in this tutorial, implementing a compiler for a small
+language is not that difficult.
 
 ## Continue
 
