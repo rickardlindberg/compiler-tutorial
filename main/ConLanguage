@@ -39,11 +39,11 @@ name. Values can be numbers or functions. The name `main` must be bound to a
 function which takes no arguments. That function is the starting point.
 
 A function is written using the following syntax: `\(arg1, arg2, ...) -> body`.
-The body must be a call to a function.
+The body must result in a call to a function.
 
 In the example above a function which takes no arguments is assigned to the
 name `main`. The body calls the function `cScale` passing one argument: `exit`.
-Exit is a built in function which terminates the execution of the program.
+`exit` is a built in function which terminates the execution of the program.
 
 The `cScale` function is defined to take one argument, `k`, which in this
 example will be the `exit` function. In the body, it calls the `setTempo`
@@ -54,3 +54,9 @@ functions and pass them along to the next one.
 When the last `setBeat` function is called, we pass in `k` to be the next
 function to call. Since `k` is bound to the `exit` function, the program will
 terminate here.
+
+## Closures
+
+The reason that `k` is available to the last function is that
+
+TODO:
