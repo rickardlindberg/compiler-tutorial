@@ -21,7 +21,7 @@ We define the parse tree data structure like this:
 
     data Term    = Identifier String
                  | Number     Integer
-                 | Lambda     [Let] [String] [Term]
+                 | Lambda     [String] [Term]
 
 Example program:
 
