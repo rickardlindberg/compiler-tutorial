@@ -5,7 +5,6 @@ main.ExecutionModel
 Before we can transform the parse tree to C code, we need to understand the
 execution model of the source program. Let's look at an example:
 
-
     let fac = \(n, k) ->
         facAccumulate n 1 k
 
