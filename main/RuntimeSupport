@@ -2,5 +2,5 @@ main.RuntimeSupport
 
 ![C runtime.]($ROOT/static/images/runtime.png)
 
-Now that we've figure out the ExecutionModel of con, we need to implement a C
+Now that we've figured out the ExecutionModel of con, we need to implement a C
 library that compiled con programs can use.
