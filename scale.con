@@ -1,0 +1,24 @@
+let main =
+    \() -> cScale
+    exit
+
+let cScale =
+    \(k) -> setTempo 100
+    \()  -> setBeat C4
+    \()  -> setBeat D4
+    \()  -> setBeat E4
+    \()  -> setBeat F4
+    \()  -> setBeat G4
+    \()  -> setBeat A4
+    \()  -> setBeat B4
+    \()  -> setBeat C5
+    k
+
+let C4 = 262
+let D4 = 294
+let E4 = 330
+let F4 = 349
+let G4 = 392
+let A4 = 440
+let B4 = 494
+let C5 = 523

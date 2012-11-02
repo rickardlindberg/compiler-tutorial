@@ -1,8 +1,9 @@
 #!/bin/sh
+
 OUT_DIR="sketch"
 
-IN_FILE="$1"
-OUT_FILE="$OUT_DIR/$(basename $1).c"
+IN_FILE="../scale.con"
+OUT_FILE="$OUT_DIR/con_program.c"
 
 rm -r "$OUT_DIR"
 mkdir "$OUT_DIR"
