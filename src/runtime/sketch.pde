@@ -1,4 +1,4 @@
-extern void con_main();
+extern "C" void con_main();
 
 void setup() {
     con_main();
