@@ -51,6 +51,18 @@ So what is `k`? It comes from the argument list. And when `printAnswer` is
 called, we pass in `exit`. When the body of `main` is evaluated, `exit` is
 looked up in the global environment, and we get back a closure.
 
+At this point we have evaluated all elements in the body and we got
+
+1. a closure
+2. a number
+3. a closure
+
+The first element in the body must always be a closure since the body always
+must result in a function call.
+
+Next we put the number and the second closure in an argument list and pass that
+argument list to the first closure.
+
 ## TODO
 
 Let's look at an example:
