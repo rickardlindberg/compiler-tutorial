@@ -36,7 +36,7 @@ looks like this:
 ![The global environment.]($ROOT/static/images/global-env.png)
 
 A function without an environment is (in most cases) useless. Most of the time
-a function need to look up names in an environment. That is why all the
+a function needs to look up names in an environment. That is why all the
 functions are stored together with an environment in the environment table. We
 call a function + an environment a **closure**.
 
