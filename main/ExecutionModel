@@ -27,6 +27,8 @@ The first thing we must figure out in order to execute `printAnswer` is what
 arguments, we need to look for it somewhere else. In the general case, a
 function has to look up names that do not exist in the argument list.
 
+We call the place where functions look up names an **environment**.
+
 ## TODO
 
 Let's look at an example:
