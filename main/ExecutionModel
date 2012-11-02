@@ -63,6 +63,8 @@ must result in a function call.
 Next we put the number and the second closure in an argument list and pass that
 argument list to the first closure.
 
+## Nested closures
+
 ## TODO
 
 Let's look at an example:
