@@ -20,6 +20,8 @@ Let's take a look at the example from StageParsing again:
     let printAnswer = \(k) ->
         print ANSWER k
 
+This time we're going to look at how `printAnswer` is actually executed.
+
 ## TODO
 
 Let's look at an example:
