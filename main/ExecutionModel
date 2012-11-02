@@ -65,7 +65,7 @@ argument list to the first closure.
 
 ## Nested closures
 
-Let's look at an example to add three numbers given that we have a build in
+Let's look at an example to add three numbers given that we have a built-in
 function `add` that adds two numbers:
 
     let add3 = \(one, two, three, k) ->
@@ -74,7 +74,7 @@ function `add` that adds two numbers:
         )
 
 This function takes four arguments: the three numbers to add and the
-continuation to send the result to. The first this we do is call the build in
+continuation to send the result to. The first this we do is call the built-in
 function `add` with the first two numbers. The result of that operation is sent
 to a function. We create that function in place as an anonymous function. In
 the body of that anonymous function we call `add` once again, but this time
