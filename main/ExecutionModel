@@ -65,8 +65,6 @@ argument list to the first closure.
 
 ## Nested closures
 
-## TODO
-
 Let's look at an example:
 
     let fac = \(n, k) ->
@@ -90,8 +88,6 @@ Let's try to run this function with n = 3:
     k 6
 
 `facAccumulate` is obviously called multiple times
-
-* environment model
 
 ## Continue
 
