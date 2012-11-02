@@ -69,8 +69,9 @@ Let's look at an example to add three numbers given that we have a build in
 function `add` that adds two numbers:
 
     let add3 = \(one, two, three, k) ->
-        add one two \(sum) ->
+        add one two (\(sum) ->
             add sum three k
+        )
 
 `facAccumulate` is obviously called multiple times
 
