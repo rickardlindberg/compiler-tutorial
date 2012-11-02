@@ -47,7 +47,9 @@ environment.
 Looking up `ANSWER` works in a similar way, but this time the number 42 is
 returned.
 
-So what is `k`?
+So what is `k`? It comes from the argument list. And when `printAnswer` is
+called, we pass in `exit`. When the body of `main` is evaluated, `exit` is
+looked up in the global environment, and we get back a closure.
 
 ## TODO
 
