@@ -67,8 +67,9 @@ argument list to the first closure.
 
 Let's look at an example:
 
-    let fac = \(n, k) ->
-        facAccumulate n 1 k
+    let add3 = \(one, two, three, k) ->
+        add one two \(sum) ->
+            add sum three k
 
     let facAccumulate = \(n, result, k) ->
         isZero n
