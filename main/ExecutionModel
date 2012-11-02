@@ -93,7 +93,8 @@ a link to the parent environment:
 
 When the anonymous function is called, it looks up `add` in its environment.
 Since it can't find it there, it looks in the parent environment, which is the
-global environment, and finds it there.
+global environment, and finds it there. `sum` is obtained from the argument
+list. `three` and `k` are both found the environment.
 
 ## Continue
 
