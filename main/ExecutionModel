@@ -87,9 +87,9 @@ can't be the global environment since `three` and `k` is not defined there.
 
 What happens when an anonymous function is encountered is that a new
 environment is created that contains all names in its surrounding. It also has
-a link to the parent environment.
+a link to the parent environment:
 
-`facAccumulate` is obviously called multiple times
+![Environment for anonymous function.]($ROOT/static/images/anon-env.png)
 
 ## Continue
 
