@@ -73,6 +73,9 @@ function `add` that adds two numbers:
             add sum three k
         )
 
+This function takes four arguments: the three numbers to add and the
+continuation to send the result to.
+
 `facAccumulate` is obviously called multiple times
 
 ## Continue
