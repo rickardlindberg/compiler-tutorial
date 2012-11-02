@@ -5,5 +5,26 @@ main.RuntimeSupport
 Now that we've figured out the ExecutionModel of con, we need to implement a C
 library that compiled con programs can use.
 
-* TODO: overview of runtime (header files)
-* TODO: explain garbage collection
+## Parts
+
+The C runtime support library must contain the following:
+
+* Data structure for environments
+* Data structure for argument list
+* Data structure for closures
+* Data structures for primitive types such as numbers
+* Implementation of built-in functions
+
+### Environment
+
+### Arguments
+
+### Closures
+
+### Primitives
+
+### Built-ins
+
+## Garbage collection
+
+* TODO

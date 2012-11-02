@@ -2,6 +2,29 @@ main.CodeGenerationFramework
 
 state monad stuff
 
+    data AccumulatedCode = AccumulatedCode
+        { counter     :: Int
+        , globalNames :: [(String, Int)]
+        , finalCode   :: String
+        }
+
+    writeLine :: String -> ST.State AccumulatedCode ()
+    writeLine line = ST.modify (\s -> s { finalCode = finalCode s ++ line ++ "\n" })
+
+    addGlobalName :: String -> Int -> ST.State AccumulatedCode ()
+    addGlobalName name n = ST.modify (\s -> s { globalNames = (name, n):globalNames s })
+
+    nextCounter :: ST.State AccumulatedCode Int
+    nextCounter = do
+        state <- get
+        ST.modify (\s -> s { counter = counter s + 1 })
+        return $ counter state
+
+And
+
+    generateCode :: Program -> String
+    generateCode program = finalCode $ ST.execState (outProgram program) (AccumulatedCode 0 [] "")
+
 ## Continue
 
 CodeGeneration
