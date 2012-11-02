@@ -88,13 +88,37 @@ Graph.prototype.getPointForVertex = function (i) {
 	return { x: this.vertices[i].posx, y: this.vertices[i].posy };
 }
 
+Graph.prototype.getRectanglePointsForVertex = function (i) {
+	var points = [];
+	var vertex = this.vertices[i];
+	var posx = vertex.posx;
+	var posy = vertex.posy;
+	var w = vertex.w;
+	var h = vertex.h;
+	points.push({ x: posx    , y: posy     });
+	points.push({ x: posx + w, y: posy     });
+	points.push({ x: posx + w, y: posy + h });
+	points.push({ x: posx    , y: posy + h });
+	return points;
+}
+
+Graph.prototype.pairwiseCombineArrays = function (a, b) {
+	var pairs = [];
+	for (var i in a) {
+		for (var j in b) {
+			pairs.push({ 
+				p1: a[i], 
+				p2: b[j]
+			});
+		}
+	}
+	return pairs;
+}
+
 Graph.prototype.findClosestDistance = function (i, j) {
-	var pointPairs = [];
-	var pair = {
-		p1: this.getPointForVertex(i),
-		p2: this.getPointForVertex(j)
-	};
-	pointPairs.push(pair);
+	var iPoints = this.getRectanglePointsForVertex(i);
+	var jPoints = this.getRectanglePointsForVertex(j);
+	var pointPairs = this.pairwiseCombineArrays(iPoints, jPoints);
 	return this.findClosestPairDistance(pointPairs);
 }
 
