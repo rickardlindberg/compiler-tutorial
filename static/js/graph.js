@@ -62,13 +62,36 @@ Graph.prototype.createEdge = function( a, b, style ) {
 	this.vertices[b].edges[a] = { "dest" : a, "line": line };
 }
 
-Graph.prototype.findClosestDistance = function (i, j) {
-	var deltax = this.vertices[j].posx - this.vertices[i].posx;
-	var deltay = this.vertices[j].posy - this.vertices[i].posy;
-	return { 
-		dx: deltax, 
-		dy: deltay 
+Graph.prototype.findClosestPairDistance = function (pointPairs) {
+	var minDistance = null;
+	var minDx = null;
+	var minDy = null;
+	for (var pair in pointPairs) {
+		var p1 = pointPairs[pair].p1;
+		var p2 = pointPairs[pair].p2;
+		var dx = p2.x - p1.x;
+		var dy = p2.y - p1.y;
+		var d2 = dx * dx + dy * dy;
+		if (minDistance === null || d2 < minDistance) {
+			minDistance = d2;
+			minDx = dx;
+			minDy = dy;
+		}
+	}
+	return {
+		dx: minDx,
+		dy: minDy
 	};
+}
+
+Graph.prototype.findClosestDistance = function (i, j) {
+	var pointPairs = [];
+	var pair = {
+		p1: { x: this.vertices[i].posx, y: this.vertices[i].posy },
+		p2: { x: this.vertices[j].posx, y: this.vertices[j].posy }
+	};
+	pointPairs.push(pair);
+	return this.findClosestPairDistance(pointPairs);
 }
 
 Graph.prototype.updateLayout = function() {
