@@ -74,7 +74,12 @@ function `add` that adds two numbers:
         )
 
 This function takes four arguments: the three numbers to add and the
-continuation to send the result to.
+continuation to send the result to. The first this we do is call the build in
+function `add` with the first two numbers. The result of that operation is sent
+to a function. We create that function in place as an anonymous function. In
+the body of that anonymous function we call `add` once again, but this time
+with the sum of the first two numbers and the third number. We pass in `k` as
+the continuation.
 
 `facAccumulate` is obviously called multiple times
 
