@@ -17,6 +17,7 @@ rm -r "html-export"
 # Checkout pages branch and clean it
 git checkout gh-pages
 git rm -rf .
+git clean -f -d -x
 
 # Copy over generated and commit
 cp -r $TMP_DEST/* .
