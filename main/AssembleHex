@@ -4,3 +4,12 @@ main.AssembleHex
 
 Now that we've implemented the C runtime in RuntimeSupport and the generation
 of C code in CodeGeneration, it's time to assemble all files with avr-gcc.
+
+The easiest way to do this is with the [Arduino
+IDE](http://www.arduino.cc/en/Main/software).
+
+TODO: explain the process
+
+## Continue
+
+MovingForward
