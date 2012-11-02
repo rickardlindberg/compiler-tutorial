@@ -1,5 +1,5 @@
 #!/bin/sh
-OUT_DIR="con_sketch"
+OUT_DIR="sketch"
 
 IN_FILE="$1"
 OUT_FILE="$OUT_DIR/$(basename $1).c"

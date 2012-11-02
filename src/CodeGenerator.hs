@@ -13,6 +13,7 @@ generateCode = runGenerator . outProgram
 outProgram :: Program -> ST.State AccumulatedCode ()
 outProgram (Program lets) = do
     addInclude "\"runtime.h\""
+    addInclude "<stdlib.h>"
     writeLine ""
     mapM_ outLet lets
     outMain
