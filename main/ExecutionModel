@@ -10,6 +10,8 @@ writing this compiler.
 
 ## Function + Environment = Closure
 
+## TODO
+
 Let's look at an example:
 
     let fac = \(n, k) ->
