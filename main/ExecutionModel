@@ -40,6 +40,10 @@ a function need to look up names in an environment. That is why all the
 functions are stored together with an environment in the environment table. We
 call a function + an environment a **closure**.
 
+So when `printAnswer` looks up `print` in the global environment, it gets back
+a closure where the built-in function `print` is bundled together with an
+environment.
+
 ## TODO
 
 Let's look at an example:
