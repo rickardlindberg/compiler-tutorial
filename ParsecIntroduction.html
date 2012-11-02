@@ -83,7 +83,7 @@ parseNumber = do
             g.repulsion = g.repulsion / 2;
             //g.spring_length = 8;
             g.createVertex("ParsecIntroduction", colors(1), goToPageFn("ParsecIntroduction"));g.createVertex("StageParsing", colors(2), goToPageFn("StageParsing"));g.createVertex("ConLanguage", colors(3), goToPageFn("ConLanguage"));g.createVertex("ConcOverview", colors(3), goToPageFn("ConcOverview"));g.createVertex("ExecutionModel", colors(3), goToPageFn("ExecutionModel"));g.createVertex("ParseTree", colors(3), goToPageFn("ParseTree"));
-            g.createEdge("StageParsing", "ParseTree");g.createEdge("StageParsing", "ParsecIntroduction");g.createEdge("StageParsing", "ConLanguage");g.createEdge("StageParsing", "ExecutionModel");g.createEdge("ConcOverview", "StageParsing");g.createEdge("ExecutionModel", "StageParsing");
+            g.createEdge("StageParsing", "ParseTree");g.createEdge("StageParsing", "ParsecIntroduction");g.createEdge("StageParsing", "ConLanguage");g.createEdge("StageParsing", "ExecutionModel");g.createEdge("ConcOverview", "StageParsing");g.createEdge("ExecutionModel", "StageParsing");g.createEdge("ExecutionModel", "StageParsing");
             g.go();
         </script>
         <hr />
@@ -98,6 +98,8 @@ parseNumber = do
         4. <a href="CodeGeneration.html">CodeGeneration</a>
         |
         5. <a href="AssembleHex.html">AssembleHex</a>
+        |
+        6. <a href="MovingForward.html">MovingForward</a>
         </center>
         </p>
         <hr />

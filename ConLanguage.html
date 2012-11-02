@@ -45,14 +45,13 @@ let G4 = 392
 let A4 = 440
 let B4 = 494
 let C5 = 523</code></pre>
-<p>A con program is a list of let-expressions. A let-expression binds a value to a name. Values can be numbers or functions. The name <code>main</code> must be bound to a function which takes no arguments. That function is the starting point.</p>
+<p>A con program is a list of let-expressions. A let-expression binds a name to a value. Values can be numbers or functions. The name <code>main</code> must be bound to a function which takes no arguments. That function is the starting point.</p>
 <p>A function is written using the following syntax: <code>\(arg1, arg2, ...) -&gt; body</code>. The body must result in a call to a function.</p>
 <p>In the example above a function which takes no arguments is assigned to the name <code>main</code>. The body calls the function <code>cScale</code> passing one argument: <code>exit</code>. <code>exit</code> is a built in function which terminates the execution of the program.</p>
 <p>The <code>cScale</code> function is defined to take one argument, <code>k</code>, which in this example will be the <code>exit</code> function. In the body, it calls the <code>setTempo</code> function passing two arguments: first a number, and then a function. The function starts like this: <code>\() -&gt; setBeat C4 ...</code> The subsequent lines nest functions and pass them along to the next one.</p>
 <p>When the last <code>setBeat</code> function is called, we pass in <code>k</code> to be the next function to call. Since <code>k</code> is bound to the <code>exit</code> function, the program will terminate here.</p>
 <h2 id="closures">Closures</h2>
-<p>The reason that <code>k</code> is available to the last function is that</p>
-<p>TODO:</p>
+<p>TODO: The reason that <code>k</code> is available to the last function is that</p>
         <hr />
         <svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
         <script type="text/javascript">
@@ -83,7 +82,7 @@ let C5 = 523</code></pre>
             g.repulsion = g.repulsion / 2;
             //g.spring_length = 8;
             g.createVertex("ConLanguage", colors(1), goToPageFn("ConLanguage"));g.createVertex("ContinuationPassingStyle", colors(2), goToPageFn("ContinuationPassingStyle"));g.createVertex("ContinuationsMusicCompiler", colors(2), goToPageFn("ContinuationsMusicCompiler"));g.createVertex("PiezoSpeakers", colors(2), goToPageFn("PiezoSpeakers"));g.createVertex("StageParsing", colors(2), goToPageFn("StageParsing"));g.createVertex("ArduinoUno", colors(3), goToPageFn("ArduinoUno"));g.createVertex("ConcOverview", colors(3), goToPageFn("ConcOverview"));g.createVertex("ExecutionModel", colors(3), goToPageFn("ExecutionModel"));g.createVertex("ParseTree", colors(3), goToPageFn("ParseTree"));g.createVertex("ParsecIntroduction", colors(3), goToPageFn("ParsecIntroduction"));g.createVertex("StructureOfCompiler", colors(3), goToPageFn("StructureOfCompiler"));g.createVertex("WhyWriteCompiler", colors(3), goToPageFn("WhyWriteCompiler"));
-            g.createEdge("ConLanguage", "ContinuationPassingStyle");g.createEdge("ConLanguage", "PiezoSpeakers");g.createEdge("ContinuationsMusicCompiler", "ArduinoUno");g.createEdge("ContinuationsMusicCompiler", "ConLanguage");g.createEdge("ContinuationsMusicCompiler", "StructureOfCompiler");g.createEdge("PiezoSpeakers", "ContinuationsMusicCompiler");g.createEdge("StageParsing", "ParseTree");g.createEdge("StageParsing", "ParsecIntroduction");g.createEdge("StageParsing", "ConLanguage");g.createEdge("StageParsing", "ExecutionModel");g.createEdge("ArduinoUno", "ContinuationsMusicCompiler");g.createEdge("ConcOverview", "StageParsing");g.createEdge("ExecutionModel", "StageParsing");g.createEdge("StructureOfCompiler", "ParseTree");g.createEdge("StructureOfCompiler", "ConcOverview");g.createEdge("WhyWriteCompiler", "ContinuationsMusicCompiler");
+            g.createEdge("ConLanguage", "ContinuationPassingStyle");g.createEdge("ConLanguage", "PiezoSpeakers");g.createEdge("ContinuationsMusicCompiler", "ArduinoUno");g.createEdge("ContinuationsMusicCompiler", "ConLanguage");g.createEdge("ContinuationsMusicCompiler", "StructureOfCompiler");g.createEdge("PiezoSpeakers", "ContinuationsMusicCompiler");g.createEdge("StageParsing", "ParseTree");g.createEdge("StageParsing", "ParsecIntroduction");g.createEdge("StageParsing", "ConLanguage");g.createEdge("StageParsing", "ExecutionModel");g.createEdge("ArduinoUno", "ContinuationsMusicCompiler");g.createEdge("ConcOverview", "StageParsing");g.createEdge("ExecutionModel", "StageParsing");g.createEdge("ExecutionModel", "StageParsing");g.createEdge("StructureOfCompiler", "ParseTree");g.createEdge("StructureOfCompiler", "ConcOverview");g.createEdge("WhyWriteCompiler", "ContinuationsMusicCompiler");
             g.go();
         </script>
         <hr />
@@ -98,6 +97,8 @@ let C5 = 523</code></pre>
         4. <a href="CodeGeneration.html">CodeGeneration</a>
         |
         5. <a href="AssembleHex.html">AssembleHex</a>
+        |
+        6. <a href="MovingForward.html">MovingForward</a>
         </center>
         </p>
         <hr />

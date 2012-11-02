@@ -22,6 +22,10 @@
 <img src="./static/images/assemble.png" alt="Assemble HEX." /><p class="caption">Assemble HEX.</p>
 </div>
 <p>Now that we've implemented the C runtime in <a href="RuntimeSupport.html" title="RuntimeSupport">RuntimeSupport</a> and the generation of C code in <a href="CodeGeneration.html" title="CodeGeneration">CodeGeneration</a>, it's time to assemble all files with avr-gcc.</p>
+<p>The easiest way to do this is with the <a href="http://www.arduino.cc/en/Main/software">Arduino IDE</a>.</p>
+<p>TODO: explain the process</p>
+<h2 id="continue">Continue</h2>
+<p><a href="MovingForward.html" title="MovingForward">MovingForward</a></p>
         <hr />
         <svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
         <script type="text/javascript">
@@ -51,8 +55,8 @@
             var g = new Graph("canvas", 800, 400);
             g.repulsion = g.repulsion / 2;
             //g.spring_length = 8;
-            g.createVertex("AssembleHex", colors(1), goToPageFn("AssembleHex"));g.createVertex("CodeGeneration", colors(2), goToPageFn("CodeGeneration"));g.createVertex("RuntimeSupport", colors(2), goToPageFn("RuntimeSupport"));g.createVertex("CodeGenerationFramework", colors(3), goToPageFn("CodeGenerationFramework"));g.createVertex("ExecutionModel", colors(3), goToPageFn("ExecutionModel"));
-            g.createEdge("AssembleHex", "RuntimeSupport");g.createEdge("AssembleHex", "CodeGeneration");g.createEdge("CodeGeneration", "RuntimeSupport");g.createEdge("CodeGeneration", "CodeGenerationFramework");g.createEdge("CodeGeneration", "AssembleHex");g.createEdge("RuntimeSupport", "ExecutionModel");g.createEdge("CodeGenerationFramework", "CodeGeneration");g.createEdge("ExecutionModel", "RuntimeSupport");g.createEdge("ExecutionModel", "CodeGeneration");
+            g.createVertex("AssembleHex", colors(1), goToPageFn("AssembleHex"));g.createVertex("CodeGeneration", colors(2), goToPageFn("CodeGeneration"));g.createVertex("MovingForward", colors(2), goToPageFn("MovingForward"));g.createVertex("RuntimeSupport", colors(2), goToPageFn("RuntimeSupport"));g.createVertex("CodeGenerationFramework", colors(3), goToPageFn("CodeGenerationFramework"));g.createVertex("ExecutionModel", colors(3), goToPageFn("ExecutionModel"));
+            g.createEdge("AssembleHex", "RuntimeSupport");g.createEdge("AssembleHex", "CodeGeneration");g.createEdge("AssembleHex", "MovingForward");g.createEdge("CodeGeneration", "RuntimeSupport");g.createEdge("CodeGeneration", "CodeGenerationFramework");g.createEdge("CodeGeneration", "AssembleHex");g.createEdge("RuntimeSupport", "ExecutionModel");g.createEdge("CodeGenerationFramework", "CodeGeneration");g.createEdge("ExecutionModel", "RuntimeSupport");g.createEdge("ExecutionModel", "CodeGeneration");
             g.go();
         </script>
         <hr />
@@ -67,6 +71,8 @@
         4. <a href="CodeGeneration.html">CodeGeneration</a>
         |
         5. <a href="AssembleHex.html">AssembleHex</a>
+        |
+        6. <a href="MovingForward.html">MovingForward</a>
         </center>
         </p>
         <hr />

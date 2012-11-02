@@ -21,8 +21,9 @@
         <div class="figure">
 <img src="./static/images/stage-code-gen.png" alt="Code generation." /><p class="caption">Code generation.</p>
 </div>
-<p>Now it's time to generate C code that uses the <a href="RuntimeSupport.html" title="RuntimeSupport">RuntimeSupport</a> library.</p>
-<p>Generating code in Haskell means generating a string that contains C code and then write it to a file. In <a href="CodeGenerationFramework.html" title="CodeGenerationFramework">CodeGenerationFramework</a> we make a small framework that allows us to generate that string in a more elegant way.</p>
+<p>Now it's time to generate C from the parse tree. The generated code will use the <a href="RuntimeSupport.html" title="RuntimeSupport">RuntimeSupport</a> library.</p>
+<p>Generating code in Haskell means generating a string that contains C code and then writing it to a file. In <a href="CodeGenerationFramework.html" title="CodeGenerationFramework">CodeGenerationFramework</a> we make a small framework that allows us to generate that string in a more elegant way.</p>
+<p>TODO: explain structure of output</p>
 <h2 id="continue">Continue</h2>
 <p><a href="AssembleHex.html" title="AssembleHex">AssembleHex</a></p>
         <hr />
@@ -54,8 +55,8 @@
             var g = new Graph("canvas", 800, 400);
             g.repulsion = g.repulsion / 2;
             //g.spring_length = 8;
-            g.createVertex("CodeGeneration", colors(1), goToPageFn("CodeGeneration"));g.createVertex("AssembleHex", colors(2), goToPageFn("AssembleHex"));g.createVertex("CodeGenerationFramework", colors(2), goToPageFn("CodeGenerationFramework"));g.createVertex("ExecutionModel", colors(2), goToPageFn("ExecutionModel"));g.createVertex("RuntimeSupport", colors(2), goToPageFn("RuntimeSupport"));g.createVertex("StageParsing", colors(3), goToPageFn("StageParsing"));
-            g.createEdge("CodeGeneration", "RuntimeSupport");g.createEdge("CodeGeneration", "CodeGenerationFramework");g.createEdge("CodeGeneration", "AssembleHex");g.createEdge("AssembleHex", "RuntimeSupport");g.createEdge("AssembleHex", "CodeGeneration");g.createEdge("CodeGenerationFramework", "CodeGeneration");g.createEdge("ExecutionModel", "StageParsing");g.createEdge("ExecutionModel", "RuntimeSupport");g.createEdge("ExecutionModel", "CodeGeneration");g.createEdge("RuntimeSupport", "ExecutionModel");g.createEdge("StageParsing", "ExecutionModel");
+            g.createVertex("CodeGeneration", colors(1), goToPageFn("CodeGeneration"));g.createVertex("AssembleHex", colors(2), goToPageFn("AssembleHex"));g.createVertex("CodeGenerationFramework", colors(2), goToPageFn("CodeGenerationFramework"));g.createVertex("ExecutionModel", colors(2), goToPageFn("ExecutionModel"));g.createVertex("RuntimeSupport", colors(2), goToPageFn("RuntimeSupport"));g.createVertex("MovingForward", colors(3), goToPageFn("MovingForward"));g.createVertex("StageParsing", colors(3), goToPageFn("StageParsing"));
+            g.createEdge("CodeGeneration", "RuntimeSupport");g.createEdge("CodeGeneration", "CodeGenerationFramework");g.createEdge("CodeGeneration", "AssembleHex");g.createEdge("AssembleHex", "RuntimeSupport");g.createEdge("AssembleHex", "CodeGeneration");g.createEdge("AssembleHex", "MovingForward");g.createEdge("CodeGenerationFramework", "CodeGeneration");g.createEdge("ExecutionModel", "StageParsing");g.createEdge("ExecutionModel", "StageParsing");g.createEdge("ExecutionModel", "RuntimeSupport");g.createEdge("ExecutionModel", "CodeGeneration");g.createEdge("RuntimeSupport", "ExecutionModel");g.createEdge("StageParsing", "ExecutionModel");
             g.go();
         </script>
         <hr />
@@ -70,6 +71,8 @@
         4. <a href="CodeGeneration.html">CodeGeneration</a>
         |
         5. <a href="AssembleHex.html">AssembleHex</a>
+        |
+        6. <a href="MovingForward.html">MovingForward</a>
         </center>
         </p>
         <hr />

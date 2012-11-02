@@ -22,28 +22,46 @@
 <img src="./static/images/stage-pre-code-gen.png" alt="Pre code generation." /><p class="caption">Pre code generation.</p>
 </div>
 <p>At this point we have a parser (<a href="StageParsing.html" title="StageParsing">StageParsing</a>) that transforms the con source code to a parse tree. Before we can transform the parse tree to C code, we need to understand the execution model of the source program. We need to figure out how to run con programs in C. This is probably the most difficult part in writing this compiler.</p>
-<p>Let's look at an example:</p>
-<pre><code>let fac = \(n, k) -&gt;
-    facAccumulate n 1 k
+<h2 id="function-environment-closure">Function + Environment = Closure</h2>
+<p>Let's take a look at the example from <a href="StageParsing.html" title="StageParsing">StageParsing</a> again:</p>
+<pre><code>let ANSWER = 42
 
-let facAccumulate = \(n, result, k) -&gt;
-    isZero n
-        (\() -&gt; k result)
-        (\() -&gt;
-            minus n 1 \(newN) -&gt;
-            times n result \(newResult) -&gt;
-            facAccumulate newN newResult k)</code></pre>
-<p>Let's try to run this function with n = 3:</p>
-<pre><code>fac 3 k             --&gt;
-facAccumulate 3 1 k --&gt;
-facAccumulate 2 3 k --&gt;
-facAccumulate 1 6 k --&gt;
-facAccumulate 0 6 k --&gt;
-k 6</code></pre>
-<p><code>facAccumulate</code> is obviously called multiple times</p>
-<ul>
-<li>environment model</li>
-</ul>
+let main = \() -&gt;
+    printAnswer exit
+
+let printAnswer = \(k) -&gt;
+    print ANSWER k</code></pre>
+<p>This time we're going to look at how <code>printAnswer</code> is actually executed.</p>
+<p>The first thing we must figure out in order to execute <code>printAnswer</code> is what <code>print</code> is. Since it's not defined inside the function <code>printAnswer</code> or in its arguments, we need to look for it somewhere else. In the general case, a function has to look up names that do not exist in the argument list.</p>
+<p>We call the place where functions look up names an <strong>environment</strong>. An environment contains mappings from names to values. There is also a special environment, the global environment, that has mappings for all top level definitions and built-in names. In the example above, the global environment looks like this:</p>
+<div class="figure">
+<img src="./static/images/global-env.png" alt="The global environment." /><p class="caption">The global environment.</p>
+</div>
+<p>A function without an environment is (in most cases) useless. Most of the time a function needs to look up names in an environment. That is why all the functions are stored together with an environment in the environment table. We call a function + an environment a <strong>closure</strong>.</p>
+<p>So when <code>printAnswer</code> looks up <code>print</code> in the global environment, it gets back a closure where the built-in function <code>print</code> is bundled together with an environment.</p>
+<p>Looking up <code>ANSWER</code> works in a similar way, but this time the number 42 is returned.</p>
+<p>So what is <code>k</code>? It comes from the argument list. And when <code>printAnswer</code> is called, we pass in <code>exit</code>. When the body of <code>main</code> is evaluated, <code>exit</code> is looked up in the global environment, and we get back a closure.</p>
+<p>At this point we have evaluated all elements in the body and we got</p>
+<ol style="list-style-type: decimal">
+<li>a closure</li>
+<li>a number</li>
+<li>a closure</li>
+</ol>
+<p>The first element in the body must always be a closure since the body always must result in a function call.</p>
+<p>Next we put the number and the second closure in an argument list and pass that argument list to the first closure.</p>
+<h2 id="nested-closures">Nested closures</h2>
+<p>Let's look at an example to add three numbers given that we have a built-in function <code>add</code> that adds two numbers:</p>
+<pre><code>let add3 = \(one, two, three, k) -&gt;
+    add one two (\(sum) -&gt;
+        add sum three k
+    )</code></pre>
+<p>This function takes four arguments: the three numbers to add and the continuation to send the result to. The first thing we do is call the built-in function <code>add</code> with the first two numbers. The result of that operation is sent to a function. We create that function in place as an anonymous function. In the body of that anonymous function we call <code>add</code> once again, but this time with the sum of the first two numbers and the third number. We pass in <code>k</code> as the continuation.</p>
+<p>Now, <code>add3</code> is connected to the global environment since it is defined at the top level. But what environment is the anonymous function connected to? It can't be the global environment since <code>three</code> and <code>k</code> are not defined there.</p>
+<p>What happens when an anonymous function is encountered is that a new environment is created that contains all names in its surrounding. It also has a link to the parent environment:</p>
+<div class="figure">
+<img src="./static/images/anon-env.png" alt="Environment for anonymous function." /><p class="caption">Environment for anonymous function.</p>
+</div>
+<p>When the anonymous function is called, it looks up <code>add</code> in its environment. Since it can't find it there, it looks in the parent environment, which is the global environment, and finds it there. <code>sum</code> is obtained from the argument list. <code>three</code> and <code>k</code> are both found the environment, and they will be bound to the values that were passed in to the call to <code>add3</code>.</p>
 <h2 id="continue">Continue</h2>
 <p><a href="RuntimeSupport.html" title="RuntimeSupport">RuntimeSupport</a> or <a href="CodeGeneration.html" title="CodeGeneration">CodeGeneration</a></p>
         <hr />
@@ -76,7 +94,7 @@ k 6</code></pre>
             g.repulsion = g.repulsion / 2;
             //g.spring_length = 8;
             g.createVertex("ExecutionModel", colors(1), goToPageFn("ExecutionModel"));g.createVertex("CodeGeneration", colors(2), goToPageFn("CodeGeneration"));g.createVertex("RuntimeSupport", colors(2), goToPageFn("RuntimeSupport"));g.createVertex("StageParsing", colors(2), goToPageFn("StageParsing"));g.createVertex("AssembleHex", colors(3), goToPageFn("AssembleHex"));g.createVertex("CodeGenerationFramework", colors(3), goToPageFn("CodeGenerationFramework"));g.createVertex("ConLanguage", colors(3), goToPageFn("ConLanguage"));g.createVertex("ConcOverview", colors(3), goToPageFn("ConcOverview"));g.createVertex("ParseTree", colors(3), goToPageFn("ParseTree"));g.createVertex("ParsecIntroduction", colors(3), goToPageFn("ParsecIntroduction"));
-            g.createEdge("ExecutionModel", "StageParsing");g.createEdge("ExecutionModel", "RuntimeSupport");g.createEdge("ExecutionModel", "CodeGeneration");g.createEdge("CodeGeneration", "RuntimeSupport");g.createEdge("CodeGeneration", "CodeGenerationFramework");g.createEdge("CodeGeneration", "AssembleHex");g.createEdge("RuntimeSupport", "ExecutionModel");g.createEdge("StageParsing", "ParseTree");g.createEdge("StageParsing", "ParsecIntroduction");g.createEdge("StageParsing", "ConLanguage");g.createEdge("StageParsing", "ExecutionModel");g.createEdge("AssembleHex", "RuntimeSupport");g.createEdge("AssembleHex", "CodeGeneration");g.createEdge("CodeGenerationFramework", "CodeGeneration");g.createEdge("ConcOverview", "StageParsing");
+            g.createEdge("ExecutionModel", "StageParsing");g.createEdge("ExecutionModel", "StageParsing");g.createEdge("ExecutionModel", "RuntimeSupport");g.createEdge("ExecutionModel", "CodeGeneration");g.createEdge("CodeGeneration", "RuntimeSupport");g.createEdge("CodeGeneration", "CodeGenerationFramework");g.createEdge("CodeGeneration", "AssembleHex");g.createEdge("RuntimeSupport", "ExecutionModel");g.createEdge("StageParsing", "ParseTree");g.createEdge("StageParsing", "ParsecIntroduction");g.createEdge("StageParsing", "ConLanguage");g.createEdge("StageParsing", "ExecutionModel");g.createEdge("AssembleHex", "RuntimeSupport");g.createEdge("AssembleHex", "CodeGeneration");g.createEdge("CodeGenerationFramework", "CodeGeneration");g.createEdge("ConcOverview", "StageParsing");
             g.go();
         </script>
         <hr />
@@ -91,6 +109,8 @@ k 6</code></pre>
         4. <a href="CodeGeneration.html">CodeGeneration</a>
         |
         5. <a href="AssembleHex.html">AssembleHex</a>
+        |
+        6. <a href="MovingForward.html">MovingForward</a>
         </center>
         </p>
         <hr />

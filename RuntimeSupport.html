@@ -22,6 +22,24 @@
 <img src="./static/images/runtime.png" alt="C runtime." /><p class="caption">C runtime.</p>
 </div>
 <p>Now that we've figured out the <a href="ExecutionModel.html" title="ExecutionModel">ExecutionModel</a> of con, we need to implement a C library that compiled con programs can use.</p>
+<h2 id="parts">Parts</h2>
+<p>The C runtime support library must contain the following:</p>
+<ul>
+<li>Data structure for environments</li>
+<li>Data structure for argument list</li>
+<li>Data structure for closures</li>
+<li>Data structures for primitive types such as numbers</li>
+<li>Implementation of built-in functions</li>
+</ul>
+<h3 id="environment">Environment</h3>
+<h3 id="arguments">Arguments</h3>
+<h3 id="closures">Closures</h3>
+<h3 id="primitives">Primitives</h3>
+<h3 id="built-ins">Built-ins</h3>
+<h2 id="garbage-collection">Garbage collection</h2>
+<ul>
+<li>TODO</li>
+</ul>
         <hr />
         <svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
         <script type="text/javascript">
@@ -51,8 +69,8 @@
             var g = new Graph("canvas", 800, 400);
             g.repulsion = g.repulsion / 2;
             //g.spring_length = 8;
-            g.createVertex("RuntimeSupport", colors(1), goToPageFn("RuntimeSupport"));g.createVertex("AssembleHex", colors(2), goToPageFn("AssembleHex"));g.createVertex("CodeGeneration", colors(2), goToPageFn("CodeGeneration"));g.createVertex("ExecutionModel", colors(2), goToPageFn("ExecutionModel"));g.createVertex("CodeGenerationFramework", colors(3), goToPageFn("CodeGenerationFramework"));g.createVertex("StageParsing", colors(3), goToPageFn("StageParsing"));
-            g.createEdge("RuntimeSupport", "ExecutionModel");g.createEdge("AssembleHex", "RuntimeSupport");g.createEdge("AssembleHex", "CodeGeneration");g.createEdge("CodeGeneration", "RuntimeSupport");g.createEdge("CodeGeneration", "CodeGenerationFramework");g.createEdge("CodeGeneration", "AssembleHex");g.createEdge("ExecutionModel", "StageParsing");g.createEdge("ExecutionModel", "RuntimeSupport");g.createEdge("ExecutionModel", "CodeGeneration");g.createEdge("CodeGenerationFramework", "CodeGeneration");g.createEdge("StageParsing", "ExecutionModel");
+            g.createVertex("RuntimeSupport", colors(1), goToPageFn("RuntimeSupport"));g.createVertex("AssembleHex", colors(2), goToPageFn("AssembleHex"));g.createVertex("CodeGeneration", colors(2), goToPageFn("CodeGeneration"));g.createVertex("ExecutionModel", colors(2), goToPageFn("ExecutionModel"));g.createVertex("CodeGenerationFramework", colors(3), goToPageFn("CodeGenerationFramework"));g.createVertex("MovingForward", colors(3), goToPageFn("MovingForward"));g.createVertex("StageParsing", colors(3), goToPageFn("StageParsing"));
+            g.createEdge("RuntimeSupport", "ExecutionModel");g.createEdge("AssembleHex", "RuntimeSupport");g.createEdge("AssembleHex", "CodeGeneration");g.createEdge("AssembleHex", "MovingForward");g.createEdge("CodeGeneration", "RuntimeSupport");g.createEdge("CodeGeneration", "CodeGenerationFramework");g.createEdge("CodeGeneration", "AssembleHex");g.createEdge("ExecutionModel", "StageParsing");g.createEdge("ExecutionModel", "StageParsing");g.createEdge("ExecutionModel", "RuntimeSupport");g.createEdge("ExecutionModel", "CodeGeneration");g.createEdge("CodeGenerationFramework", "CodeGeneration");g.createEdge("StageParsing", "ExecutionModel");
             g.go();
         </script>
         <hr />
@@ -67,6 +85,8 @@
         4. <a href="CodeGeneration.html">CodeGeneration</a>
         |
         5. <a href="AssembleHex.html">AssembleHex</a>
+        |
+        6. <a href="MovingForward.html">MovingForward</a>
         </center>
         </p>
         <hr />

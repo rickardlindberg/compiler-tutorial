@@ -91,7 +91,7 @@ let printAnswer = \(k) -&gt;
             g.repulsion = g.repulsion / 2;
             //g.spring_length = 8;
             g.createVertex("StageParsing", colors(1), goToPageFn("StageParsing"));g.createVertex("ConLanguage", colors(2), goToPageFn("ConLanguage"));g.createVertex("ConcOverview", colors(2), goToPageFn("ConcOverview"));g.createVertex("ExecutionModel", colors(2), goToPageFn("ExecutionModel"));g.createVertex("ParseTree", colors(2), goToPageFn("ParseTree"));g.createVertex("ParsecIntroduction", colors(2), goToPageFn("ParsecIntroduction"));g.createVertex("CodeGeneration", colors(3), goToPageFn("CodeGeneration"));g.createVertex("ContinuationPassingStyle", colors(3), goToPageFn("ContinuationPassingStyle"));g.createVertex("ContinuationsMusicCompiler", colors(3), goToPageFn("ContinuationsMusicCompiler"));g.createVertex("PiezoSpeakers", colors(3), goToPageFn("PiezoSpeakers"));g.createVertex("RuntimeSupport", colors(3), goToPageFn("RuntimeSupport"));g.createVertex("StructureOfCompiler", colors(3), goToPageFn("StructureOfCompiler"));
-            g.createEdge("StageParsing", "ParseTree");g.createEdge("StageParsing", "ParsecIntroduction");g.createEdge("StageParsing", "ConLanguage");g.createEdge("StageParsing", "ExecutionModel");g.createEdge("ConLanguage", "ContinuationPassingStyle");g.createEdge("ConLanguage", "PiezoSpeakers");g.createEdge("ConcOverview", "StageParsing");g.createEdge("ExecutionModel", "StageParsing");g.createEdge("ExecutionModel", "RuntimeSupport");g.createEdge("ExecutionModel", "CodeGeneration");g.createEdge("CodeGeneration", "RuntimeSupport");g.createEdge("ContinuationsMusicCompiler", "ConLanguage");g.createEdge("ContinuationsMusicCompiler", "StructureOfCompiler");g.createEdge("PiezoSpeakers", "ContinuationsMusicCompiler");g.createEdge("RuntimeSupport", "ExecutionModel");g.createEdge("StructureOfCompiler", "ParseTree");g.createEdge("StructureOfCompiler", "ConcOverview");
+            g.createEdge("StageParsing", "ParseTree");g.createEdge("StageParsing", "ParsecIntroduction");g.createEdge("StageParsing", "ConLanguage");g.createEdge("StageParsing", "ExecutionModel");g.createEdge("ConLanguage", "ContinuationPassingStyle");g.createEdge("ConLanguage", "PiezoSpeakers");g.createEdge("ConcOverview", "StageParsing");g.createEdge("ExecutionModel", "StageParsing");g.createEdge("ExecutionModel", "StageParsing");g.createEdge("ExecutionModel", "RuntimeSupport");g.createEdge("ExecutionModel", "CodeGeneration");g.createEdge("CodeGeneration", "RuntimeSupport");g.createEdge("ContinuationsMusicCompiler", "ConLanguage");g.createEdge("ContinuationsMusicCompiler", "StructureOfCompiler");g.createEdge("PiezoSpeakers", "ContinuationsMusicCompiler");g.createEdge("RuntimeSupport", "ExecutionModel");g.createEdge("StructureOfCompiler", "ParseTree");g.createEdge("StructureOfCompiler", "ConcOverview");
             g.go();
         </script>
         <hr />
@@ -106,6 +106,8 @@ let printAnswer = \(k) -&gt;
         4. <a href="CodeGeneration.html">CodeGeneration</a>
         |
         5. <a href="AssembleHex.html">AssembleHex</a>
+        |
+        6. <a href="MovingForward.html">MovingForward</a>
         </center>
         </p>
         <hr />

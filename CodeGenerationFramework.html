@@ -19,6 +19,26 @@
       <div class="span-20 prepend-2 append-2">
         <h1>CodeGenerationFramework</h1>
         <p>state monad stuff</p>
+<pre><code>data AccumulatedCode = AccumulatedCode
+    { counter     :: Int
+    , globalNames :: [(String, Int)]
+    , finalCode   :: String
+    }
+
+writeLine :: String -&gt; ST.State AccumulatedCode ()
+writeLine line = ST.modify (\s -&gt; s { finalCode = finalCode s ++ line ++ &quot;\n&quot; })
+
+addGlobalName :: String -&gt; Int -&gt; ST.State AccumulatedCode ()
+addGlobalName name n = ST.modify (\s -&gt; s { globalNames = (name, n):globalNames s })
+
+nextCounter :: ST.State AccumulatedCode Int
+nextCounter = do
+    state &lt;- get
+    ST.modify (\s -&gt; s { counter = counter s + 1 })
+    return $ counter state</code></pre>
+<p>And</p>
+<pre><code>generateCode :: Program -&gt; String
+generateCode program = finalCode $ ST.execState (outProgram program) (AccumulatedCode 0 [] &quot;&quot;)</code></pre>
 <h2 id="continue">Continue</h2>
 <p><a href="CodeGeneration.html" title="CodeGeneration">CodeGeneration</a></p>
         <hr />
@@ -66,6 +86,8 @@
         4. <a href="CodeGeneration.html">CodeGeneration</a>
         |
         5. <a href="AssembleHex.html">AssembleHex</a>
+        |
+        6. <a href="MovingForward.html">MovingForward</a>
         </center>
         </p>
         <hr />
