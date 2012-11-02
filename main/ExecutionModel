@@ -8,6 +8,8 @@ to understand the execution model of the source program. We need to figure out
 how to run con programs in C. This is probably the most difficult part in
 writing this compiler.
 
+## Function + Environment = Closure
+
 Let's look at an example:
 
     let fac = \(n, k) ->
