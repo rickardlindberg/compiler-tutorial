@@ -4,7 +4,7 @@ In this tutorial we are going to write a compiler. We write it in Haskell
 (HaskellLanguage) with some supporting code in C.
 
 As we will discover in this tutorial, implementing a compiler for a small
-language is not that difficult.
+language does not have to be difficult.
 
 ## Continue
 
