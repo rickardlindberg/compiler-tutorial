@@ -27,7 +27,10 @@ The first thing we must figure out in order to execute `printAnswer` is what
 arguments, we need to look for it somewhere else. In the general case, a
 function has to look up names that do not exist in the argument list.
 
-We call the place where functions look up names an **environment**.
+We call the place where functions look up names an **environment**. An
+environment contains mappings from names to values. There is also a special
+environment, the global environment, that has mappings for all top level
+definitions and built-in names.
 
 ## TODO
 
