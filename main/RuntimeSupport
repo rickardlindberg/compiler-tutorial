@@ -4,3 +4,6 @@ main.RuntimeSupport
 
 Now that we've figured out the ExecutionModel of con, we need to implement a C
 library that compiled con programs can use.
+
+* TODO: overview of runtime (header files)
+* TODO: explain garbage collection
