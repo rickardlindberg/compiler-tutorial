@@ -13,8 +13,8 @@ function Graph( canvas_name, width, height ) {
 	this.task = null;
 
 	// tunables to adjust the layout
-	this.repulsion = 200000; // repulsion constant, adjust for wider/narrower spacing
-	this.spring_length = 20; // base resting length of springs
+	this.repulsion = 100000; // repulsion constant, adjust for wider/narrower spacing
+	this.spring_length = 10; // base resting length of springs
 }
 
 Graph.prototype.createVertex = function( name, colors, clickFn ) { // XXX -- should support separate id and name 
