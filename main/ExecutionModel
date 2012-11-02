@@ -33,6 +33,8 @@ environment, the global environment, that has mappings for all top level
 definitions and built-in names. In the example above, the global environment
 looks like this:
 
+![The global environment.]($ROOT/static/images/global-env.png)
+
 ## TODO
 
 Let's look at an example:
