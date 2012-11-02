@@ -10,7 +10,15 @@ writing this compiler.
 
 ## Function + Environment = Closure
 
-Let's take a look at the
+Let's take a look at the example from StageParsing again:
+
+    let ANSWER = 42
+
+    let main = \() ->
+        printAnswer exit
+
+    let printAnswer = \(k) ->
+        print ANSWER k
 
 ## TODO
 
