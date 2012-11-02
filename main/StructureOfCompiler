@@ -12,7 +12,7 @@ generates the target program from some internal representation.
 Transforming source text into target text without any intermediate steps is not
 always trivial and is therefore avoided:
 
-![Stages in a compiler.]($ROOT/static/images/stages-shortcut.png)
+![Having no stages in a compiler is often a bad idea.]($ROOT/static/images/stages-shortcut.png)
 
 Different compilers have different stages. More complex compilers have more
 stages. Follow along to see what stages we are going to implement in the con

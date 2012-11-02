@@ -11,7 +11,7 @@ the case of the con compiler, it is C source code. So the con compiler
 transforms con source code to C source code.
 
 In order to make the generated C source code run on the Arduino, we have to
-compiler it with a C compiler.
+compile it with a C compiler.
 
 ![Environment in which conc is used.]($ROOT/static/images/conc-environment.png)
 
