@@ -85,6 +85,10 @@ Now, `add3` is connected to the global environment since it is defined at the
 top level. But what environment is the anonymous function connected to? It
 can't be the global environment since `three` and `k` is not defined there.
 
+What happens when an anonymous function is encountered is that a new
+environment is created that contains all names in its surrounding. It also has
+a link to the parent environment.
+
 `facAccumulate` is obviously called multiple times
 
 ## Continue
