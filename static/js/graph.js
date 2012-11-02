@@ -62,15 +62,24 @@ Graph.prototype.createEdge = function( a, b, style ) {
 	this.vertices[b].edges[a] = { "dest" : a, "line": line };
 }
 
+Graph.prototype.findClosestDistance = function (i, j) {
+	var deltax = this.vertices[j].posx - this.vertices[i].posx;
+	var deltay = this.vertices[j].posy - this.vertices[i].posy;
+	return { 
+		dx: deltax, 
+		dy: deltay 
+	};
+}
+
 Graph.prototype.updateLayout = function() {
 	for (i in this.vertices) {
 		this.forcex[i] = 0;
 		this.forcey[i] = 0;
 		for (j in this.vertices) {
 			if( i !== j ) {
-				// using rectangle's center, bounding box would be better
-				var deltax = this.vertices[j].posx - this.vertices[i].posx;
-				var deltay = this.vertices[j].posy - this.vertices[i].posy;
+				var delta = this.findClosestDistance(i, j);
+				var deltax = delta.dx;
+				var deltay = delta.dy;
 				var d2 = deltax * deltax + deltay * deltay;
 
 				// add some jitter if distance^2 is very small
