@@ -84,11 +84,15 @@ Graph.prototype.findClosestPairDistance = function (pointPairs) {
 	};
 }
 
+Graph.prototype.getPointForVertex = function (i) {
+	return { x: this.vertices[i].posx, y: this.vertices[i].posy };
+}
+
 Graph.prototype.findClosestDistance = function (i, j) {
 	var pointPairs = [];
 	var pair = {
-		p1: { x: this.vertices[i].posx, y: this.vertices[i].posy },
-		p2: { x: this.vertices[j].posx, y: this.vertices[j].posy }
+		p1: this.getPointForVertex(i),
+		p2: this.getPointForVertex(j)
 	};
 	pointPairs.push(pair);
 	return this.findClosestPairDistance(pointPairs);
