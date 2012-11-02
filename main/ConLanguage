@@ -34,8 +34,8 @@ A program that plays the C-scale looks like this:
     let B4 = 494
     let C5 = 523
 
-A con program is a list of let-expressions. A let-expression binds a value to a
-name. Values can be numbers or functions. The name `main` must be bound to a
+A con program is a list of let-expressions. A let-expression binds a name to a
+value. Values can be numbers or functions. The name `main` must be bound to a
 function which takes no arguments. That function is the starting point.
 
 A function is written using the following syntax: `\(arg1, arg2, ...) -> body`.
@@ -57,6 +57,4 @@ terminate here.
 
 ## Closures
 
-The reason that `k` is available to the last function is that
-
-TODO:
+TODO: The reason that `k` is available to the last function is that
