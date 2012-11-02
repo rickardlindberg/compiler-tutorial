@@ -95,10 +95,19 @@ Graph.prototype.getRectanglePointsForVertex = function (i) {
 	var posy = vertex.posy;
 	var w = vertex.w;
 	var h = vertex.h;
-	points.push({ x: posx    , y: posy     });
-	points.push({ x: posx + w, y: posy     });
-	points.push({ x: posx + w, y: posy + h });
-	points.push({ x: posx    , y: posy + h });
+	var n = 6;
+	for (var i=0; i<=n; i++) {
+		var dx = i*w/n;
+		points.push({ x: posx + dx, y: posy     });
+		points.push({ x: posx + dx, y: posy + h });
+	}
+	var m = 2;
+	for (var i=0; i<=m; i++) {
+		var dy = i*h/m;
+		points.push({ x: posx    , y: posy + dy });
+		points.push({ x: posx + w, y: posy + dy });
+	}
+
 	return points;
 }
 
