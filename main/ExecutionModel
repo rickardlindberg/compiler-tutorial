@@ -65,7 +65,8 @@ argument list to the first closure.
 
 ## Nested closures
 
-Let's look at an example:
+Let's look at an example to add three numbers given that we have a build in
+function `add` that adds two numbers:
 
     let add3 = \(one, two, three, k) ->
         add one two \(sum) ->
