@@ -15,8 +15,8 @@ always trivial and is therefore avoided:
 ![Stages in a compiler.]($ROOT/static/images/stages-shortcut.png)
 
 Different compilers have different stages. More complex compilers have more
-stages. Follow along to see what stages are involved in the compiler for this
-tutorial.
+stages. Follow along to see what stages we are going to implement in the con
+compiler.
 
 ## Continue
 
