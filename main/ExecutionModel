@@ -44,6 +44,11 @@ So when `printAnswer` looks up `print` in the global environment, it gets back
 a closure where the built-in function `print` is bundled together with an
 environment.
 
+Looking up `ANSWER` works in a similar way, but this time the number 42 is
+returned.
+
+So what is `k`?
+
 ## TODO
 
 Let's look at an example:
