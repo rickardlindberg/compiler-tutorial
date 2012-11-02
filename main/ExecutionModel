@@ -22,9 +22,10 @@ Let's take a look at the example from StageParsing again:
 
 This time we're going to look at how `printAnswer` is actually executed.
 
-The first thing we must figure out is what `print` is. Since it's not defined
-inside the function `printAnswer` or in its arguments, we need to look for it
-somewhere else.
+The first thing we must figure out in order to execute `printAnswer` is what
+`print` is. Since it's not defined inside the function `printAnswer` or in its
+arguments, we need to look for it somewhere else. In the general case, a
+function has to look up names that do not exist in the argument list.
 
 ## TODO
 
