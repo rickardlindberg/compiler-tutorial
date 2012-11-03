@@ -1,6 +1,7 @@
 main.PiezoSpeaker
 
-A piezo speaker is a primitive speaker. It looks like this:
+A piezo speaker is a primitive speaker that can emit sounds at different
+frequencies. It looks like this:
 
 ![A piezo speaker.]($ROOT/static/images/piezo.png)
 
