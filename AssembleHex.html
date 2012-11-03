@@ -23,7 +23,13 @@
 </div>
 <p>Now that we've implemented the C runtime in <a href="RuntimeSupport.html" title="RuntimeSupport">RuntimeSupport</a> and the generation of C code in <a href="CodeGeneration.html" title="CodeGeneration">CodeGeneration</a>, it's time to assemble all files with avr-gcc.</p>
 <p>The easiest way to do this is with the <a href="http://www.arduino.cc/en/Main/software">Arduino IDE</a>.</p>
-<p>TODO: explain the process</p>
+<p>The files we need to assemble are:</p>
+<ul>
+<li>Runtime files (<code>runtime.h</code>, <code>runtime.cpp</code>)</li>
+<li>The compiled con file (<code>con_program.cpp</code>)</li>
+<li>A sketch file (<a href="https://github.com/rickardlindberg/compiler-tutorial/blob/master/src/runtime/sketch.pde"><code>sketch.pde</code></a>)</li>
+</ul>
+<p>The <a href="https://github.com/rickardlindberg/compiler-tutorial/blob/master/src/compile.sh">compile.sh</a> script in the reference implementation collects all these files into a directory called <code>sketch</code> and then opens the Arduino IDE that can be used to compile all files and upload the program to the Arduino.</p>
 <h2 id="continue">Continue</h2>
 <p><a href="MovingForward.html" title="MovingForward">MovingForward</a></p>
         <hr />

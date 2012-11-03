@@ -19,7 +19,7 @@
       <div class="span-20 prepend-2 append-2">
         <h1>ConLanguage</h1>
         <p>Con is a general-purpose programming language based on <a href="ContinuationPassingStyle.html" title="ContinuationPassingStyle">ContinuationPassingStyle</a>.</p>
-<p>Depending on which primitives are implemented in the language, it can do different things. We will implement primitives to control a <a href="PiezoSpeaker.html" title="PiezoSpeaker">PiezoSpeaker</a> connected to the Arduino. They are: <code>setTempo</code> and <code>setBeat</code>.</p>
+<p>Depending on which primitives are implemented in the language, it can do different things. We will implement primitives to control a <a href="PiezoSpeaker.html" title="PiezoSpeaker">PiezoSpeaker</a> connected to the Arduino. They are <code>setTempo</code> and <code>setBeat</code>.</p>
 <p>A program that plays the C-scale looks like this:</p>
 <pre><code>let main =
     \() -&gt; cScale
@@ -50,8 +50,26 @@ let C5 = 523</code></pre>
 <p>In the example above a function which takes no arguments is assigned to the name <code>main</code>. The body calls the function <code>cScale</code> passing one argument: <code>exit</code>. <code>exit</code> is a built in function which terminates the execution of the program.</p>
 <p>The <code>cScale</code> function is defined to take one argument, <code>k</code>, which in this example will be the <code>exit</code> function. In the body, it calls the <code>setTempo</code> function passing two arguments: first a number, and then a function. The function starts like this: <code>\() -&gt; setBeat C4 ...</code> The subsequent lines nest functions and pass them along to the next one.</p>
 <p>When the last <code>setBeat</code> function is called, we pass in <code>k</code> to be the next function to call. Since <code>k</code> is bound to the <code>exit</code> function, the program will terminate here.</p>
-<h2 id="closures">Closures</h2>
-<p>TODO: The reason that <code>k</code> is available to the last function is that</p>
+<p>The reason that <code>k</code> is available to the last function is that all functions can access variables defined in their outer scope. If we add parenthesis and indentation to <code>cScale</code>, it looks like this:</p>
+<pre><code>let cScale =
+    (\(k) -&gt; setTempo 100
+        (\()  -&gt; setBeat C4
+            (\()  -&gt; setBeat D4
+                (\()  -&gt; setBeat E4
+                    (\()  -&gt; setBeat F4
+                        (\()  -&gt; setBeat G4
+                            (\()  -&gt; setBeat A4
+                                (\()  -&gt; setBeat B4
+                                    (\()  -&gt; setBeat C5 k)
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+        )
+    )</code></pre>
+<p>If we write it like this, it's easier to see that the functions are actually nested. Since all <code>setBeat</code> functions are nested inside the <code>setTempo</code> function, they all have access to the variable <code>k</code>.</p>
         <hr />
         <svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
         <script type="text/javascript">

@@ -22,12 +22,8 @@
 <img src="./static/images/stage-parsing.png" alt="Parsing." /><p class="caption">Parsing.</p>
 </div>
 <p>The first transformation in a compiler is often parsing. Working with raw text is difficult, so we convert it to a <a href="ParseTree.html" title="ParseTree">ParseTree</a> which is easier to work with.</p>
-<h2 id="parsing-methods">Parsing methods</h2>
-<ul>
-<li>different parsing methods</li>
-<li><a href="ParsecIntroduction.html" title="ParsecIntroduction">ParsecIntroduction</a></li>
-</ul>
-<p>TODO: fill in stuff here</p>
+<h2 id="parsing-method">Parsing method</h2>
+<p>In this tutorial we will use a parser combinator library to parse con source code intro a parse tree. Check out <a href="ParsecIntroduction.html" title="ParsecIntroduction">ParsecIntroduction</a> to see how it works.</p>
 <h2 id="data-structure-for-parse-tree">Data structure for parse tree</h2>
 <p>We define the parse tree data structure like this (<a href="https://github.com/rickardlindberg/compiler-tutorial/blob/master/src/ParseTree.hs"><code>ParseTree.hs</code></a>):</p>
 <pre><code>data Program = Program [Let]
@@ -54,11 +50,11 @@ let printAnswer = \(k) -&gt;
 <p>The top level parse function has the following type:</p>
 <pre><code>parseCon :: String -&gt; Either ParseError Program</code></pre>
 <p>And is implemented like this (<a href="https://github.com/rickardlindberg/compiler-tutorial/blob/master/src/Parser.hs"><code>Parser.hs</code></a>):</p>
-<pre><code>parseCon input = parse programParser &quot;&quot; input</code></pre>
-<p>We use Parsec's <a href="http://legacy.cs.uu.nl/daan/download/parsec/parsec.html#parse">parse</a> function and pass along <code>programParser</code> which defines how a con program should be parsed. Its type is this:</p>
-<pre><code>programParser :: Parser Program</code></pre>
+<pre><code>parseCon input = parse translate &quot;&quot; input</code></pre>
+<p>We use Parsec's <a href="http://legacy.cs.uu.nl/daan/download/parsec/parsec.html#parse">parse</a> function and pass along <code>translate</code> which defines how a con program should be parsed. Its type is this:</p>
+<pre><code>translate :: Parser Program</code></pre>
 <h2 id="exercise">Exercise</h2>
-<p>Fill in the implementation of <code>programParser</code> so that can parse arbitrary con programs.</p>
+<p>Fill in the implementation of <code>translate</code> so that it can parse arbitrary con programs.</p>
 <h2 id="continue">Continue</h2>
 <p><a href="ExecutionModel.html" title="ExecutionModel">ExecutionModel</a></p>
         <hr />

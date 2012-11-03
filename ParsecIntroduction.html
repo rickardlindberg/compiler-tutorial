@@ -20,6 +20,9 @@
         <h1>ParsecIntroduction</h1>
         <p>Parsec is a parser combinator library for Haskell.</p>
 <p>The manual is pretty nice: <a href="http://legacy.cs.uu.nl/daan/download/parsec/parsec.html">http://legacy.cs.uu.nl/daan/download/parsec/parsec.html</a>.</p>
+<p>In Parsec, a parser is a function that takes as input a string and returns a parsed object and the rest of the string:</p>
+<p>TODO: image here illustrating the above sentence</p>
+<p>These functions can then be combined to form parsers for more complex object, hence the name parser combinator.</p>
 <p>The following code snippet can be used to play around with parsec:</p>
 <pre><code>import Text.ParserCombinators.Parsec
 
@@ -46,6 +49,7 @@ parseNumber = do
                              )
     --eof
     return (read numbersAsString)</code></pre>
+<p>Try changing the inputs and the parser to see what happens.</p>
 <p>It uses the following Parsec functions:</p>
 <ul>
 <li><a href="http://legacy.cs.uu.nl/daan/download/parsec/parsec.html#parse">parse</a></li>
