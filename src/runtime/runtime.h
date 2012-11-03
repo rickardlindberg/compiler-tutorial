@@ -1,6 +1,8 @@
 #ifndef RUNTIME_H
 #define RUNTIME_H
 
+#define PIEZO_PIN 2
+
 typedef struct ref_count * RefCount;
 typedef struct env       * Env;
 typedef struct args      * Args;

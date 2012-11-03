@@ -162,7 +162,6 @@ void free_number(void * ref_countable) {
 // Built-ins
 
 int tempo = 120;
-#define PIN 2
 
 Call builtin_setTempo(Env parent_env, Args args) {
     Number n = (Number)args_get(args, 0);
@@ -174,7 +173,7 @@ Call builtin_setTempo(Env parent_env, Args args) {
 Call builtin_setBeat(Env parent_env, Args args) {
     Number n = (Number)args_get(args, 0);
     Closure k = (Closure)args_get(args, 1);
-    tone(PIN, (int)n->value, tempo);
+    tone(PIEZO_PIN, (int)n->value, tempo);
     return create_call(k, create_args(0));
 }
 
