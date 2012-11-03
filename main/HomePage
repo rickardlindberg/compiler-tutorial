@@ -6,6 +6,12 @@ in Haskell (HaskellLanguage) with some supporting code in C.
 As we will discover in this tutorial, implementing a compiler for a small
 language is not that complicated.
 
+A reference implementation of the compiler is available on github:
+[https://github.com/rickardlindberg/compiler-tutorial/tree/master/src](https://github.com/rickardlindberg/compiler-tutorial/tree/master/src).
+If at any time you feel stuck or feel that the descriptions on the wiki are not
+enough, feel free to check out the code on github. The goal with this tutorial
+is to teach you how to write this compiler.
+
 ## Continue
 
 WhatIsCompiler
