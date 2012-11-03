@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "runtime.h"
+#include "WProgram.h"
 
 // Ref countable
 
@@ -156,4 +157,27 @@ Number const_number(double i) {
 void free_number(void * ref_countable) {
     Number number = (Number)ref_countable;
     free(number);
+}
+
+// Built-ins
+
+int tempo = 120;
+#define PIN 2
+
+Call builtin_setTempo(Env parent_env, Args args) {
+    Number n = (Number)args_get(args, 0);
+    Closure k = (Closure)args_get(args, 1);
+    tempo = (int)n->value;
+    return create_call(k, create_args(0));
+}
+
+Call builtin_setBeat(Env parent_env, Args args) {
+    Number n = (Number)args_get(args, 0);
+    Closure k = (Closure)args_get(args, 1);
+    tone(PIN, (int)n->value, tempo);
+    return create_call(k, create_args(0));
+}
+
+Call builtin_setExit(Env parent_env, Args args) {
+    return NULL;
 }

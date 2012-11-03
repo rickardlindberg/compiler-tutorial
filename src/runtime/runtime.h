@@ -87,4 +87,10 @@ struct number {
 Number const_number(double i);
 void free_number(void * number);
 
+// Built-ins
+
+Call builtin_setTempo(Env parent_env, Args args);
+Call builtin_setBeat(Env parent_env, Args args);
+Call builtin_setExit(Env parent_env, Args args);
+
 #endif
