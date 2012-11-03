@@ -41,6 +41,8 @@ The following code snippet can be used to play around with parsec:
         --eof
         return (read numbersAsString)
 
+Try changing the inputs and the parser to see what happens.
+
 It uses the following Parsec functions:
 
 * [parse](http://legacy.cs.uu.nl/daan/download/parsec/parsec.html#parse)
