@@ -1,6 +1,7 @@
 main.PiezoSpeaker
 
-A piezo speaker is a primitive speaker. Have a look at the video in
-ContinuationsMusicCompiler to see how they are used.
+A piezo speaker is a primitive speaker. It looks like this:
 
-TODO: write something more here
+![A piezo speaker.]($ROOT/static/images/piezo.png)
+
+Have a look at the video in ContinuationsMusicCompiler to see some in action.

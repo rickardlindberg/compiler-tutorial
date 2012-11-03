@@ -27,7 +27,3 @@ And we might use it like this:
         ...
 
     add(4, 5, handle_result)
-
-## Exercises
-
-TODO: ...to help grok continuation passing style...
