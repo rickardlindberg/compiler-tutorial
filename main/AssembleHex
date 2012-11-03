@@ -8,7 +8,17 @@ of C code in CodeGeneration, it's time to assemble all files with avr-gcc.
 The easiest way to do this is with the [Arduino
 IDE](http://www.arduino.cc/en/Main/software).
 
-TODO: explain the process
+The files we need to assemble are:
+
+* Runtime files (`runtime.h`, `runtime.cpp`)
+* The compiled con file (`con_program.cpp`)
+* A sketch file ([`sketch.pde`](https://github.com/rickardlindberg/compiler-tutorial/blob/master/src/runtime/sketch.pde))
+
+The
+[compile.sh](https://github.com/rickardlindberg/compiler-tutorial/blob/master/src/compile.sh)
+script in the reference implementation collects all these files into a
+directory called `sketch` and then opens the Arduino IDE that can be used to
+compile all files and upload the program to the Arduino.
 
 ## Continue
 
