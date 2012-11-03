@@ -13,8 +13,8 @@ function Graph( canvas_name, width, height ) {
 	this.task = null;
 
 	// tunables to adjust the layout
-	this.repulsion = 100000; // repulsion constant, adjust for wider/narrower spacing
-	this.spring_length = 10; // base resting length of springs
+	this.repulsion = 50000; // repulsion constant, adjust for wider/narrower spacing
+	this.spring_length = 5; // base resting length of springs
 }
 
 Graph.prototype.createVertex = function( name, colors, clickFn ) { // XXX -- should support separate id and name 
@@ -131,6 +131,74 @@ Graph.prototype.findClosestDistance = function (i, j) {
 	return this.findClosestPairDistance(pointPairs);
 }
 
+Graph.prototype.getRectangle = function(i) {
+	var v = this.vertices[i];
+	return {
+		x1: v.posx, 
+		y1: v.posy, 
+		x2: v.posx + v.w,
+		y2: v.posy + v.h,
+		w: v.w,
+		h: v.h,
+		cx: v.posx + v.w / 2,
+		cy: v.posy + v.h / 2
+	};
+}
+
+Graph.prototype.resolveCollisionsRectangular = function() {
+	for (var i in this.vertices) {
+		for (var j in this.vertices) {
+			if (i !== j) {
+				var r1 = this.getRectangle(i);
+				var r2 = this.getRectangle(j);
+				var notOverlap =  r1.x2 < r2.x1
+                               || r1.x1 > r2.x2
+                               || r1.y2 < r2.y1
+                               || r1.y1 > r2.y2;
+				var overlap = !notOverlap;
+				if (overlap) {
+					var kickDistance = 50;
+					if (r1.y1 < r2.y1) {
+						this.vertices[i].posy -= kickDistance;
+						this.vertices[j].posy += kickDistance;
+					} else {
+						this.vertices[i].posy += kickDistance;
+						this.vertices[j].posy -= kickDistance;
+					}
+				}
+			}
+		}
+	}
+}
+
+Graph.prototype.resolveCollisionsCircular = function() {
+	for (var i in this.vertices) {
+		for (var j in this.vertices) {
+			if (i !== j) {
+				var r1 = this.getRectangle(i);
+				var r2 = this.getRectangle(j);
+				var vect = {
+					x: r2.cx - r1.cx,
+					y: r2.cy - r1.cy
+				};
+				var distance = Math.sqrt(vect.x * vect.x + vect.y * vect.y);
+				var diff = distance - (1.1*r1.w/2 + 1.1*r2.w/2);
+				if (diff < 0) {
+					var dx = -diff * vect.x / distance;
+					var dy = -diff * vect.y / distance;
+					this.forcex[i] -= 1000*dx;
+					this.forcey[i] -= 1000*dy;
+				}
+			}
+		}
+	}
+}
+
+Graph.prototype.resolveCollisions = function() {
+	//this.resolveCollisionsRectangular();
+	this.resolveCollisionsCircular();
+}
+
 Graph.prototype.updateLayout = function() {
 	for (i in this.vertices) {
 		this.forcex[i] = 0;
@@ -162,10 +230,13 @@ Graph.prototype.updateLayout = function() {
 			}
 		}
 	}
+	this.resolveCollisions();
 	for (i in this.vertices) {
 		// update rectangles
 		this.vertices[i].posx += this.forcex[i] * this.stepsize;
 		this.vertices[i].posy += this.forcey[i] * this.stepsize;
+	}
+	for (i in this.vertices) {
 		this.vertices[i].setAttribute("x", this.vertices[i].posx );
 		this.vertices[i].setAttribute("y", this.vertices[i].posy );
 		// update labels
