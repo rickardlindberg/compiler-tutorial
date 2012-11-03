@@ -2,7 +2,7 @@
 "http://www.w3.org/TR/html4/strict.dtd">
 <html>
   <head>
-    <title>PiezoSpeakers</title>
+    <title>PiezoSpeaker</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <link rel="stylesheet" href="./static/css/blueprint/screen.css" type="text/css" media="screen, projection">
     <link rel="stylesheet" href="./static/css/blueprint/print.css" type="text/css" media="print">
@@ -17,8 +17,9 @@
   <body>
     <div class="container noshowgrid">
       <div class="span-20 prepend-2 append-2">
-        <h1>PiezoSpeakers</h1>
+        <h1>PiezoSpeaker</h1>
         <p>A piezo speaker is a primitive speaker. Have a look at the video in <a href="ContinuationsMusicCompiler.html" title="ContinuationsMusicCompiler">ContinuationsMusicCompiler</a> to see how they are used.</p>
+<p>TODO: write something more here</p>
         <hr />
         <svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
         <script type="text/javascript">
@@ -48,8 +49,8 @@
             var g = new Graph("canvas", 800, 400);
             g.repulsion = g.repulsion / 2;
             //g.spring_length = 8;
-            g.createVertex("PiezoSpeakers", colors(1), goToPageFn("PiezoSpeakers"));g.createVertex("ConLanguage", colors(2), goToPageFn("ConLanguage"));g.createVertex("ContinuationsMusicCompiler", colors(2), goToPageFn("ContinuationsMusicCompiler"));g.createVertex("ArduinoUno", colors(3), goToPageFn("ArduinoUno"));g.createVertex("ContinuationPassingStyle", colors(3), goToPageFn("ContinuationPassingStyle"));g.createVertex("StageParsing", colors(3), goToPageFn("StageParsing"));g.createVertex("StructureOfCompiler", colors(3), goToPageFn("StructureOfCompiler"));g.createVertex("WhyWriteCompiler", colors(3), goToPageFn("WhyWriteCompiler"));
-            g.createEdge("PiezoSpeakers", "ContinuationsMusicCompiler");g.createEdge("ConLanguage", "ContinuationPassingStyle");g.createEdge("ConLanguage", "PiezoSpeakers");g.createEdge("ContinuationsMusicCompiler", "ArduinoUno");g.createEdge("ContinuationsMusicCompiler", "ConLanguage");g.createEdge("ContinuationsMusicCompiler", "StructureOfCompiler");g.createEdge("ArduinoUno", "ContinuationsMusicCompiler");g.createEdge("StageParsing", "ConLanguage");g.createEdge("WhyWriteCompiler", "ContinuationsMusicCompiler");
+            g.createVertex("PiezoSpeaker", colors(1), goToPageFn("PiezoSpeaker"));g.createVertex("ConLanguage", colors(2), goToPageFn("ConLanguage"));g.createVertex("ContinuationsMusicCompiler", colors(2), goToPageFn("ContinuationsMusicCompiler"));g.createVertex("ArduinoUno", colors(3), goToPageFn("ArduinoUno"));g.createVertex("ContinuationPassingStyle", colors(3), goToPageFn("ContinuationPassingStyle"));g.createVertex("StageParsing", colors(3), goToPageFn("StageParsing"));g.createVertex("StructureOfCompiler", colors(3), goToPageFn("StructureOfCompiler"));g.createVertex("WhyWriteCompiler", colors(3), goToPageFn("WhyWriteCompiler"));
+            g.createEdge("PiezoSpeaker", "ContinuationsMusicCompiler");g.createEdge("ConLanguage", "ContinuationPassingStyle");g.createEdge("ConLanguage", "PiezoSpeaker");g.createEdge("ContinuationsMusicCompiler", "ArduinoUno");g.createEdge("ContinuationsMusicCompiler", "ConLanguage");g.createEdge("ContinuationsMusicCompiler", "StructureOfCompiler");g.createEdge("ArduinoUno", "ContinuationsMusicCompiler");g.createEdge("StageParsing", "ConLanguage");g.createEdge("WhyWriteCompiler", "ContinuationsMusicCompiler");
             g.go();
         </script>
         <hr />

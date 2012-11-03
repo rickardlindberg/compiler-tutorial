@@ -20,7 +20,7 @@
         <h1>ParsecIntroduction</h1>
         <p>Parsec is a parser combinator library for Haskell.</p>
 <p>The manual is pretty nice: <a href="http://legacy.cs.uu.nl/daan/download/parsec/parsec.html">http://legacy.cs.uu.nl/daan/download/parsec/parsec.html</a>.</p>
-<p>The following code snipped can be used to play around with parsec:</p>
+<p>The following code snippet can be used to play around with parsec:</p>
 <pre><code>import Text.ParserCombinators.Parsec
 
 main :: IO ()
@@ -83,7 +83,7 @@ parseNumber = do
             g.repulsion = g.repulsion / 2;
             //g.spring_length = 8;
             g.createVertex("ParsecIntroduction", colors(1), goToPageFn("ParsecIntroduction"));g.createVertex("StageParsing", colors(2), goToPageFn("StageParsing"));g.createVertex("ConLanguage", colors(3), goToPageFn("ConLanguage"));g.createVertex("ConcOverview", colors(3), goToPageFn("ConcOverview"));g.createVertex("ExecutionModel", colors(3), goToPageFn("ExecutionModel"));g.createVertex("ParseTree", colors(3), goToPageFn("ParseTree"));
-            g.createEdge("StageParsing", "ParseTree");g.createEdge("StageParsing", "ParsecIntroduction");g.createEdge("StageParsing", "ConLanguage");g.createEdge("StageParsing", "ExecutionModel");g.createEdge("ConcOverview", "StageParsing");g.createEdge("ExecutionModel", "StageParsing");g.createEdge("ExecutionModel", "StageParsing");
+            g.createEdge("StageParsing", "ConLanguage");g.createEdge("StageParsing", "ExecutionModel");g.createEdge("StageParsing", "ParseTree");g.createEdge("StageParsing", "ParsecIntroduction");g.createEdge("ConcOverview", "StageParsing");g.createEdge("ExecutionModel", "StageParsing");
             g.go();
         </script>
         <hr />

@@ -19,6 +19,7 @@
       <div class="span-20 prepend-2 append-2">
         <h1>ArduinoUno</h1>
         <p>Have a look at the video in <a href="ContinuationsMusicCompiler.html" title="ContinuationsMusicCompiler">ContinuationsMusicCompiler</a> to see how it is used.</p>
+<p>TODO: write something more here</p>
         <hr />
         <svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
         <script type="text/javascript">
@@ -48,8 +49,8 @@
             var g = new Graph("canvas", 800, 400);
             g.repulsion = g.repulsion / 2;
             //g.spring_length = 8;
-            g.createVertex("ArduinoUno", colors(1), goToPageFn("ArduinoUno"));g.createVertex("ContinuationsMusicCompiler", colors(2), goToPageFn("ContinuationsMusicCompiler"));g.createVertex("ConLanguage", colors(3), goToPageFn("ConLanguage"));g.createVertex("PiezoSpeakers", colors(3), goToPageFn("PiezoSpeakers"));g.createVertex("StructureOfCompiler", colors(3), goToPageFn("StructureOfCompiler"));g.createVertex("WhyWriteCompiler", colors(3), goToPageFn("WhyWriteCompiler"));
-            g.createEdge("ArduinoUno", "ContinuationsMusicCompiler");g.createEdge("ContinuationsMusicCompiler", "ArduinoUno");g.createEdge("ContinuationsMusicCompiler", "ConLanguage");g.createEdge("ContinuationsMusicCompiler", "StructureOfCompiler");g.createEdge("ConLanguage", "PiezoSpeakers");g.createEdge("PiezoSpeakers", "ContinuationsMusicCompiler");g.createEdge("WhyWriteCompiler", "ContinuationsMusicCompiler");
+            g.createVertex("ArduinoUno", colors(1), goToPageFn("ArduinoUno"));g.createVertex("ContinuationsMusicCompiler", colors(2), goToPageFn("ContinuationsMusicCompiler"));g.createVertex("ConLanguage", colors(3), goToPageFn("ConLanguage"));g.createVertex("PiezoSpeaker", colors(3), goToPageFn("PiezoSpeaker"));g.createVertex("StructureOfCompiler", colors(3), goToPageFn("StructureOfCompiler"));g.createVertex("WhyWriteCompiler", colors(3), goToPageFn("WhyWriteCompiler"));
+            g.createEdge("ArduinoUno", "ContinuationsMusicCompiler");g.createEdge("ContinuationsMusicCompiler", "ArduinoUno");g.createEdge("ContinuationsMusicCompiler", "ConLanguage");g.createEdge("ContinuationsMusicCompiler", "StructureOfCompiler");g.createEdge("ConLanguage", "PiezoSpeaker");g.createEdge("PiezoSpeaker", "ContinuationsMusicCompiler");g.createEdge("WhyWriteCompiler", "ContinuationsMusicCompiler");
             g.go();
         </script>
         <hr />

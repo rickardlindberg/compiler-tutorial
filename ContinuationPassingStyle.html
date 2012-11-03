@@ -63,8 +63,8 @@ add(4, 5, handle_result)</code></pre>
             var g = new Graph("canvas", 800, 400);
             g.repulsion = g.repulsion / 2;
             //g.spring_length = 8;
-            g.createVertex("ContinuationPassingStyle", colors(1), goToPageFn("ContinuationPassingStyle"));g.createVertex("ConLanguage", colors(2), goToPageFn("ConLanguage"));g.createVertex("ContinuationsMusicCompiler", colors(3), goToPageFn("ContinuationsMusicCompiler"));g.createVertex("PiezoSpeakers", colors(3), goToPageFn("PiezoSpeakers"));g.createVertex("StageParsing", colors(3), goToPageFn("StageParsing"));
-            g.createEdge("ConLanguage", "ContinuationPassingStyle");g.createEdge("ConLanguage", "PiezoSpeakers");g.createEdge("ContinuationsMusicCompiler", "ConLanguage");g.createEdge("PiezoSpeakers", "ContinuationsMusicCompiler");g.createEdge("StageParsing", "ConLanguage");
+            g.createVertex("ContinuationPassingStyle", colors(1), goToPageFn("ContinuationPassingStyle"));g.createVertex("ConLanguage", colors(2), goToPageFn("ConLanguage"));g.createVertex("ContinuationsMusicCompiler", colors(3), goToPageFn("ContinuationsMusicCompiler"));g.createVertex("PiezoSpeaker", colors(3), goToPageFn("PiezoSpeaker"));g.createVertex("StageParsing", colors(3), goToPageFn("StageParsing"));
+            g.createEdge("ConLanguage", "ContinuationPassingStyle");g.createEdge("ConLanguage", "PiezoSpeaker");g.createEdge("ContinuationsMusicCompiler", "ConLanguage");g.createEdge("PiezoSpeaker", "ContinuationsMusicCompiler");g.createEdge("StageParsing", "ConLanguage");
             g.go();
         </script>
         <hr />

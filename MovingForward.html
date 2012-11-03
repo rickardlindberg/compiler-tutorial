@@ -49,7 +49,7 @@
             g.repulsion = g.repulsion / 2;
             //g.spring_length = 8;
             g.createVertex("MovingForward", colors(1), goToPageFn("MovingForward"));g.createVertex("AssembleHex", colors(2), goToPageFn("AssembleHex"));g.createVertex("CodeGeneration", colors(3), goToPageFn("CodeGeneration"));g.createVertex("RuntimeSupport", colors(3), goToPageFn("RuntimeSupport"));
-            g.createEdge("AssembleHex", "RuntimeSupport");g.createEdge("AssembleHex", "CodeGeneration");g.createEdge("AssembleHex", "MovingForward");g.createEdge("CodeGeneration", "RuntimeSupport");g.createEdge("CodeGeneration", "AssembleHex");
+            g.createEdge("AssembleHex", "CodeGeneration");g.createEdge("AssembleHex", "MovingForward");g.createEdge("AssembleHex", "RuntimeSupport");g.createEdge("CodeGeneration", "AssembleHex");g.createEdge("CodeGeneration", "RuntimeSupport");g.createEdge("RuntimeSupport", "AssembleHex");g.createEdge("RuntimeSupport", "CodeGeneration");
             g.go();
         </script>
         <hr />

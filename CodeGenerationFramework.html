@@ -71,7 +71,7 @@ generateCode program = finalCode $ ST.execState (outProgram program) (Accumulate
             g.repulsion = g.repulsion / 2;
             //g.spring_length = 8;
             g.createVertex("CodeGenerationFramework", colors(1), goToPageFn("CodeGenerationFramework"));g.createVertex("CodeGeneration", colors(2), goToPageFn("CodeGeneration"));g.createVertex("AssembleHex", colors(3), goToPageFn("AssembleHex"));g.createVertex("ExecutionModel", colors(3), goToPageFn("ExecutionModel"));g.createVertex("RuntimeSupport", colors(3), goToPageFn("RuntimeSupport"));
-            g.createEdge("CodeGenerationFramework", "CodeGeneration");g.createEdge("CodeGeneration", "RuntimeSupport");g.createEdge("CodeGeneration", "CodeGenerationFramework");g.createEdge("CodeGeneration", "AssembleHex");g.createEdge("AssembleHex", "RuntimeSupport");g.createEdge("AssembleHex", "CodeGeneration");g.createEdge("ExecutionModel", "RuntimeSupport");g.createEdge("ExecutionModel", "CodeGeneration");g.createEdge("RuntimeSupport", "ExecutionModel");
+            g.createEdge("CodeGenerationFramework", "CodeGeneration");g.createEdge("CodeGeneration", "AssembleHex");g.createEdge("CodeGeneration", "CodeGenerationFramework");g.createEdge("CodeGeneration", "RuntimeSupport");g.createEdge("AssembleHex", "CodeGeneration");g.createEdge("AssembleHex", "RuntimeSupport");g.createEdge("ExecutionModel", "CodeGeneration");g.createEdge("ExecutionModel", "RuntimeSupport");g.createEdge("RuntimeSupport", "AssembleHex");g.createEdge("RuntimeSupport", "CodeGeneration");g.createEdge("RuntimeSupport", "ExecutionModel");
             g.go();
         </script>
         <hr />
