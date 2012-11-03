@@ -173,10 +173,11 @@ Call builtin_setTempo(Env parent_env, Args args) {
 Call builtin_setBeat(Env parent_env, Args args) {
     Number n = (Number)args_get(args, 0);
     Closure k = (Closure)args_get(args, 1);
-    tone(PIEZO_PIN, (int)n->value, tempo);
+    tone(PIEZO_PIN, (int)n->value);
+    delay(60000 / tempo);
     return create_call(k, create_args(0));
 }
 
-Call builtin_setExit(Env parent_env, Args args) {
+Call builtin_exit(Env parent_env, Args args) {
     return NULL;
 }

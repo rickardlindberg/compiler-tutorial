@@ -93,6 +93,6 @@ void free_number(void * number);
 
 Call builtin_setTempo(Env parent_env, Args args);
 Call builtin_setBeat(Env parent_env, Args args);
-Call builtin_setExit(Env parent_env, Args args);
+Call builtin_exit(Env parent_env, Args args);
 
 #endif

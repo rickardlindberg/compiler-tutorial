@@ -12,6 +12,9 @@ generateCode = runGenerator . outProgram
 
 outProgram :: Program -> ST.State AccumulatedCode ()
 outProgram (Program lets) = do
+    addGlobalName "exit" "create_closure(&builtin_exit, env)"
+    addGlobalName "setTempo" "create_closure(&builtin_setTempo, env)"
+    addGlobalName "setBeat" "create_closure(&builtin_setBeat, env)"
     addInclude "\"runtime.h\""
     addInclude "<stdlib.h>"
     writeLine ""
