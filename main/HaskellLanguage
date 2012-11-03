@@ -1,4 +1,8 @@
 main.HaskellLanguage
 
-Haskell is a purely functional programming language. Since it is not widely
-known we will explain it in more detail in this tutorial.
+Haskell is a purely functional programming language.
+
+Two good freely available books about Haskell are
+
+* [Learn You a Haskell for Great Good!](http://learnyouahaskell.com/)
+* [Real World Haskell](http://book.realworldhaskell.org/)

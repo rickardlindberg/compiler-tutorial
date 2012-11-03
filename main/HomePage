@@ -1,10 +1,10 @@
 main.HomePage
 
-In this tutorial we are going to write a compiler. We write it in Haskell
-(HaskellLanguage) with some supporting code in C.
+In this tutorial we are going to write a compiler. We will write the compiler
+in Haskell (HaskellLanguage) with some supporting code in C.
 
 As we will discover in this tutorial, implementing a compiler for a small
-language does not have to be difficult.
+language is not that complicated.
 
 ## Continue
 
