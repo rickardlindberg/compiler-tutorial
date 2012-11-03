@@ -5,12 +5,10 @@ main.StageParsing
 The first transformation in a compiler is often parsing. Working with raw text
 is difficult, so we convert it to a ParseTree which is easier to work with.
 
-## Parsing methods
+## Parsing method
 
-* different parsing methods
-* ParsecIntroduction
-
-TODO: fill in stuff here
+In this tutorial we will use a parser combinator library to parse con source
+code intro a parse tree. Check out ParsecIntroduction to see how it works.
 
 ## Data structure for parse tree
 
@@ -49,18 +47,18 @@ The top level parse function has the following type:
 
 And is implemented like this ([`Parser.hs`](https://github.com/rickardlindberg/compiler-tutorial/blob/master/src/Parser.hs)):
 
-    parseCon input = parse programParser "" input
+    parseCon input = parse translate "" input
 
 We use Parsec's
 [parse](http://legacy.cs.uu.nl/daan/download/parsec/parsec.html#parse) function
-and pass along `programParser` which defines how a con program should be
-parsed. Its type is this:
+and pass along `translate` which defines how a con program should be parsed.
+Its type is this:
 
-    programParser :: Parser Program
+    translate :: Parser Program
 
 ## Exercise
 
-Fill in the implementation of `programParser` so that can parse arbitrary con
+Fill in the implementation of `translate` so that it can parse arbitrary con
 programs.
 
 ## Continue

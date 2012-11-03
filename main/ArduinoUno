@@ -1,5 +1,6 @@
 main.ArduinoUno
 
-Have a look at the video in ContinuationsMusicCompiler to see how it is used.
+The Arduino Uno is a microcontroller board based on the ATmega328. It is one
+type of Arduino: [http://www.arduino.cc/](http://www.arduino.cc/).
 
-TODO: write something more here
+Have a look at the video in ContinuationsMusicCompiler to see it in action.
