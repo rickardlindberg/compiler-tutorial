@@ -5,7 +5,7 @@ ContinuationPassingStyle.
 
 Depending on which primitives are implemented in the language, it can do
 different things. We will implement primitives to control a
-PiezoSpeakers connected to the Arduino. They are: `setTempo` and `setBeat`.
+PiezoSpeaker connected to the Arduino. They are: `setTempo` and `setBeat`.
 
 A program that plays the C-scale looks like this:
 

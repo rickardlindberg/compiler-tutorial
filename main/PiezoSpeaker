@@ -1,4 +1,4 @@
-main.PiezoSpeakers
+main.PiezoSpeaker
 
 A piezo speaker is a primitive speaker. Have a look at the video in
 ContinuationsMusicCompiler to see how they are used.
