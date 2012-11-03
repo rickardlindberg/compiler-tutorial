@@ -5,6 +5,8 @@ main.RuntimeSupport
 Now that we've figured out the ExecutionModel of con, we need to implement a C
 library that compiled con programs can use.
 
+You might want to look at CodeGeneration first and then come back here.
+
 ## Parts
 
 The C runtime support library must contain the following:
@@ -28,3 +30,7 @@ The C runtime support library must contain the following:
 ## Garbage collection
 
 * TODO
+
+## Continue
+
+CodeGeneration or AssembleHex

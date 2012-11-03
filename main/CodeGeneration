@@ -9,8 +9,10 @@ Generating code in Haskell means generating a string that contains C code and
 then writing it to a file. In CodeGenerationFramework we make a small framework
 that allows us to generate that string in a more elegant way.
 
+## ...
+
 TODO: explain structure of output
 
 ## Continue
 
-AssembleHex
+RuntimeSupport or AssembleHex

@@ -5,7 +5,7 @@ Parsec is a parser combinator library for Haskell.
 The manual is pretty nice:
 [http://legacy.cs.uu.nl/daan/download/parsec/parsec.html](http://legacy.cs.uu.nl/daan/download/parsec/parsec.html).
 
-The following code snipped can be used to play around with parsec:
+The following code snippet can be used to play around with parsec:
 
     import Text.ParserCombinators.Parsec
 
