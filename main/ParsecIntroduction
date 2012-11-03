@@ -10,6 +10,9 @@ parsed object and the rest of the string:
 
 TODO: image here illustrating the above sentence
 
+These functions can then be combined to form parsers for more complex object,
+hence the name parser combinator.
+
 The following code snippet can be used to play around with parsec:
 
     import Text.ParserCombinators.Parsec
