@@ -1,3 +1,13 @@
+function Vector(x, y) {
+    this.x = x;
+    this.y = y;
+}
+
+Vector.prototype.add = function (dx, dy) {
+    this.x += dx;
+    this.y += dy;
+}
+
 function Graph(canvas_name, width, height) {
     this.svg = "http://www.w3.org/2000/svg";
     this.canvas = document.getElementById(canvas_name);
@@ -6,8 +16,7 @@ function Graph(canvas_name, width, height) {
     this.canvas.style.width = width + "px";
     this.canvas.style.height = height + "px";
     this.vertices = {};
-    this.forcex = {};
-    this.forcey = {};
+    this.forces = {};
     this.stepsize = 0.0005;
     this.iteration = 0;
     this.task = null;
@@ -182,8 +191,7 @@ Graph.prototype.resolveCollisionsCircular = function () {
                 if (diff < 0) {
                     var dx = -diff * vect.x / distance;
                     var dy = -diff * vect.y / distance;
-                    this.forcex[i] -= 1000*dx;
-                    this.forcey[i] -= 1000*dy;
+                    this.forces[i].add(-1000*dx, -1000*dy);
                 }
             }
         }
@@ -197,8 +205,7 @@ Graph.prototype.resolveCollisions = function () {
 
 Graph.prototype.updateLayout = function () {
     for (i in this.vertices) {
-        this.forcex[i] = 0;
-        this.forcey[i] = 0;
+        this.forces[i] = new Vector(0, 0);
         for (j in this.vertices) {
             if( i !== j ) {
                 var delta = this.findClosestDistance(i, j);
@@ -214,14 +221,18 @@ Graph.prototype.updateLayout = function () {
                 }
 
                 // Coulomb's law -- repulsion varies inversely with square of distance
-                this.forcex[i] -= (this.repulsion / d2) * deltax;
-                this.forcey[i] -= (this.repulsion / d2) * deltay;
+                this.forces[i].add(
+                    -(this.repulsion / d2) * deltax,
+                    -(this.repulsion / d2) * deltay
+                );
 
                 // spring force along edges, follows Hooke's law
                 if( this.vertices[i].edges[j] ) {
                     var distance = Math.sqrt(d2);
-                    this.forcex[i] += (distance - this.spring_length) * deltax;
-                    this.forcey[i] += (distance - this.spring_length) * deltay;
+                    this.forces[i].add(
+                        (distance - this.spring_length) * deltax,
+                        (distance - this.spring_length) * deltay
+                    );
                 }
             }
         }
@@ -229,8 +240,8 @@ Graph.prototype.updateLayout = function () {
     this.resolveCollisions();
     for (i in this.vertices) {
         // update rectangles
-        this.vertices[i].posx += this.forcex[i] * this.stepsize;
-        this.vertices[i].posy += this.forcey[i] * this.stepsize;
+        this.vertices[i].posx += this.forces[i].x * this.stepsize;
+        this.vertices[i].posy += this.forces[i].y * this.stepsize;
     }
     for (i in this.vertices) {
         this.vertices[i].setAttribute("x", this.vertices[i].posx );
