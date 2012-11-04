@@ -8,6 +8,23 @@ Vector.prototype.add = function (dx, dy) {
     this.y += dy;
 }
 
+Vector.prototype.addV = function (v) {
+    this.add(v.x, v.y);
+}
+
+Vector.prototype.scale = function (factor) {
+    this.x *= factor;
+    this.y *= factor;
+}
+
+Vector.prototype.scaleNew = function (factor) {
+    return new Vector(this.x * factor, this.y * factor);
+}
+
+Vector.prototype.d2 = function () {
+    return this.x * this.x + this.y * this.y;
+}
+
 function Graph(canvas_name, width, height) {
     this.svg = "http://www.w3.org/2000/svg";
     this.canvas = document.getElementById(canvas_name);
@@ -209,30 +226,25 @@ Graph.prototype.updateLayout = function () {
         for (j in this.vertices) {
             if( i !== j ) {
                 var delta = this.findClosestDistance(i, j);
-                var deltax = delta.dx;
-                var deltay = delta.dy;
-                var d2 = deltax * deltax + deltay * deltay;
+                var deltaV = new Vector(delta.dx, delta.dy);
+                var d2 = deltaV.d2();
 
                 // add some jitter if distance^2 is very small
                 if( d2 < 0.01 ) {
-                    deltax = 0.1 * Math.random() + 0.1;
-                    deltay = 0.1 * Math.random() + 0.1;
-                    var d2 = deltax * deltax + deltay * deltay;
+                    deltaV = newVector(
+                        0.1 * Math.random() + 0.1,
+                        0.1 * Math.random() + 0.1
+                    );
+                    d2 = deltaV.d2();
                 }
 
                 // Coulomb's law -- repulsion varies inversely with square of distance
-                this.forces[i].add(
-                    -(this.repulsion / d2) * deltax,
-                    -(this.repulsion / d2) * deltay
-                );
+                this.forces[i].addV(deltaV.scaleNew(-(this.repulsion / d2)));
 
                 // spring force along edges, follows Hooke's law
                 if( this.vertices[i].edges[j] ) {
                     var distance = Math.sqrt(d2);
-                    this.forces[i].add(
-                        (distance - this.spring_length) * deltax,
-                        (distance - this.spring_length) * deltay
-                    );
+                    this.forces[i].addV(deltaV.scaleNew(distance - this.spring_length));
                 }
             }
         }
