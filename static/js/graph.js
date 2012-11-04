@@ -183,11 +183,11 @@ Graph.prototype.resolveCollisionsRectangular = function () {
                 if (overlap) {
                     var kickDistance = 50;
                     if (r1.y1 < r2.y1) {
-                        this.vertices[i].pos.y -= kickDistance;
-                        this.vertices[j].pos.y += kickDistance;
+                        this.vertices[i].pos.add(0, -kickDistance);
+                        this.vertices[j].pos.add(0,  kickDistance);
                     } else {
-                        this.vertices[i].pos.y += kickDistance;
-                        this.vertices[j].pos.y -= kickDistance;
+                        this.vertices[i].pos.add(0,  kickDistance);
+                        this.vertices[j].pos.add(0, -kickDistance);
                     }
                 }
             }
@@ -265,8 +265,7 @@ Graph.prototype.calculateForces = function () {
 
 Graph.prototype.applyForces = function () {
     for (i in this.vertices) {
-        this.vertices[i].pos.x += this.forces[i].x * this.stepsize;
-        this.vertices[i].pos.y += this.forces[i].y * this.stepsize;
+        this.vertices[i].pos.addV(this.forces[i].scaleNew(this.stepsize));
     }
 }
 
