@@ -12,6 +12,10 @@ Vector.prototype.addV = function (v) {
     this.add(v.x, v.y);
 }
 
+Vector.prototype.subVNew = function (v) {
+    return new Vector(this.x - v.x, this.y - v.y);
+}
+
 Vector.prototype.scale = function (factor) {
     this.x *= factor;
     this.y *= factor;
@@ -225,14 +229,14 @@ Graph.prototype.getRectanglePointsForVertex = function (i) {
     var n = 6;
     for (var i=0; i<=n; i++) {
         var dx = i*w/n;
-        points.push({ x: posx + dx, y: posy     });
-        points.push({ x: posx + dx, y: posy + h });
+        points.push(new Vector(posx + dx, posy    ));
+        points.push(new Vector(posx + dx, posy + h));
     }
     var m = 2;
     for (var i=0; i<=m; i++) {
         var dy = i*h/m;
-        points.push({ x: posx    , y: posy + dy });
-        points.push({ x: posx + w, y: posy + dy });
+        points.push(new Vector(posx    , posy + dy));
+        points.push(new Vector(posx + w, posy + dy));
     }
     return points;
 }
@@ -252,21 +256,13 @@ Graph.prototype.pairwiseCombineArrays = function (a, b) {
 
 Graph.prototype.findClosestPairDistance = function (pointPairs) {
     var minDistance = null;
-    var minDx = null;
-    var minDy = null;
     for (var pair in pointPairs) {
-        var p1 = pointPairs[pair].p1;
-        var p2 = pointPairs[pair].p2;
-        var dx = p2.x - p1.x;
-        var dy = p2.y - p1.y;
-        var d2 = dx * dx + dy * dy;
-        if (minDistance === null || d2 < minDistance) {
-            minDistance = d2;
-            minDx = dx;
-            minDy = dy;
+        var diff = pointPairs[pair].p2.subVNew(pointPairs[pair].p1);
+        if (minDistance === null || diff.d2() < minDistance.d2()) {
+            minDistance = diff;
         }
     }
-    return new Vector(minDx, minDy);
+    return minDistance;
 }
 
 Graph.prototype.applyForces = function () {
