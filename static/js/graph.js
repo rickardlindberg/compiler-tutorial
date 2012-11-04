@@ -250,11 +250,7 @@ Graph.prototype.updateLayout = function () {
         }
     }
     this.resolveCollisions();
-    for (i in this.vertices) {
-        // update rectangles
-        this.vertices[i].posx += this.forces[i].x * this.stepsize;
-        this.vertices[i].posy += this.forces[i].y * this.stepsize;
-    }
+    this.applyForces();
     for (i in this.vertices) {
         this.vertices[i].setAttribute("x", this.vertices[i].posx );
         this.vertices[i].setAttribute("y", this.vertices[i].posy );
@@ -269,6 +265,13 @@ Graph.prototype.updateLayout = function () {
     this.iteration++;
     if( this.iteration > 300 ) // XXX -- should watch for rest state, not just quit after N iterations
         this.quit();
+}
+
+Graph.prototype.applyForces = function () {
+    for (i in this.vertices) {
+        this.vertices[i].posx += this.forces[i].x * this.stepsize;
+        this.vertices[i].posy += this.forces[i].y * this.stepsize;
+    }
 }
 
 Graph.prototype.go = function () {
