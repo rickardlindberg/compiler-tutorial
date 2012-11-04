@@ -90,83 +90,19 @@ Graph.prototype.createEdge = function (a, b, style) {
     this.vertices[b].edges[a] = { "dest" : a, "line": line };
 }
 
-Graph.prototype.findClosestPairDistance = function (pointPairs) {
-    var minDistance = null;
-    var minDx = null;
-    var minDy = null;
-    for (var pair in pointPairs) {
-        var p1 = pointPairs[pair].p1;
-        var p2 = pointPairs[pair].p2;
-        var dx = p2.x - p1.x;
-        var dy = p2.y - p1.y;
-        var d2 = dx * dx + dy * dy;
-        if (minDistance === null || d2 < minDistance) {
-            minDistance = d2;
-            minDx = dx;
-            minDy = dy;
-        }
-    }
-    return {
-        dx: minDx,
-        dy: minDy
-    };
+Graph.prototype.updateLayout = function () {
+    this.calculateForces();
+    this.resolveCollisions();
+    this.applyForces();
+    this.updateScreen();
+    this.iteration++;
+    if( this.iteration > 300 ) // XXX -- should watch for rest state, not just quit after N iterations
+        this.quit();
 }
 
-Graph.prototype.getRectanglePointsForVertex = function (i) {
-    var points = [];
-    var vertex = this.vertices[i];
-    var posx = vertex.pos.x;
-    var posy = vertex.pos.y;
-    var w = vertex.w;
-    var h = vertex.h;
-    var n = 6;
-    for (var i=0; i<=n; i++) {
-        var dx = i*w/n;
-        points.push({ x: posx + dx, y: posy     });
-        points.push({ x: posx + dx, y: posy + h });
-    }
-    var m = 2;
-    for (var i=0; i<=m; i++) {
-        var dy = i*h/m;
-        points.push({ x: posx    , y: posy + dy });
-        points.push({ x: posx + w, y: posy + dy });
-    }
-
-    return points;
-}
-
-Graph.prototype.pairwiseCombineArrays = function (a, b) {
-    var pairs = [];
-    for (var i in a) {
-        for (var j in b) {
-            pairs.push({
-                p1: a[i],
-                p2: b[j]
-            });
-        }
-    }
-    return pairs;
-}
-
-Graph.prototype.findClosestDistance = function (i, j) {
-    var iPoints = this.getRectanglePointsForVertex(i);
-    var jPoints = this.getRectanglePointsForVertex(j);
-    var pointPairs = this.pairwiseCombineArrays(iPoints, jPoints);
-    return this.findClosestPairDistance(pointPairs);
-}
-
-Graph.prototype.getRectangle = function (i) {
-    var v = this.vertices[i];
-    return {
-        x1: v.pos.x,
-        y1: v.pos.y,
-        x2: v.pos.x + v.w,
-        y2: v.pos.y + v.h,
-        w: v.w,
-        h: v.h,
-        cx: v.pos.x + v.w / 2,
-        cy: v.pos.y + v.h / 2
-    };
+Graph.prototype.resolveCollisions = function () {
+    //this.resolveCollisionsRectangular();
+    this.resolveCollisionsCircular();
 }
 
 Graph.prototype.resolveCollisionsRectangular = function () {
@@ -217,19 +153,18 @@ Graph.prototype.resolveCollisionsCircular = function () {
     }
 }
 
-Graph.prototype.resolveCollisions = function () {
-    //this.resolveCollisionsRectangular();
-    this.resolveCollisionsCircular();
-}
-
-Graph.prototype.updateLayout = function () {
-    this.calculateForces();
-    this.resolveCollisions();
-    this.applyForces();
-    this.updateScreen();
-    this.iteration++;
-    if( this.iteration > 300 ) // XXX -- should watch for rest state, not just quit after N iterations
-        this.quit();
+Graph.prototype.getRectangle = function (i) {
+    var v = this.vertices[i];
+    return {
+        x1: v.pos.x,
+        y1: v.pos.y,
+        x2: v.pos.x + v.w,
+        y2: v.pos.y + v.h,
+        w: v.w,
+        h: v.h,
+        cx: v.pos.x + v.w / 2,
+        cy: v.pos.y + v.h / 2
+    };
 }
 
 Graph.prototype.calculateForces = function () {
@@ -261,6 +196,70 @@ Graph.prototype.calculateForces = function () {
             }
         }
     }
+}
+
+Graph.prototype.findClosestDistance = function (i, j) {
+    var iPoints = this.getRectanglePointsForVertex(i);
+    var jPoints = this.getRectanglePointsForVertex(j);
+    var pointPairs = this.pairwiseCombineArrays(iPoints, jPoints);
+    return this.findClosestPairDistance(pointPairs);
+}
+
+Graph.prototype.getRectanglePointsForVertex = function (i) {
+    var points = [];
+    var vertex = this.vertices[i];
+    var posx = vertex.pos.x;
+    var posy = vertex.pos.y;
+    var w = vertex.w;
+    var h = vertex.h;
+    var n = 6;
+    for (var i=0; i<=n; i++) {
+        var dx = i*w/n;
+        points.push({ x: posx + dx, y: posy     });
+        points.push({ x: posx + dx, y: posy + h });
+    }
+    var m = 2;
+    for (var i=0; i<=m; i++) {
+        var dy = i*h/m;
+        points.push({ x: posx    , y: posy + dy });
+        points.push({ x: posx + w, y: posy + dy });
+    }
+    return points;
+}
+
+Graph.prototype.pairwiseCombineArrays = function (a, b) {
+    var pairs = [];
+    for (var i in a) {
+        for (var j in b) {
+            pairs.push({
+                p1: a[i],
+                p2: b[j]
+            });
+        }
+    }
+    return pairs;
+}
+
+Graph.prototype.findClosestPairDistance = function (pointPairs) {
+    var minDistance = null;
+    var minDx = null;
+    var minDy = null;
+    for (var pair in pointPairs) {
+        var p1 = pointPairs[pair].p1;
+        var p2 = pointPairs[pair].p2;
+        var dx = p2.x - p1.x;
+        var dy = p2.y - p1.y;
+        var d2 = dx * dx + dy * dy;
+        if (minDistance === null || d2 < minDistance) {
+            minDistance = d2;
+            minDx = dx;
+            minDy = dy;
+        }
+    }
+    return {
+        dx: minDx,
+        dy: minDy
+    };
 }
 
 Graph.prototype.applyForces = function () {
