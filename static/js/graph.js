@@ -80,6 +80,11 @@ Graph.prototype.createVertex = function (name, colors, clickFn) { // XXX -- shou
     vertex.setAttribute("height", vertex.h + "px");
     vertex.setAttribute("width", vertex.w + "px");
 
+    vertex.centerPos = function () {
+        return new Vector(vertex.pos.x + vertex.w / 2,
+                          vertex.pos.y + vertex.h / 2);
+    };
+
     this.vertices[name] = vertex;
 }
 
@@ -213,10 +218,13 @@ Graph.prototype.calculateForces = function () {
 }
 
 Graph.prototype.findClosestDistance = function (i, j) {
-    var iPoints = this.getRectanglePointsForVertex(i);
-    var jPoints = this.getRectanglePointsForVertex(j);
-    var pointPairs = this.pairwiseCombineArrays(iPoints, jPoints);
-    return this.findClosestPairDistance(pointPairs);
+    var iV = this.vertices[i].centerPos();
+    var jV = this.vertices[j].centerPos();
+    return jV.subVNew(iV);
+//    var iPoints = this.getRectanglePointsForVertex(i);
+//    var jPoints = this.getRectanglePointsForVertex(j);
+//    var pointPairs = this.pairwiseCombineArrays(iPoints, jPoints);
+//    return this.findClosestPairDistance(pointPairs);
 }
 
 Graph.prototype.getRectanglePointsForVertex = function (i) {
