@@ -272,11 +272,10 @@ Graph.prototype.updateLayout = function () {
 }
 
 Graph.prototype.go = function () {
-    // already running
     if (this.task) {
         return;
     }
-    obj = this;
+    var obj = this;
     this.iteration = 0;
     this.task = window.setInterval(function () { obj.updateLayout(); }, 1);
 }
