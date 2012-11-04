@@ -224,17 +224,7 @@ Graph.prototype.updateLayout = function () {
     this.calculateForces();
     this.resolveCollisions();
     this.applyForces();
-    for (i in this.vertices) {
-        this.vertices[i].setAttribute("x", this.vertices[i].posx );
-        this.vertices[i].setAttribute("y", this.vertices[i].posy );
-        // update labels
-        this.vertices[i].textLabel.setAttribute("x", this.vertices[i].posx + 5 + "px");
-        this.vertices[i].textLabel.setAttribute("y", this.vertices[i].posy + (2*this.vertices[i].h/3 )+ "px");
-        // update edges
-        for (j in this.vertices[i].edges) {
-            this.vertices[i].edges[j].line.setAttribute("d", "M"+(this.vertices[i].posx+(this.vertices[i].w/2))+","+(this.vertices[i].posy+(this.vertices[i].h/2))+" L"+(this.vertices[this.vertices[i].edges[j].dest].posx+(this.vertices[this.vertices[i].edges[j].dest].w/2))+" "+(this.vertices[this.vertices[i].edges[j].dest].posy+(this.vertices[this.vertices[i].edges[j].dest].h/2)));
-        }
-    }
+    this.updateScreen();
     this.iteration++;
     if( this.iteration > 300 ) // XXX -- should watch for rest state, not just quit after N iterations
         this.quit();
@@ -275,6 +265,20 @@ Graph.prototype.applyForces = function () {
     for (i in this.vertices) {
         this.vertices[i].posx += this.forces[i].x * this.stepsize;
         this.vertices[i].posy += this.forces[i].y * this.stepsize;
+    }
+}
+
+Graph.prototype.updateScreen = function () {
+    for (i in this.vertices) {
+        this.vertices[i].setAttribute("x", this.vertices[i].posx );
+        this.vertices[i].setAttribute("y", this.vertices[i].posy );
+        // update labels
+        this.vertices[i].textLabel.setAttribute("x", this.vertices[i].posx + 5 + "px");
+        this.vertices[i].textLabel.setAttribute("y", this.vertices[i].posy + (2*this.vertices[i].h/3 )+ "px");
+        // update edges
+        for (j in this.vertices[i].edges) {
+            this.vertices[i].edges[j].line.setAttribute("d", "M"+(this.vertices[i].posx+(this.vertices[i].w/2))+","+(this.vertices[i].posy+(this.vertices[i].h/2))+" L"+(this.vertices[this.vertices[i].edges[j].dest].posx+(this.vertices[this.vertices[i].edges[j].dest].w/2))+" "+(this.vertices[this.vertices[i].edges[j].dest].posy+(this.vertices[this.vertices[i].edges[j].dest].h/2)));
+        }
     }
 }
 
