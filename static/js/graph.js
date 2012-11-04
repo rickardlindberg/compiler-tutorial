@@ -188,7 +188,7 @@ Graph.prototype.calculateForces = function () {
 
                 // add some jitter if distance^2 is very small
                 if( d2 < 0.01 ) {
-                    deltaV = newVector(
+                    deltaV = new Vector(
                         0.1 * Math.random() + 0.1,
                         0.1 * Math.random() + 0.1
                     );
