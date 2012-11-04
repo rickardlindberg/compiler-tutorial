@@ -122,7 +122,7 @@ Graph.prototype.updateLayout = function () {
 
 Graph.prototype.resolveCollisions = function () {
     //this.resolveCollisionsRectangular();
-    this.resolveCollisionsCircular();
+    //this.resolveCollisionsCircular();
 }
 
 Graph.prototype.resolveCollisionsRectangular = function () {
