@@ -84,10 +84,6 @@ Graph.prototype.findClosestPairDistance = function (pointPairs) {
     };
 }
 
-Graph.prototype.getPointForVertex = function (i) {
-    return { x: this.vertices[i].posx, y: this.vertices[i].posy };
-}
-
 Graph.prototype.getRectanglePointsForVertex = function (i) {
     var points = [];
     var vertex = this.vertices[i];
@@ -110,7 +106,7 @@ Graph.prototype.getRectanglePointsForVertex = function (i) {
 
     return points;
 }
- 
+
 Graph.prototype.pairwiseCombineArrays = function (a, b) {
     var pairs = [];
     for (var i in a) {
