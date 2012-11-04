@@ -43,8 +43,8 @@ function Graph(canvas_name, width, height) {
     this.task = null;
 
     // tunables to adjust the layout
-    this.repulsion = 50000; // repulsion constant, adjust for wider/narrower spacing
-    this.spring_length = 5; // base resting length of springs
+    this.repulsion = 500000; // repulsion constant, adjust for wider/narrower spacing
+    this.spring_length = 1; // base resting length of springs
 }
 
 Graph.prototype.createVertex = function (name, colors, clickFn) { // XXX -- should support separate id and name
@@ -211,6 +211,18 @@ Graph.prototype.calculateForces = function () {
                 if( this.vertices[i].edges[j] ) {
                     var distance = Math.sqrt(d2);
                     this.forces[i].addV(deltaV.scaleNew(distance - this.spring_length));
+                }
+
+                var magnets = [
+                    [ 10000, new Vector(0,          this.height/5          ) ],
+                    [ 10000, new Vector(this.width, this.height*4/5) ]
+                ];
+                var me = this.vertices[i].centerPos();
+                for (var k=0; k < magnets.length; k++) {
+                    var strength = magnets[k][0];
+                    var magnet = magnets[k][1];
+                    var toMagnet = magnet.subVNew(me);
+                    this.forces[i].addV(toMagnet.scaleNew(strength / toMagnet.d2()));
                 }
             }
         }
