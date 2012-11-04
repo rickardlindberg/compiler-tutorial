@@ -110,7 +110,7 @@ Graph.prototype.getRectanglePointsForVertex = function (i) {
 
     return points;
 }
-
+ 
 Graph.prototype.pairwiseCombineArrays = function (a, b) {
     var pairs = [];
     for (var i in a) {
