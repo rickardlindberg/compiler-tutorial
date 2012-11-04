@@ -52,10 +52,12 @@ Graph.prototype.createVertex = function (name, colors, clickFn) { // XXX -- shou
     vertex.setAttribute("style", "fill: "+colors.color+"; stroke: "+colors.stroke+"; stroke-width: 1px;");
     vertex.setAttribute("rx", "10px"); // round the edges
     // random placement with a 10% margin at the edges
-    vertex.posx = Math.random() * (this.width * 0.8) + (this.width * 0.1);
-    vertex.posy = (Math.random() * (this.height * 0.8)) + (this.height * 0.1);
-    vertex.setAttribute("x", vertex.posx );
-    vertex.setAttribute("y", vertex.posy );
+    vertex.pos = new Vector(
+        Math.random() * (this.width * 0.8) + (this.width * 0.1),
+        (Math.random() * (this.height * 0.8)) + (this.height * 0.1)
+    );
+    vertex.setAttribute("x", vertex.pos.x );
+    vertex.setAttribute("y", vertex.pos.y );
     vertex.onclick = clickFn;
     vertex.edges = new Array();
     this.canvas.appendChild(vertex);
@@ -113,8 +115,8 @@ Graph.prototype.findClosestPairDistance = function (pointPairs) {
 Graph.prototype.getRectanglePointsForVertex = function (i) {
     var points = [];
     var vertex = this.vertices[i];
-    var posx = vertex.posx;
-    var posy = vertex.posy;
+    var posx = vertex.pos.x;
+    var posy = vertex.pos.y;
     var w = vertex.w;
     var h = vertex.h;
     var n = 6;
@@ -156,14 +158,14 @@ Graph.prototype.findClosestDistance = function (i, j) {
 Graph.prototype.getRectangle = function (i) {
     var v = this.vertices[i];
     return {
-        x1: v.posx,
-        y1: v.posy,
-        x2: v.posx + v.w,
-        y2: v.posy + v.h,
+        x1: v.pos.x,
+        y1: v.pos.y,
+        x2: v.pos.x + v.w,
+        y2: v.pos.y + v.h,
         w: v.w,
         h: v.h,
-        cx: v.posx + v.w / 2,
-        cy: v.posy + v.h / 2
+        cx: v.pos.x + v.w / 2,
+        cy: v.pos.y + v.h / 2
     };
 }
 
@@ -181,11 +183,11 @@ Graph.prototype.resolveCollisionsRectangular = function () {
                 if (overlap) {
                     var kickDistance = 50;
                     if (r1.y1 < r2.y1) {
-                        this.vertices[i].posy -= kickDistance;
-                        this.vertices[j].posy += kickDistance;
+                        this.vertices[i].pos.y -= kickDistance;
+                        this.vertices[j].pos.y += kickDistance;
                     } else {
-                        this.vertices[i].posy += kickDistance;
-                        this.vertices[j].posy -= kickDistance;
+                        this.vertices[i].pos.y += kickDistance;
+                        this.vertices[j].pos.y -= kickDistance;
                     }
                 }
             }
@@ -263,21 +265,21 @@ Graph.prototype.calculateForces = function () {
 
 Graph.prototype.applyForces = function () {
     for (i in this.vertices) {
-        this.vertices[i].posx += this.forces[i].x * this.stepsize;
-        this.vertices[i].posy += this.forces[i].y * this.stepsize;
+        this.vertices[i].pos.x += this.forces[i].x * this.stepsize;
+        this.vertices[i].pos.y += this.forces[i].y * this.stepsize;
     }
 }
 
 Graph.prototype.updateScreen = function () {
     for (i in this.vertices) {
-        this.vertices[i].setAttribute("x", this.vertices[i].posx );
-        this.vertices[i].setAttribute("y", this.vertices[i].posy );
+        this.vertices[i].setAttribute("x", this.vertices[i].pos.x );
+        this.vertices[i].setAttribute("y", this.vertices[i].pos.y );
         // update labels
-        this.vertices[i].textLabel.setAttribute("x", this.vertices[i].posx + 5 + "px");
-        this.vertices[i].textLabel.setAttribute("y", this.vertices[i].posy + (2*this.vertices[i].h/3 )+ "px");
+        this.vertices[i].textLabel.setAttribute("x", this.vertices[i].pos.x + 5 + "px");
+        this.vertices[i].textLabel.setAttribute("y", this.vertices[i].pos.y + (2*this.vertices[i].h/3 )+ "px");
         // update edges
         for (j in this.vertices[i].edges) {
-            this.vertices[i].edges[j].line.setAttribute("d", "M"+(this.vertices[i].posx+(this.vertices[i].w/2))+","+(this.vertices[i].posy+(this.vertices[i].h/2))+" L"+(this.vertices[this.vertices[i].edges[j].dest].posx+(this.vertices[this.vertices[i].edges[j].dest].w/2))+" "+(this.vertices[this.vertices[i].edges[j].dest].posy+(this.vertices[this.vertices[i].edges[j].dest].h/2)));
+            this.vertices[i].edges[j].line.setAttribute("d", "M"+(this.vertices[i].pos.x+(this.vertices[i].w/2))+","+(this.vertices[i].pos.y+(this.vertices[i].h/2))+" L"+(this.vertices[this.vertices[i].edges[j].dest].pos.x+(this.vertices[this.vertices[i].edges[j].dest].w/2))+" "+(this.vertices[this.vertices[i].edges[j].dest].pos.y+(this.vertices[this.vertices[i].edges[j].dest].h/2)));
         }
     }
 }
