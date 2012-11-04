@@ -90,14 +90,25 @@ Graph.prototype.createEdge = function (a, b, style) {
     this.vertices[b].edges[a] = { "dest" : a, "line": line };
 }
 
+Graph.prototype.go = function () {
+    if (this.task) {
+        return;
+    }
+    var obj = this;
+    this.iteration = 0;
+    this.task = window.setInterval(function () { obj.updateLayout(); }, 1);
+}
+
 Graph.prototype.updateLayout = function () {
     this.calculateForces();
     this.resolveCollisions();
     this.applyForces();
     this.updateScreen();
     this.iteration++;
-    if( this.iteration > 300 ) // XXX -- should watch for rest state, not just quit after N iterations
+    if (this.iteration > 300) {
+        // XXX -- should watch for rest state, not just quit after N iterations
         this.quit();
+    }
 }
 
 Graph.prototype.resolveCollisions = function () {
@@ -280,15 +291,6 @@ Graph.prototype.updateScreen = function () {
             this.vertices[i].edges[j].line.setAttribute("d", "M"+(this.vertices[i].pos.x+(this.vertices[i].w/2))+","+(this.vertices[i].pos.y+(this.vertices[i].h/2))+" L"+(this.vertices[this.vertices[i].edges[j].dest].pos.x+(this.vertices[this.vertices[i].edges[j].dest].w/2))+" "+(this.vertices[this.vertices[i].edges[j].dest].pos.y+(this.vertices[this.vertices[i].edges[j].dest].h/2)));
         }
     }
-}
-
-Graph.prototype.go = function () {
-    if (this.task) {
-        return;
-    }
-    var obj = this;
-    this.iteration = 0;
-    this.task = window.setInterval(function () { obj.updateLayout(); }, 1);
 }
 
 Graph.prototype.quit = function () {
