@@ -183,8 +183,7 @@ Graph.prototype.calculateForces = function () {
         this.forces[i] = new Vector(0, 0);
         for (j in this.vertices) {
             if( i !== j ) {
-                var delta = this.findClosestDistance(i, j);
-                var deltaV = new Vector(delta.dx, delta.dy);
+                var deltaV = this.findClosestDistance(i, j);
                 var d2 = deltaV.d2();
 
                 // add some jitter if distance^2 is very small
@@ -267,10 +266,7 @@ Graph.prototype.findClosestPairDistance = function (pointPairs) {
             minDy = dy;
         }
     }
-    return {
-        dx: minDx,
-        dy: minDy
-    };
+    return new Vector(minDx, minDy);
 }
 
 Graph.prototype.applyForces = function () {
