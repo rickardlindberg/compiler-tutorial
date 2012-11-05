@@ -22,7 +22,7 @@
 <div class="figure">
 <img src="./static/images/stages.png" alt="Stages in a compiler." /><p class="caption">Stages in a compiler.</p>
 </div>
-<p>The first step is usually parsing which transforms the source text to a <a href="ParseTree.html" title="ParseTree">ParseTree</a>. A parse tree is much easier to work with than strings. The last stage generates the target program from some internal representation.</p>
+<p>The first step is usually parsing which transforms the source text into a <a href="ParseTree.html" title="ParseTree">ParseTree</a>. A parse tree is much easier to work with than strings. The last stage generates the target program from some internal representation.</p>
 <p>Transforming source text into target text without any intermediate steps is not always trivial and is therefore avoided:</p>
 <div class="figure">
 <img src="./static/images/stages-shortcut.png" alt="Having no stages in a compiler is often a bad idea." /><p class="caption">Having no stages in a compiler is often a bad idea.</p>
@@ -79,6 +79,20 @@
         6. <a href="MovingForward.html">MovingForward</a>
         </center>
         </p>
+        <hr />
+
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+        var disqus_shortname = 'compilertutorial';
+        (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+         })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
         <hr />
       </div>
     </div>

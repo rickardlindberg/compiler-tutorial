@@ -45,17 +45,18 @@ int main() {
     , code        :: String
     , indentCount :: Int
     }</code></pre>
-<p>The <code>code</code> is the most important piece here. It contains the generated C code as it looks like now. When the whole generation is done, this code will be returned:</p>
+<p>The <code>code</code> is the most important piece here. It contains the generated C code as it looks right now. When the whole generation is done, this code will be returned. A code generator can be passed to <code>runGenerator</code> to retrieve the generated code as a string. This function creates an initial state and returns the <code>code</code> field when the code generator has been run:</p>
 <pre><code>runGenerator :: CodeGenerator () -&gt; String
-runGenerator m = code $ ST.execState m (AccumulatedCode 0 [] &quot;&quot; 0)
-
-writeLine :: String -&gt; CodeGenerator ()
+runGenerator m = code $ ST.execState m (AccumulatedCode 0 [] &quot;&quot; 0)</code></pre>
+<p><code>writeLine</code> is implemented like this:</p>
+<pre><code>writeLine :: String -&gt; CodeGenerator ()
 writeLine line = ST.modify (\s -&gt; s { code = code s ++ newLine s })
     where
         newLine   s = indentStr s ++ line ++ &quot;\n&quot;
         indentStr s = if null line
                           then &quot;&quot;
                           else concatMap (const &quot;    &quot;) [1..indentCount s]</code></pre>
+<p>What we do here is modifying the state by appending a string to the <code>code</code> field. The string we add is <code>newLine</code>, and it contains the line passed to <code>writeLine</code> indented properly and with a newline character at the end. If we write the empty string (<code>line</code> is <code>null</code>), we don't indent anything.</p>
 <p>The rest of this code can be found in <a href="https://github.com/rickardlindberg/compiler-tutorial/blob/master/src/CodeGenerationFramework.hs"><code>CodeGenerationFramework.hs</code></a>.</p>
 <h2 id="continue">Continue</h2>
 <p><a href="CodeGeneration.html" title="CodeGeneration">CodeGeneration</a></p>
@@ -108,6 +109,20 @@ writeLine line = ST.modify (\s -&gt; s { code = code s ++ newLine s })
         6. <a href="MovingForward.html">MovingForward</a>
         </center>
         </p>
+        <hr />
+
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+        var disqus_shortname = 'compilertutorial';
+        (function() {
+         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+         dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+         })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
         <hr />
       </div>
     </div>
