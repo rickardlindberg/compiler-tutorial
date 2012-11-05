@@ -10,26 +10,26 @@ import qualified Data.Map as M
 generateCode :: Program -> String
 generateCode = runGenerator . outProgram
 
-outProgram :: Program -> ST.State AccumulatedCode ()
+outProgram :: Program -> CodeGenerator ()
 outProgram (Program lets) = do
-    addGlobalName "exit" "create_closure(&builtin_exit, env)"
+    addGlobalName "exit"     "create_closure(&builtin_exit, env)"
     addGlobalName "setTempo" "create_closure(&builtin_setTempo, env)"
-    addGlobalName "setBeat" "create_closure(&builtin_setBeat, env)"
-    addInclude "\"runtime.h\""
-    addInclude "<stdlib.h>"
+    addGlobalName "setBeat"  "create_closure(&builtin_setBeat, env)"
+    writeLine "#include \"runtime.h\""
+    writeLine "#include <stdlib.h>"
     writeLine ""
     mapM_ outLet lets
     outMain
 
-outLet :: Let -> ST.State AccumulatedCode ()
+outLet :: Let -> CodeGenerator ()
 outLet (Let name term) = outTerm term >>= addGlobalName name
 
-outTerm :: Term -> ST.State AccumulatedCode String
+outTerm :: Term -> CodeGenerator String
 outTerm (Identifier s)   = return $ "env_lookup(env, \"" ++ s ++ "\")"
 outTerm (Number     n)   = return $ "const_number(" ++ show n ++ ")"
 outTerm (Lambda     a t) = outFunction $ Lambda a t
 
-outFunction :: Term -> ST.State AccumulatedCode String
+outFunction :: Term -> CodeGenerator String
 outFunction (Lambda args terms) = do
     n <- nextCounter
     terms <- mapM outTerm terms
@@ -56,7 +56,7 @@ outFunction (Lambda args terms) = do
     writeLine ""
     return $ "create_closure(&fn_" ++ show n ++ ", env)"
 
-outMain :: ST.State AccumulatedCode ()
+outMain :: CodeGenerator ()
 outMain = do
     state <- get
     writeLine "void con_main() {"
