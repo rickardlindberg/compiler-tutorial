@@ -8,10 +8,22 @@ The manual is pretty nice:
 In Parsec, a parser is a function that takes as input a string and returns a
 parsed object and the rest of the string:
 
-TODO: image here illustrating the above sentence
+![A parsec parser for integers.]($ROOT/static/images/parsec-parser.png)
 
-These functions can then be combined to form parsers for more complex object,
+These functions can then be combined to form parsers for more complex objects,
 hence the name parser combinator.
+
+One common parser combinator is the choice combinator
+([`<|>`](http://legacy.cs.uu.nl/daan/download/parsec/parsec.html#or)). It
+combines two parsers. If the first parser fails, it tries the second.
+
+    char '0'
+
+is a parser for the single character '0'. The combined parser
+
+    char '0' <|> char '1'
+
+is a parser for either the character '0' or the character '1'.
 
 The following code snippet can be used to play around with parsec:
 
