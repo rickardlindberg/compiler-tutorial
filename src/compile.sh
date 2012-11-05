@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 OUT_DIR="sketch"
 
 IN_FILE="../scale.con"
