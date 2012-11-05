@@ -5,27 +5,118 @@ main.RuntimeSupport
 Now that we've figured out the ExecutionModel of con, we need to implement a C
 library that compiled con programs can use.
 
-You might want to look at CodeGeneration first and then come back here.
+## Environment
 
-## Parts
+We concluded that the environment was a central part in the ExecutionModel.
+Let's see how we can implement that in C. The basic struct looks:
 
-The C runtime support library must contain the following:
+    struct env {
+        struct ref_count ref_count;
+        int size;
+        struct pair * pairs;
+        struct env * parent;
+    };
 
-* Data structure for environments
-* Data structure for argument list
-* Data structure for closures
-* Data structures for primitive types such as numbers
-* Implementation of built-in functions
+`ref_count` has to do with garbage collection. Ignore that for now, and we will
+come back to it later. The last entry is a pointer to a parent environment. It
+is `NULL` for the global environment. The middle part is where we actually
+implement the environment table. We implement it as an array of pairs. A pair
+looks like this:
 
-### Environment
+    struct pair {
+        char * key;
+        void * ref_countable;
+    };
 
-### Arguments
+The key is a string and the value is a pointer to some value. The value must be
+something that can be garbage collected.
 
-### Closures
+The methods we need to work with environments are
 
-### Primitives
+* `Env create_env(Env parent);`
+* `void env_insert(Env env, char * key, void * ref_countable);`
+* `void * env_lookup(Env env, char * key);`
+* `void free_env(void * env);`
 
-### Built-ins
+## Arguments
+
+Next we need a structure to hold arguments to functions. The struct looks like
+this:
+
+    struct args {
+        struct ref_count ref_count;
+        int size;
+        void ** args;
+    };
+
+Arguments are implemented as an array of void pointers. The void pointer must
+point to a value that can be garbage collected.
+
+The methods we need to work with arguments are
+
+* `Args create_args(int size);`
+* `void args_set(Args args, int i, void * ref_countable);`
+* `void * args_get(Args args, int i);`
+* `void free_args(void * args);`
+
+## Values
+
+The values we store in environments and arguments can be one of the following:
+
+* Primitive value (only numbers in our case)
+* Closure (function + environment)
+
+Numbers look like this:
+
+    struct number {
+        struct ref_count ref_count;
+        int value;
+    };
+
+And methods:
+
+* `Number const_number(int i);`
+* `void free_number(void * number);`
+
+Closures look like this:
+
+    struct closure {
+        struct ref_count ref_count;
+        FnSpec fn_spec;
+        Env env;
+    };
+
+And methods:
+
+* `Closure create_closure(FnSpec fn_spec, Env env);`
+* `void free_closure(void * closure);`
+
+`FnSpec` is the function without an environment. It is a pointer to a C
+function with the following type:
+
+    Call aFunction(Env env, Args args);
+
+## A call
+
+Let's see if we can use the runtime to implement a call to a function. Assume
+we have the following body:
+
+    add 2 5 handle_add_result
+
+First we need to create the global environment:
+
+    Env env = create_env(NULL);
+    env_insert("handle_add_result", ...);
+    env_insert("add", ...);
+
+Then we need to create the arguments for the call:
+
+    Args args = create_args(3);
+    args_set(0, create_number(2));
+    args_set(1, create_number(5));
+    args_set(2, env_lookup(env, "handle_add_result"));
+
+    Closure closure = (Closure)env_lookup(env, "add");
 
 ## Garbage collection
 
@@ -33,4 +124,4 @@ The C runtime support library must contain the following:
 
 ## Continue
 
-CodeGeneration or AssembleHex
+CodeGeneration

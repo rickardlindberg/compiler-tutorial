@@ -1,29 +1,61 @@
 main.CodeGenerationFramework
 
-state monad stuff
+Our goal with this framework is to simplify generation of C code. Our goal is
+to be able to generate C code something like this:
+
+    outCode :: CodeGenerator ()
+    outCode = do
+        writeLine "#include <stdio.h>"
+        writeLine ""
+        writeLine "int main() {"
+        indented $ do
+            writeLine "printf(\"hello world\\n\");"
+            writeLine "return 0;"
+        writeLine "}"
+
+And it generates this:
+
+    #include <stdio.h>
+
+    int main() {
+        printf("hello world\n");
+        return 0;
+    }
+
+We will use the state monad to implement this framework. The state monad allows
+us to keep a state (the in-progress generated code) and update it in an
+imperative way while still being purely functional.
+
+The `CodeGenerator` type is a synonym for a state:
+
+    type CodeGenerator a = ST.State AccumulatedCode a
+
+The state in our case is defined like this:
 
     data AccumulatedCode = AccumulatedCode
         { counter     :: Int
-        , globalNames :: [(String, Int)]
-        , finalCode   :: String
+        , globalNames :: [(String, String)]
+        , code        :: String
+        , indentCount :: Int
         }
 
-    writeLine :: String -> ST.State AccumulatedCode ()
-    writeLine line = ST.modify (\s -> s { finalCode = finalCode s ++ line ++ "\n" })
+The `code` is the most important piece here. It contains the generated C code
+as it looks like now. When the whole generation is done, this code will be
+returned:
 
-    addGlobalName :: String -> Int -> ST.State AccumulatedCode ()
-    addGlobalName name n = ST.modify (\s -> s { globalNames = (name, n):globalNames s })
+    runGenerator :: CodeGenerator () -> String
+    runGenerator m = code $ ST.execState m (AccumulatedCode 0 [] "" 0)
 
-    nextCounter :: ST.State AccumulatedCode Int
-    nextCounter = do
-        state <- get
-        ST.modify (\s -> s { counter = counter s + 1 })
-        return $ counter state
+    writeLine :: String -> CodeGenerator ()
+    writeLine line = ST.modify (\s -> s { code = code s ++ newLine s })
+        where
+            newLine   s = indentStr s ++ line ++ "\n"
+            indentStr s = if null line
+                              then ""
+                              else concatMap (const "    ") [1..indentCount s]
 
-And
-
-    generateCode :: Program -> String
-    generateCode program = finalCode $ ST.execState (outProgram program) (AccumulatedCode 0 [] "")
+The rest of this code can be found in
+[`CodeGenerationFramework.hs`](https://github.com/rickardlindberg/compiler-tutorial/blob/master/src/CodeGenerationFramework.hs).
 
 ## Continue
 

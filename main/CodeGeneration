@@ -9,14 +9,25 @@ Generating code in Haskell means generating a string that contains C code and
 then writing it to a file. In CodeGenerationFramework we make a small framework
 that allows us to generate that string in a more elegant way.
 
-## Generating code for a function
+There are two things we need to generate: first the main function `con_main`,
+and then one C function per con function.
 
-TODO:
+The easiest way to get a feeling for how these two things should look like is
+to compile a [test
+program](https://github.com/rickardlindberg/compiler-tutorial/blob/master/scale.con)
+using the reference implementation and then look at the generated code. If the
+[compile](https://github.com/rickardlindberg/compiler-tutorial/blob/master/src/compile.sh)
+script is used, the generated file is located in `sketch/con_program.cpp`.
 
 ## Generating the main function
+
+The main function should create the global environment and start calling the
+main function.
+
+## Generating code for a function
 
 TODO:
 
 ## Continue
 
-RuntimeSupport or AssembleHex
+AssembleHex
