@@ -4,15 +4,15 @@ import Control.Monad.Trans.State.Lazy as ST
 
 type CodeGenerator a = ST.State AccumulatedCode a
 
-runGenerator :: CodeGenerator () -> String
-runGenerator m = code $ ST.execState m (AccumulatedCode 0 [] "" 0)
-
 data AccumulatedCode = AccumulatedCode
     { counter     :: Int
     , globalNames :: [(String, String)]
     , code        :: String
     , indentCount :: Int
     }
+
+runGenerator :: CodeGenerator () -> String
+runGenerator m = code $ ST.execState m (AccumulatedCode 0 [] "" 0)
 
 writeLine :: String -> CodeGenerator ()
 writeLine line = ST.modify (\s -> s { code = code s ++ newLine s })
