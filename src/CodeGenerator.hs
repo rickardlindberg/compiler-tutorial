@@ -1,6 +1,6 @@
 module CodeGenerator where
 
-import CodeGeneratorFramework
+import CodeGenerationFramework
 import Control.Monad
 import Control.Monad.Trans.State.Lazy as ST
 import Data.Maybe

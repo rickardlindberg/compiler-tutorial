@@ -1,4 +1,4 @@
-module CodeGeneratorFramework where
+module CodeGenerationFramework where
 
 import Control.Monad.Trans.State.Lazy as ST
 

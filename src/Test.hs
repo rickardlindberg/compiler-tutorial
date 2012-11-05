@@ -1,4 +1,4 @@
-import CodeGeneratorFramework
+import CodeGenerationFramework
 
 outCode :: CodeGenerator ()
 outCode = do
