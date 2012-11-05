@@ -83,10 +83,10 @@ void free_call(void * call);
 
 struct number {
     struct ref_count ref_count;
-    double value;
+    int value;
 };
 
-Number const_number(double i);
+Number const_number(int i);
 void free_number(void * number);
 
 // Built-ins

@@ -146,7 +146,7 @@ void free_call(void * ref_countable) {
 
 // Constants
 
-Number const_number(double i) {
+Number const_number(int i) {
     Number number = (Number)malloc(sizeof(struct number));
     number->ref_count.count = 0;
     number->ref_count.free_fn = &free_number;
