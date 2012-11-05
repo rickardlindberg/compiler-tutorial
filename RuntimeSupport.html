@@ -22,27 +22,91 @@
 <img src="./static/images/runtime.png" alt="C runtime." /><p class="caption">C runtime.</p>
 </div>
 <p>Now that we've figured out the <a href="ExecutionModel.html" title="ExecutionModel">ExecutionModel</a> of con, we need to implement a C library that compiled con programs can use.</p>
-<p>You might want to look at <a href="CodeGeneration.html" title="CodeGeneration">CodeGeneration</a> first and then come back here.</p>
-<h2 id="parts">Parts</h2>
-<p>The C runtime support library must contain the following:</p>
+<h2 id="environment">Environment</h2>
+<p>We concluded that the environment was a central part in the <a href="ExecutionModel.html" title="ExecutionModel">ExecutionModel</a>. Let's see how we can implement that in C. The basic struct looks:</p>
+<pre><code>struct env {
+    struct ref_count ref_count;
+    int size;
+    struct pair * pairs;
+    struct env * parent;
+};</code></pre>
+<p><code>ref_count</code> has to do with garbage collection. Ignore that for now, and we will come back to it later. The last entry is a pointer to a parent environment. It is <code>NULL</code> for the global environment. The middle part is where we actually implement the environment table. We implement it as an array of pairs. A pair looks like this:</p>
+<pre><code>struct pair {
+    char * key;
+    void * ref_countable;
+};</code></pre>
+<p>The key is a string and the value is a pointer to some value. The value must be something that can be garbage collected.</p>
+<p>The methods we need to work with environments are</p>
 <ul>
-<li>Data structure for environments</li>
-<li>Data structure for argument list</li>
-<li>Data structure for closures</li>
-<li>Data structures for primitive types such as numbers</li>
-<li>Implementation of built-in functions</li>
+<li><code>Env create_env(Env parent);</code></li>
+<li><code>void env_insert(Env env, char * key, void * ref_countable);</code></li>
+<li><code>void * env_lookup(Env env, char * key);</code></li>
+<li><code>void free_env(void * env);</code></li>
 </ul>
-<h3 id="environment">Environment</h3>
-<h3 id="arguments">Arguments</h3>
-<h3 id="closures">Closures</h3>
-<h3 id="primitives">Primitives</h3>
-<h3 id="built-ins">Built-ins</h3>
+<h2 id="arguments">Arguments</h2>
+<p>Next we need a structure to hold arguments to functions. The struct looks like this:</p>
+<pre><code>struct args {
+    struct ref_count ref_count;
+    int size;
+    void ** args;
+};</code></pre>
+<p>Arguments are implemented as an array of void pointers. The void pointer must point to a value that can be garbage collected.</p>
+<p>The methods we need to work with arguments are</p>
+<ul>
+<li><code>Args create_args(int size);</code></li>
+<li><code>void args_set(Args args, int i, void * ref_countable);</code></li>
+<li><code>void * args_get(Args args, int i);</code></li>
+<li><code>void free_args(void * args);</code></li>
+</ul>
+<h2 id="values">Values</h2>
+<p>The values we store in environments and arguments can be one of the following:</p>
+<ul>
+<li>Primitive value (only numbers in our case)</li>
+<li>Closure (function + environment)</li>
+</ul>
+<p>Numbers look like this:</p>
+<pre><code>struct number {
+    struct ref_count ref_count;
+    int value;
+};</code></pre>
+<p>And methods:</p>
+<ul>
+<li><code>Number const_number(int i);</code></li>
+<li><code>void free_number(void * number);</code></li>
+</ul>
+<p>Closures look like this:</p>
+<pre><code>struct closure {
+    struct ref_count ref_count;
+    FnSpec fn_spec;
+    Env env;
+};</code></pre>
+<p>And methods:</p>
+<ul>
+<li><code>Closure create_closure(FnSpec fn_spec, Env env);</code></li>
+<li><code>void free_closure(void * closure);</code></li>
+</ul>
+<p><code>FnSpec</code> is the function without an environment. It is a pointer to a C function with the following type:</p>
+<pre><code>Call aFunction(Env env, Args args);</code></pre>
+<h2 id="a-call">A call</h2>
+<p>Let's see if we can use the runtime to implement a call to a function. Assume we have the following body:</p>
+<pre><code>add 2 5 handle_add_result</code></pre>
+<p>First we need to create the global environment:</p>
+<pre><code>Env env = create_env(NULL);
+env_insert(&quot;handle_add_result&quot;, ...);
+env_insert(&quot;add&quot;, ...);</code></pre>
+<p>Then we need to create the arguments for the call:</p>
+<pre><code>Args args = create_args(3);
+args_set(0, create_number(2));
+args_set(1, create_number(5));
+args_set(2, env_lookup(env, &quot;handle_add_result&quot;));
+
+Closure closure = (Closure)env_lookup(env, &quot;add&quot;);</code></pre>
 <h2 id="garbage-collection">Garbage collection</h2>
 <ul>
 <li>TODO</li>
 </ul>
 <h2 id="continue">Continue</h2>
-<p><a href="CodeGeneration.html" title="CodeGeneration">CodeGeneration</a> or <a href="AssembleHex.html" title="AssembleHex">AssembleHex</a></p>
+<p><a href="CodeGeneration.html" title="CodeGeneration">CodeGeneration</a></p>
         <hr />
         <svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
         <script type="text/javascript">
@@ -73,7 +137,7 @@
             g.repulsion = g.repulsion / 2;
             //g.spring_length = 8;
             g.createVertex("RuntimeSupport", colors(1), goToPageFn("RuntimeSupport"));g.createVertex("AssembleHex", colors(2), goToPageFn("AssembleHex"));g.createVertex("CodeGeneration", colors(2), goToPageFn("CodeGeneration"));g.createVertex("ExecutionModel", colors(2), goToPageFn("ExecutionModel"));g.createVertex("CodeGenerationFramework", colors(3), goToPageFn("CodeGenerationFramework"));g.createVertex("MovingForward", colors(3), goToPageFn("MovingForward"));g.createVertex("StageParsing", colors(3), goToPageFn("StageParsing"));
-            g.createEdge("RuntimeSupport", "AssembleHex");g.createEdge("RuntimeSupport", "CodeGeneration");g.createEdge("RuntimeSupport", "ExecutionModel");g.createEdge("AssembleHex", "CodeGeneration");g.createEdge("AssembleHex", "MovingForward");g.createEdge("AssembleHex", "RuntimeSupport");g.createEdge("CodeGeneration", "AssembleHex");g.createEdge("CodeGeneration", "CodeGenerationFramework");g.createEdge("CodeGeneration", "RuntimeSupport");g.createEdge("ExecutionModel", "CodeGeneration");g.createEdge("ExecutionModel", "RuntimeSupport");g.createEdge("ExecutionModel", "StageParsing");g.createEdge("CodeGenerationFramework", "CodeGeneration");g.createEdge("StageParsing", "ExecutionModel");
+            g.createEdge("RuntimeSupport", "CodeGeneration");g.createEdge("RuntimeSupport", "ExecutionModel");g.createEdge("AssembleHex", "CodeGeneration");g.createEdge("AssembleHex", "MovingForward");g.createEdge("AssembleHex", "RuntimeSupport");g.createEdge("CodeGeneration", "AssembleHex");g.createEdge("CodeGeneration", "CodeGenerationFramework");g.createEdge("CodeGeneration", "RuntimeSupport");g.createEdge("ExecutionModel", "RuntimeSupport");g.createEdge("ExecutionModel", "StageParsing");g.createEdge("CodeGenerationFramework", "CodeGeneration");g.createEdge("StageParsing", "ExecutionModel");
             g.go();
         </script>
         <hr />

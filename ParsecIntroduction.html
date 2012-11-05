@@ -21,8 +21,15 @@
         <p>Parsec is a parser combinator library for Haskell.</p>
 <p>The manual is pretty nice: <a href="http://legacy.cs.uu.nl/daan/download/parsec/parsec.html">http://legacy.cs.uu.nl/daan/download/parsec/parsec.html</a>.</p>
 <p>In Parsec, a parser is a function that takes as input a string and returns a parsed object and the rest of the string:</p>
-<p>TODO: image here illustrating the above sentence</p>
-<p>These functions can then be combined to form parsers for more complex object, hence the name parser combinator.</p>
+<div class="figure">
+<img src="./static/images/parsec-parser.png" alt="A parsec parser for integers." /><p class="caption">A parsec parser for integers.</p>
+</div>
+<p>These functions can then be combined to form parsers for more complex objects, hence the name parser combinator.</p>
+<p>One common parser combinator is the choice combinator (<a href="http://legacy.cs.uu.nl/daan/download/parsec/parsec.html#or"><code>&lt;|&gt;</code></a>). It combines two parsers. If the first parser fails, it tries the second.</p>
+<pre><code>char &#39;0&#39;</code></pre>
+<p>is a parser for the single character '0'. The combined parser</p>
+<pre><code>char &#39;0&#39; &lt;|&gt; char &#39;1&#39;</code></pre>
+<p>is a parser for either the character '0' or the character '1'.</p>
 <p>The following code snippet can be used to play around with parsec:</p>
 <pre><code>import Text.ParserCombinators.Parsec
 

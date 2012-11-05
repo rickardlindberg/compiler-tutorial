@@ -23,12 +23,14 @@
 </div>
 <p>Now it's time to generate C code from the parse tree. The generated code will use the <a href="RuntimeSupport.html" title="RuntimeSupport">RuntimeSupport</a> library.</p>
 <p>Generating code in Haskell means generating a string that contains C code and then writing it to a file. In <a href="CodeGenerationFramework.html" title="CodeGenerationFramework">CodeGenerationFramework</a> we make a small framework that allows us to generate that string in a more elegant way.</p>
+<p>There are two things we need to generate: first the main function <code>con_main</code>, and then one C function per con function.</p>
+<p>The easiest way to get a feeling for how these two things should look like is to compile a <a href="https://github.com/rickardlindberg/compiler-tutorial/blob/master/scale.con">test program</a> using the reference implementation and then look at the generated code. If the <a href="https://github.com/rickardlindberg/compiler-tutorial/blob/master/src/compile.sh">compile</a> script is used, the generated file is located in <code>sketch/con_program.cpp</code>.</p>
+<h2 id="generating-the-main-function">Generating the main function</h2>
+<p>The main function should create the global environment and start calling the main function.</p>
 <h2 id="generating-code-for-a-function">Generating code for a function</h2>
 <p>TODO:</p>
-<h2 id="generating-the-main-function">Generating the main function</h2>
-<p>TODO:</p>
 <h2 id="continue">Continue</h2>
-<p><a href="RuntimeSupport.html" title="RuntimeSupport">RuntimeSupport</a> or <a href="AssembleHex.html" title="AssembleHex">AssembleHex</a></p>
+<p><a href="AssembleHex.html" title="AssembleHex">AssembleHex</a></p>
         <hr />
         <svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
         <script type="text/javascript">
@@ -58,8 +60,8 @@
             var g = new Graph("canvas", 800, 400);
             g.repulsion = g.repulsion / 2;
             //g.spring_length = 8;
-            g.createVertex("CodeGeneration", colors(1), goToPageFn("CodeGeneration"));g.createVertex("AssembleHex", colors(2), goToPageFn("AssembleHex"));g.createVertex("CodeGenerationFramework", colors(2), goToPageFn("CodeGenerationFramework"));g.createVertex("ExecutionModel", colors(2), goToPageFn("ExecutionModel"));g.createVertex("RuntimeSupport", colors(2), goToPageFn("RuntimeSupport"));g.createVertex("MovingForward", colors(3), goToPageFn("MovingForward"));g.createVertex("StageParsing", colors(3), goToPageFn("StageParsing"));
-            g.createEdge("CodeGeneration", "AssembleHex");g.createEdge("CodeGeneration", "CodeGenerationFramework");g.createEdge("CodeGeneration", "RuntimeSupport");g.createEdge("AssembleHex", "CodeGeneration");g.createEdge("AssembleHex", "MovingForward");g.createEdge("AssembleHex", "RuntimeSupport");g.createEdge("CodeGenerationFramework", "CodeGeneration");g.createEdge("ExecutionModel", "CodeGeneration");g.createEdge("ExecutionModel", "RuntimeSupport");g.createEdge("ExecutionModel", "StageParsing");g.createEdge("RuntimeSupport", "AssembleHex");g.createEdge("RuntimeSupport", "CodeGeneration");g.createEdge("RuntimeSupport", "ExecutionModel");g.createEdge("StageParsing", "ExecutionModel");
+            g.createVertex("CodeGeneration", colors(1), goToPageFn("CodeGeneration"));g.createVertex("AssembleHex", colors(2), goToPageFn("AssembleHex"));g.createVertex("CodeGenerationFramework", colors(2), goToPageFn("CodeGenerationFramework"));g.createVertex("RuntimeSupport", colors(2), goToPageFn("RuntimeSupport"));g.createVertex("ExecutionModel", colors(3), goToPageFn("ExecutionModel"));g.createVertex("MovingForward", colors(3), goToPageFn("MovingForward"));
+            g.createEdge("CodeGeneration", "AssembleHex");g.createEdge("CodeGeneration", "CodeGenerationFramework");g.createEdge("CodeGeneration", "RuntimeSupport");g.createEdge("AssembleHex", "CodeGeneration");g.createEdge("AssembleHex", "MovingForward");g.createEdge("AssembleHex", "RuntimeSupport");g.createEdge("CodeGenerationFramework", "CodeGeneration");g.createEdge("RuntimeSupport", "CodeGeneration");g.createEdge("RuntimeSupport", "ExecutionModel");g.createEdge("ExecutionModel", "RuntimeSupport");
             g.go();
         </script>
         <hr />

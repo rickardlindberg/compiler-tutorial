@@ -18,27 +18,45 @@
     <div class="container noshowgrid">
       <div class="span-20 prepend-2 append-2">
         <h1>CodeGenerationFramework</h1>
-        <p>state monad stuff</p>
+        <p>Our goal with this framework is to simplify generation of C code. Our goal is to be able to generate C code something like this:</p>
+<pre><code>outCode :: CodeGenerator ()
+outCode = do
+    writeLine &quot;#include &lt;stdio.h&gt;&quot;
+    writeLine &quot;&quot;
+    writeLine &quot;int main() {&quot;
+    indented $ do
+        writeLine &quot;printf(\&quot;hello world\\n\&quot;);&quot;
+        writeLine &quot;return 0;&quot;
+    writeLine &quot;}&quot;</code></pre>
+<p>And it generates this:</p>
+<pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    printf(&quot;hello world\n&quot;);
+    return 0;
+}</code></pre>
+<p>We will use the state monad to implement this framework. The state monad allows us to keep a state (the in-progress generated code) and update it in an imperative way while still being purely functional.</p>
+<p>The <code>CodeGenerator</code> type is a synonym for a state:</p>
+<pre><code>type CodeGenerator a = ST.State AccumulatedCode a</code></pre>
+<p>The state in our case is defined like this:</p>
 <pre><code>data AccumulatedCode = AccumulatedCode
     { counter     :: Int
-    , globalNames :: [(String, Int)]
-    , finalCode   :: String
-    }
+    , globalNames :: [(String, String)]
+    , code        :: String
+    , indentCount :: Int
+    }</code></pre>
+<p>The <code>code</code> is the most important piece here. It contains the generated C code as it looks like now. When the whole generation is done, this code will be returned:</p>
+<pre><code>runGenerator :: CodeGenerator () -&gt; String
+runGenerator m = code $ ST.execState m (AccumulatedCode 0 [] &quot;&quot; 0)
 
-writeLine :: String -&gt; ST.State AccumulatedCode ()
-writeLine line = ST.modify (\s -&gt; s { finalCode = finalCode s ++ line ++ &quot;\n&quot; })
-
-addGlobalName :: String -&gt; Int -&gt; ST.State AccumulatedCode ()
-addGlobalName name n = ST.modify (\s -&gt; s { globalNames = (name, n):globalNames s })
-
-nextCounter :: ST.State AccumulatedCode Int
-nextCounter = do
-    state &lt;- get
-    ST.modify (\s -&gt; s { counter = counter s + 1 })
-    return $ counter state</code></pre>
-<p>And</p>
-<pre><code>generateCode :: Program -&gt; String
-generateCode program = finalCode $ ST.execState (outProgram program) (AccumulatedCode 0 [] &quot;&quot;)</code></pre>
+writeLine :: String -&gt; CodeGenerator ()
+writeLine line = ST.modify (\s -&gt; s { code = code s ++ newLine s })
+    where
+        newLine   s = indentStr s ++ line ++ &quot;\n&quot;
+        indentStr s = if null line
+                          then &quot;&quot;
+                          else concatMap (const &quot;    &quot;) [1..indentCount s]</code></pre>
+<p>The rest of this code can be found in <a href="https://github.com/rickardlindberg/compiler-tutorial/blob/master/src/CodeGenerationFramework.hs"><code>CodeGenerationFramework.hs</code></a>.</p>
 <h2 id="continue">Continue</h2>
 <p><a href="CodeGeneration.html" title="CodeGeneration">CodeGeneration</a></p>
         <hr />
@@ -70,8 +88,8 @@ generateCode program = finalCode $ ST.execState (outProgram program) (Accumulate
             var g = new Graph("canvas", 800, 400);
             g.repulsion = g.repulsion / 2;
             //g.spring_length = 8;
-            g.createVertex("CodeGenerationFramework", colors(1), goToPageFn("CodeGenerationFramework"));g.createVertex("CodeGeneration", colors(2), goToPageFn("CodeGeneration"));g.createVertex("AssembleHex", colors(3), goToPageFn("AssembleHex"));g.createVertex("ExecutionModel", colors(3), goToPageFn("ExecutionModel"));g.createVertex("RuntimeSupport", colors(3), goToPageFn("RuntimeSupport"));
-            g.createEdge("CodeGenerationFramework", "CodeGeneration");g.createEdge("CodeGeneration", "AssembleHex");g.createEdge("CodeGeneration", "CodeGenerationFramework");g.createEdge("CodeGeneration", "RuntimeSupport");g.createEdge("AssembleHex", "CodeGeneration");g.createEdge("AssembleHex", "RuntimeSupport");g.createEdge("ExecutionModel", "CodeGeneration");g.createEdge("ExecutionModel", "RuntimeSupport");g.createEdge("RuntimeSupport", "AssembleHex");g.createEdge("RuntimeSupport", "CodeGeneration");g.createEdge("RuntimeSupport", "ExecutionModel");
+            g.createVertex("CodeGenerationFramework", colors(1), goToPageFn("CodeGenerationFramework"));g.createVertex("CodeGeneration", colors(2), goToPageFn("CodeGeneration"));g.createVertex("AssembleHex", colors(3), goToPageFn("AssembleHex"));g.createVertex("RuntimeSupport", colors(3), goToPageFn("RuntimeSupport"));
+            g.createEdge("CodeGenerationFramework", "CodeGeneration");g.createEdge("CodeGeneration", "AssembleHex");g.createEdge("CodeGeneration", "CodeGenerationFramework");g.createEdge("CodeGeneration", "RuntimeSupport");g.createEdge("AssembleHex", "CodeGeneration");g.createEdge("AssembleHex", "RuntimeSupport");g.createEdge("RuntimeSupport", "CodeGeneration");
             g.go();
         </script>
         <hr />
