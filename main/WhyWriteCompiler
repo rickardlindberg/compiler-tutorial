@@ -1,10 +1,21 @@
 main.WhyWriteCompiler
 
-There are many reasons why one would want to write a compiler. Here are some of
-them.
+Here are some reasons why you would want to write a compiler.
 
-TODO: ## Learn how programs execute
-TODO: ## Make more powerful construct
+## Learn how programs execute
+
+By writing a compiler, you gain insight into how programs are actually
+executed.
+
+You no longer have to live with the feeling that programming is writing code in
+Java or in Python. If you know how to make your own language execute on a
+computer, you no longer need to choose any of the existing languages.
+
+## Increase problem solving techniques
+
+Introducing a new language to solve a particular program is a powerful
+technique. If you know how to implement a compiler, you are more likely to use
+this technique.
 
 ## Continue
 

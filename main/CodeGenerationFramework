@@ -42,8 +42,8 @@ The state in our case is defined like this:
 The `code` is the most important piece here. It contains the generated C code
 as it looks right now. When the whole generation is done, this code will be
 returned. A code generator can be passed to `runGenerator` to retrieve the
-generated code. This function creates an initial state and returns the `code`
-field when the code generator has been run:
+generated code as a string. This function creates an initial state and returns
+the `code` field when the code generator has been run:
 
     runGenerator :: CodeGenerator () -> String
     runGenerator m = code $ ST.execState m (AccumulatedCode 0 [] "" 0)

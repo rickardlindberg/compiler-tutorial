@@ -5,9 +5,9 @@ source program until the target program is obtained.
 
 ![Stages in a compiler.]($ROOT/static/images/stages.png)
 
-The first step is usually parsing which transforms the source text to a
-ParseTree. A parse tree is much easier to work with than strings. The last stage
-generates the target program from some internal representation.
+The first step is usually parsing which transforms the source text into a
+ParseTree. A parse tree is much easier to work with than strings. The last
+stage generates the target program from some internal representation.
 
 Transforming source text into target text without any intermediate steps is not
 always trivial and is therefore avoided:
