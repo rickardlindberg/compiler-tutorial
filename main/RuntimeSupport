@@ -8,7 +8,7 @@ library that compiled con programs can use.
 ## Environment
 
 We concluded that the environment was a central part in the ExecutionModel.
-Let's see how we can implement that in C. The basic struct looks:
+Let's see how we can implement that in C. The basic struct looks like this:
 
     struct env {
         struct ref_count ref_count;
@@ -96,6 +96,17 @@ function with the following type:
 
     Call aFunction(Env env, Args args);
 
+So all functions in con are translated to C functions with the above type. The
+input is the environment in which to execute this function and the arguments
+passed to it. The return value is a call which is simply a closure bundled
+together with arguments:
+
+    struct call {
+        struct ref_count ref_count;
+        Closure closure;
+        Args args;
+    };
+
 ## A call
 
 Let's see if we can use the runtime to implement a call to a function. Assume
@@ -103,11 +114,15 @@ we have the following body:
 
     add 2 5 handle_add_result
 
-First we need to create the global environment:
+First we need to have the global environment:
 
     Env env = create_env(NULL);
-    env_insert("handle_add_result", ...);
-    env_insert("add", ...);
+    env_insert("handle_add_result", create_closure(generated_fn_1, env));
+    env_insert("add",               create_closure(builtin_add, env));
+
+Then we need the closure for `add`:
+
+    Closure closure = (Closure)env_lookup(env, "add");
 
 Then we need to create the arguments for the call:
 
@@ -116,11 +131,71 @@ Then we need to create the arguments for the call:
     args_set(1, create_number(5));
     args_set(2, env_lookup(env, "handle_add_result"));
 
-    Closure closure = (Closure)env_lookup(env, "add");
+Then we need to bundle it in a `Call`:
+
+    Call call = create_call(closure, args);
+
+We can then call it like this:
+
+    next_call = call->closure->fn_spec(call->closure->env, call->args);
 
 ## Garbage collection
 
-* TODO
+Every time we create a new object using a `create_` function, new memory is
+allocated dynamically. This memory must be freed or we will eventually run out
+of memory.
+
+The problem is that we can't always know when objects can be freed. Consider
+the `add3` example:
+
+    let add3 = \(one, two, three, k) ->
+        add one two (\(sum) ->
+            add sum three k
+        )
+
+This will result in two C functions: one for `add3` and one for the anonymous
+function. When `add3` is called, we have allocated memory to hold `k`. But we
+can't free the memory for `k` when we leave the C function for `add3` because
+it is needed later by the anonymous function.
+
+We solve this problem by using reference counting. So all structs that we
+allocated must have a reference counter as first entry:
+
+    struct ref_count ref_count;
+
+That struct looks like this:
+
+    struct ref_count {
+        int count;
+        FnFree free_fn;
+    };
+
+It keeps track of how many things are referencing this object and also has a
+pointer to a function to free this object. Different objects are freed in
+different ways, so we need a free function for each object we allocate.
+
+Let's look at how freeing arguments work:
+
+    void free_args(void * ref_countable) {
+        Args args = (Args)ref_countable;
+        int i;
+        for (i = 0; i < args->size; i++) {
+            dec_and_free(args->args[i]);
+        }
+        free(args->args);
+        free(args);
+    }
+
+The for loop goes over all arguments and calls `dec_and_free` on each one of
+them. In the above example that includes calling `dec_and_free` on `k`. What
+happens is that the reference counter is decreased by one, saying that this
+arguments structure no longer holds a reference to `k`. But freeing is only
+performed if the reference count is 0. Since `k` has been put in a new
+environment for use by the anonymous function later, it will not be freed when
+freeing the arguments since that new environment has a reference to `k`.
+
+The last part of `free_args` frees the array allocated for the arguments and
+the arguments structure itself.
 
 ## Continue
 
