@@ -214,7 +214,7 @@ Graph.prototype.calculateForces = function () {
                 }
 
                 var magnets = [
-                    [ 10000, new Vector(0,          this.height/5          ) ],
+                    [ 10000, new Vector(0,          this.height/5)   ],
                     [ 10000, new Vector(this.width, this.height*4/5) ]
                 ];
                 var me = this.vertices[i].centerPos();
