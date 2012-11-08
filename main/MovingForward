@@ -44,3 +44,11 @@ gain more insight into how programs are executed on a machine.
 Another approach is to compile code to byte code that is later executed by a
 virtual machine. If we can implement this virtual machine on an Arduino, we can
 compile con to that byte code in have it execute on the Arduino.
+
+### Improve runtime
+
+The runtime system that we used in this tutorial can be optimized in
+different was. It does not need to allocate as many objects as it does for
+example.
+
+We can also experiment with different table structures.
