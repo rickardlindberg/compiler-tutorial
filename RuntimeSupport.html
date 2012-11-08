@@ -23,7 +23,7 @@
 </div>
 <p>Now that we've figured out the <a href="ExecutionModel.html" title="ExecutionModel">ExecutionModel</a> of con, we need to implement a C library that compiled con programs can use.</p>
 <h2 id="environment">Environment</h2>
-<p>We concluded that the environment was a central part in the <a href="ExecutionModel.html" title="ExecutionModel">ExecutionModel</a>. Let's see how we can implement that in C. The basic struct looks:</p>
+<p>We concluded that the environment was a central part in the <a href="ExecutionModel.html" title="ExecutionModel">ExecutionModel</a>. Let's see how we can implement that in C. The basic struct looks like this:</p>
 <pre><code>struct env {
     struct ref_count ref_count;
     int size;
@@ -87,24 +87,58 @@
 </ul>
 <p><code>FnSpec</code> is the function without an environment. It is a pointer to a C function with the following type:</p>
 <pre><code>Call aFunction(Env env, Args args);</code></pre>
+<p>So all functions in con are translated to C functions with the above type. The input is the environment in which to execute this function and the arguments passed to it. The return value is a call which is simply a closure bundled together with arguments:</p>
+<pre><code>struct call {
+    struct ref_count ref_count;
+    Closure closure;
+    Args args;
+};</code></pre>
 <h2 id="a-call">A call</h2>
 <p>Let's see if we can use the runtime to implement a call to a function. Assume we have the following body:</p>
 <pre><code>add 2 5 handle_add_result</code></pre>
-<p>First we need to create the global environment:</p>
+<p>First we need to have the global environment:</p>
 <pre><code>Env env = create_env(NULL);
-env_insert(&quot;handle_add_result&quot;, ...);
-env_insert(&quot;add&quot;, ...);</code></pre>
+env_insert(&quot;handle_add_result&quot;, create_closure(generated_fn_1, env));
+env_insert(&quot;add&quot;,               create_closure(builtin_add, env));</code></pre>
+<p>Then we need the closure for <code>add</code>:</p>
+<pre><code>Closure closure = (Closure)env_lookup(env, &quot;add&quot;);</code></pre>
 <p>Then we need to create the arguments for the call:</p>
 <pre><code>Args args = create_args(3);
 args_set(0, create_number(2));
 args_set(1, create_number(5));
-args_set(2, env_lookup(env, &quot;handle_add_result&quot;));
-
-Closure closure = (Closure)env_lookup(env, &quot;add&quot;);</code></pre>
+args_set(2, env_lookup(env, &quot;handle_add_result&quot;));</code></pre>
+<p>Then we need to bundle it in a <code>Call</code>:</p>
+<pre><code>Call call = create_call(closure, args);</code></pre>
+<p>We can then call it like this:</p>
+<pre><code>next_call = call-&gt;closure-&gt;fn_spec(call-&gt;closure-&gt;env, call-&gt;args);</code></pre>
 <h2 id="garbage-collection">Garbage collection</h2>
-<ul>
-<li>TODO</li>
-</ul>
+<p>Every time we create a new object using a <code>create_</code> function, new memory is allocated dynamically. This memory must be freed or we will eventually run out of memory.</p>
+<p>The problem is that we can't always know when objects can be freed. Consider the <code>add3</code> example:</p>
+<pre><code>let add3 = \(one, two, three, k) -&gt;
+    add one two (\(sum) -&gt;
+        add sum three k
+    )</code></pre>
+<p>This will result in two C functions: one for <code>add3</code> and one for the anonymous function. When <code>add3</code> is called, we have allocated memory to hold <code>k</code>. But we can't free the memory for <code>k</code> when we leave the C function for <code>add3</code> because it is needed later by the anonymous function.</p>
+<p>We solve this problem by using reference counting. So all structs that we allocated must have a reference counter as first entry:</p>
+<pre><code>struct ref_count ref_count;</code></pre>
+<p>That struct looks like this:</p>
+<pre><code>struct ref_count {
+    int count;
+    FnFree free_fn;
+};</code></pre>
+<p>It keeps track of how many things are referencing this object and also has a pointer to a function to free this object. Different objects are freed in different ways, so we need a free function for each object we allocate.</p>
+<p>Let's look at how freeing arguments work:</p>
+<pre><code>void free_args(void * ref_countable) {
+    Args args = (Args)ref_countable;
+    int i;
+    for (i = 0; i &lt; args-&gt;size; i++) {
+        dec_and_free(args-&gt;args[i]);
+    }
+    free(args-&gt;args);
+    free(args);
+}</code></pre>
+<p>The for loop goes over all arguments and calls <code>dec_and_free</code> on each one of them. In the above example that includes calling <code>dec_and_free</code> on <code>k</code>. What happens is that the reference counter is decreased by one, saying that this arguments structure no longer holds a reference to <code>k</code>. But freeing is only performed if the reference count is 0. Since <code>k</code> has been put in a new environment for use by the anonymous function later, it will not be freed when freeing the arguments since that new environment has a reference to <code>k</code>.</p>
+<p>The last part of <code>free_args</code> frees the array allocated for the arguments and the arguments structure itself.</p>
 <h2 id="continue">Continue</h2>
 <p><a href="CodeGeneration.html" title="CodeGeneration">CodeGeneration</a></p>
         <hr />

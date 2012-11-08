@@ -21,13 +21,22 @@
         <div class="figure">
 <img src="./static/images/summary.png" alt="Summary." /><p class="caption">Summary.</p>
 </div>
-<p>In this tutorial we have written a simple compiler for a simple language.</p>
+<p>In this tutorial we have written a simple compiler for a simple language. We transformed code in con to code in C, and together with a runtime library we were able to assemble a HEX file that could be uploaded and run on the Arduino.</p>
 <h2 id="whats-next">What's next?</h2>
-<p>TODO:</p>
-<ul>
-<li>we do can this...</li>
-<li>and that..</li>
-</ul>
+<p>The compiler we developed in this tutorial is very simple. If you want to learn more about compilers, here are some things you can look into.</p>
+<h3 id="type-checking">Type checking</h3>
+<p>At the moment, there are not many checks that a con program is valid. If the writer of a con program makes a mistake, it will explode at runtime. One check that we could perform is that all functions are called with the correct number of arguments. It is difficult to do thorough type checking since we don't define types in con, but number of arguments we can check.</p>
+<h3 id="optimization">Optimization</h3>
+<p>We could introduce a new stage in the compiler to optimize the source program. One optimization that we could do is to remove dead code. If we assign values to names without using them, there is no need to include them in the target code. In the example below, <code>BAR</code> is not used:</p>
+<pre><code>let FOO = 5
+
+let BAR = 6
+
+let main = \() -&gt; print FOO</code></pre>
+<h3 id="different-target-platform">Different target platform</h3>
+<p>In this tutorial, the target language was C. Then we used a different compiler to turn C code into an Arduino executable. What we can do instead is to generate Arduino machine code directly. This is a more complex task, but you gain more insight into how programs are executed on a machine.</p>
+<h3 id="virtual-machine">Virtual machine</h3>
+<p>Another approach is to compile code to byte code that is later executed by a virtual machine. If we can implement this virtual machine on an Arduino, we can compile con to that byte code in have it execute on the Arduino.</p>
         <hr />
         <svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
         <script type="text/javascript">
