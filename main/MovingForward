@@ -36,7 +36,7 @@ code. In the example below, `BAR` is not used:
 
 In this tutorial, the target language was C. Then we used a different compiler
 to turn C code into an Arduino executable. What we can do instead is to
-generate Arduino machine code directly. This is a more complex task, but you
+generate Arduino machine code directly. This is a more complex task, but we
 gain more insight into how programs are executed on a machine.
 
 ### Virtual machine

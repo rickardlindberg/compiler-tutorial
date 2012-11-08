@@ -9,7 +9,7 @@ that adds two numbers might look like this:
     def add(first, second):
         return first + second
 
-And you might use the function like this:
+And we might use the function like this:
 
     result = add(4, 5)
 
