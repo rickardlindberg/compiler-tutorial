@@ -19,14 +19,25 @@ using the reference implementation and then look at the generated code. If the
 [compile](https://github.com/rickardlindberg/compiler-tutorial/blob/master/src/compile.sh)
 script is used, the generated file is located in `sketch/con_program.cpp`.
 
-## Generating the main function
+The top-level code generator in the reference implementation looks like this:
 
-The main function should create the global environment and start calling the
-main function.
+    outProgram :: Program -> CodeGenerator ()
+    outProgram (Program lets) = do
+        addGlobalName "exit" "create_closure(&builtin_exit, env)"
+        addGlobalName "setTempo" "create_closure(&builtin_setTempo, env)"
+        addGlobalName "setBeat" "create_closure(&builtin_setBeat, env)"
+        writeLine "#include \"runtime.h\""
+        writeLine "#include <stdlib.h>"
+        writeLine ""
+        mapM_ outLet lets
+        outMain
 
-## Generating code for a function
-
-TODO:
+It generates C code for a whole con program. First we use `addGlobalName` for
+the built in functions. They will be used later when the main function is
+generated. `addGlobalName` is also part of the CodeGenerationFramework. Next we
+output a few include lines. Following that is a loop to generate code for each
+let expression. `outLet` generates C code for one let expression. Last we
+generate the main function using `outMain`.
 
 ## Continue
 
