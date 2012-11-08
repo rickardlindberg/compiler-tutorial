@@ -48,6 +48,7 @@
             var g = new Graph("canvas", 800, 400);
             g.repulsion = g.repulsion / 2;
             //g.spring_length = 8;
+            g.setCenter("$name$");
             $vertices:{x|g.createVertex("$x.1$", colors($x.0$), goToPageFn("$x.1$"));}; separator=""$
             $edges:{x|g.createEdge("$x.0$", "$x.1$");}; separator=""$
             g.go();

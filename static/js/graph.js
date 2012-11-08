@@ -47,6 +47,10 @@ function Graph(canvas_name, width, height) {
     this.spring_length = 1; // base resting length of springs
 }
 
+Graph.prototype.setCenter = function (name) {
+    this.center = name;
+}
+
 Graph.prototype.createVertex = function (name, colors, clickFn) { // XXX -- should support separate id and name
     // create an SVG rectangle, attach additional attributed to it
     var vertex = document.createElementNS(this.svg, "rect");
@@ -223,6 +227,12 @@ Graph.prototype.calculateForces = function () {
                     var magnet = magnets[k][1];
                     var toMagnet = magnet.subVNew(me);
                     this.forces[i].addV(toMagnet.scaleNew(strength / toMagnet.d2()));
+                }
+
+                if (i === this.center) {
+                    var center = new Vector(this.width/2, this.height/2);
+                    var toCenter = center.subVNew(me);
+                    this.forces[i].addV(toCenter.scaleNew(10000000 / toMagnet.d2()));
                 }
             }
         }
