@@ -25,10 +25,18 @@
 <p>Generating code in Haskell means generating a string that contains C code and then writing it to a file. In <a href="CodeGenerationFramework.html" title="CodeGenerationFramework">CodeGenerationFramework</a> we make a small framework that allows us to generate that string in a more elegant way.</p>
 <p>There are two things we need to generate: first the main function <code>con_main</code>, and then one C function per con function.</p>
 <p>The easiest way to get a feeling for how these two things should look like is to compile a <a href="https://github.com/rickardlindberg/compiler-tutorial/blob/master/scale.con">test program</a> using the reference implementation and then look at the generated code. If the <a href="https://github.com/rickardlindberg/compiler-tutorial/blob/master/src/compile.sh">compile</a> script is used, the generated file is located in <code>sketch/con_program.cpp</code>.</p>
-<h2 id="generating-the-main-function">Generating the main function</h2>
-<p>The main function should create the global environment and start calling the main function.</p>
-<h2 id="generating-code-for-a-function">Generating code for a function</h2>
-<p>TODO:</p>
+<p>The top-level code generator in the reference implementation looks like this:</p>
+<pre><code>outProgram :: Program -&gt; CodeGenerator ()
+outProgram (Program lets) = do
+    addGlobalName &quot;exit&quot; &quot;create_closure(&amp;builtin_exit, env)&quot;
+    addGlobalName &quot;setTempo&quot; &quot;create_closure(&amp;builtin_setTempo, env)&quot;
+    addGlobalName &quot;setBeat&quot; &quot;create_closure(&amp;builtin_setBeat, env)&quot;
+    writeLine &quot;#include \&quot;runtime.h\&quot;&quot;
+    writeLine &quot;#include &lt;stdlib.h&gt;&quot;
+    writeLine &quot;&quot;
+    mapM_ outLet lets
+    outMain</code></pre>
+<p>It generates C code for a whole con program. First we use <code>addGlobalName</code> for the built in functions. They will be used later when the main function is generated. <code>addGlobalName</code> is also part of the <a href="CodeGenerationFramework.html" title="CodeGenerationFramework">CodeGenerationFramework</a>. Next we output a few include lines. Following that is a loop to generate code for each let expression. <code>outLet</code> generates C code for one let expression. Last we generate the main function using <code>outMain</code>.</p>
 <h2 id="continue">Continue</h2>
 <p><a href="AssembleHex.html" title="AssembleHex">AssembleHex</a></p>
         <hr />

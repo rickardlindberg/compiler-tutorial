@@ -34,9 +34,12 @@ let BAR = 6
 
 let main = \() -&gt; print FOO</code></pre>
 <h3 id="different-target-platform">Different target platform</h3>
-<p>In this tutorial, the target language was C. Then we used a different compiler to turn C code into an Arduino executable. What we can do instead is to generate Arduino machine code directly. This is a more complex task, but you gain more insight into how programs are executed on a machine.</p>
+<p>In this tutorial, the target language was C. Then we used a different compiler to turn C code into an Arduino executable. What we can do instead is to generate Arduino machine code directly. This is a more complex task, but we gain more insight into how programs are executed on a machine.</p>
 <h3 id="virtual-machine">Virtual machine</h3>
 <p>Another approach is to compile code to byte code that is later executed by a virtual machine. If we can implement this virtual machine on an Arduino, we can compile con to that byte code in have it execute on the Arduino.</p>
+<h3 id="improve-runtime">Improve runtime</h3>
+<p>The runtime system that we used in this tutorial can be optimized in different was. It does not need to allocate as many objects as it does for example.</p>
+<p>We can also experiment with different table structures.</p>
         <hr />
         <svg xmlns="http://www.w3.org/2000/svg" id="canvas"></svg>
         <script type="text/javascript">
