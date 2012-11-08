@@ -52,6 +52,7 @@
             var g = new Graph("canvas", 800, 400);
             g.repulsion = g.repulsion / 2;
             //g.spring_length = 8;
+            g.setCenter("PiezoSpeaker");
             g.createVertex("PiezoSpeaker", colors(1), goToPageFn("PiezoSpeaker"));g.createVertex("ConLanguage", colors(2), goToPageFn("ConLanguage"));g.createVertex("ContinuationsMusicCompiler", colors(2), goToPageFn("ContinuationsMusicCompiler"));g.createVertex("ArduinoUno", colors(3), goToPageFn("ArduinoUno"));g.createVertex("ContinuationPassingStyle", colors(3), goToPageFn("ContinuationPassingStyle"));g.createVertex("StageParsing", colors(3), goToPageFn("StageParsing"));g.createVertex("StructureOfCompiler", colors(3), goToPageFn("StructureOfCompiler"));g.createVertex("WhyWriteCompiler", colors(3), goToPageFn("WhyWriteCompiler"));
             g.createEdge("PiezoSpeaker", "ContinuationsMusicCompiler");g.createEdge("ConLanguage", "ContinuationPassingStyle");g.createEdge("ConLanguage", "PiezoSpeaker");g.createEdge("ContinuationsMusicCompiler", "ArduinoUno");g.createEdge("ContinuationsMusicCompiler", "ConLanguage");g.createEdge("ContinuationsMusicCompiler", "StructureOfCompiler");g.createEdge("ArduinoUno", "ContinuationsMusicCompiler");g.createEdge("StageParsing", "ConLanguage");g.createEdge("WhyWriteCompiler", "ContinuationsMusicCompiler");
             g.go();

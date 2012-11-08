@@ -52,6 +52,7 @@
             var g = new Graph("canvas", 800, 400);
             g.repulsion = g.repulsion / 2;
             //g.spring_length = 8;
+            g.setCenter("HomePage");
             g.createVertex("HomePage", colors(1), goToPageFn("HomePage"));g.createVertex("HaskellLanguage", colors(2), goToPageFn("HaskellLanguage"));g.createVertex("WhatIsCompiler", colors(2), goToPageFn("WhatIsCompiler"));g.createVertex("WhyWriteCompiler", colors(3), goToPageFn("WhyWriteCompiler"));
             g.createEdge("HomePage", "HaskellLanguage");g.createEdge("HomePage", "WhatIsCompiler");g.createEdge("WhatIsCompiler", "WhyWriteCompiler");
             g.go();

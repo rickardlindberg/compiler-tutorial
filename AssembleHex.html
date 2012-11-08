@@ -61,6 +61,7 @@
             var g = new Graph("canvas", 800, 400);
             g.repulsion = g.repulsion / 2;
             //g.spring_length = 8;
+            g.setCenter("AssembleHex");
             g.createVertex("AssembleHex", colors(1), goToPageFn("AssembleHex"));g.createVertex("CodeGeneration", colors(2), goToPageFn("CodeGeneration"));g.createVertex("MovingForward", colors(2), goToPageFn("MovingForward"));g.createVertex("RuntimeSupport", colors(2), goToPageFn("RuntimeSupport"));g.createVertex("CodeGenerationFramework", colors(3), goToPageFn("CodeGenerationFramework"));g.createVertex("ExecutionModel", colors(3), goToPageFn("ExecutionModel"));
             g.createEdge("AssembleHex", "CodeGeneration");g.createEdge("AssembleHex", "MovingForward");g.createEdge("AssembleHex", "RuntimeSupport");g.createEdge("CodeGeneration", "AssembleHex");g.createEdge("CodeGeneration", "CodeGenerationFramework");g.createEdge("CodeGeneration", "RuntimeSupport");g.createEdge("RuntimeSupport", "CodeGeneration");g.createEdge("RuntimeSupport", "ExecutionModel");g.createEdge("CodeGenerationFramework", "CodeGeneration");g.createEdge("ExecutionModel", "RuntimeSupport");
             g.go();

@@ -53,6 +53,7 @@
             var g = new Graph("canvas", 800, 400);
             g.repulsion = g.repulsion / 2;
             //g.spring_length = 8;
+            g.setCenter("WhatIsCompiler");
             g.createVertex("WhatIsCompiler", colors(1), goToPageFn("WhatIsCompiler"));g.createVertex("HomePage", colors(2), goToPageFn("HomePage"));g.createVertex("WhyWriteCompiler", colors(2), goToPageFn("WhyWriteCompiler"));g.createVertex("ContinuationsMusicCompiler", colors(3), goToPageFn("ContinuationsMusicCompiler"));g.createVertex("HaskellLanguage", colors(3), goToPageFn("HaskellLanguage"));
             g.createEdge("WhatIsCompiler", "WhyWriteCompiler");g.createEdge("HomePage", "HaskellLanguage");g.createEdge("HomePage", "WhatIsCompiler");g.createEdge("WhyWriteCompiler", "ContinuationsMusicCompiler");
             g.go();

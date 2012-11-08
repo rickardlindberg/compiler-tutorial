@@ -89,6 +89,7 @@ writeLine line = ST.modify (\s -&gt; s { code = code s ++ newLine s })
             var g = new Graph("canvas", 800, 400);
             g.repulsion = g.repulsion / 2;
             //g.spring_length = 8;
+            g.setCenter("CodeGenerationFramework");
             g.createVertex("CodeGenerationFramework", colors(1), goToPageFn("CodeGenerationFramework"));g.createVertex("CodeGeneration", colors(2), goToPageFn("CodeGeneration"));g.createVertex("AssembleHex", colors(3), goToPageFn("AssembleHex"));g.createVertex("RuntimeSupport", colors(3), goToPageFn("RuntimeSupport"));
             g.createEdge("CodeGenerationFramework", "CodeGeneration");g.createEdge("CodeGeneration", "AssembleHex");g.createEdge("CodeGeneration", "CodeGenerationFramework");g.createEdge("CodeGeneration", "RuntimeSupport");g.createEdge("AssembleHex", "CodeGeneration");g.createEdge("AssembleHex", "RuntimeSupport");g.createEdge("RuntimeSupport", "CodeGeneration");
             g.go();

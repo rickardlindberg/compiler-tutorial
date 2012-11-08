@@ -93,6 +93,7 @@ let printAnswer = \(k) -&gt;
             var g = new Graph("canvas", 800, 400);
             g.repulsion = g.repulsion / 2;
             //g.spring_length = 8;
+            g.setCenter("ExecutionModel");
             g.createVertex("ExecutionModel", colors(1), goToPageFn("ExecutionModel"));g.createVertex("RuntimeSupport", colors(2), goToPageFn("RuntimeSupport"));g.createVertex("StageParsing", colors(2), goToPageFn("StageParsing"));g.createVertex("AssembleHex", colors(3), goToPageFn("AssembleHex"));g.createVertex("CodeGeneration", colors(3), goToPageFn("CodeGeneration"));g.createVertex("ConLanguage", colors(3), goToPageFn("ConLanguage"));g.createVertex("ConcOverview", colors(3), goToPageFn("ConcOverview"));g.createVertex("ParseTree", colors(3), goToPageFn("ParseTree"));g.createVertex("ParsecIntroduction", colors(3), goToPageFn("ParsecIntroduction"));
             g.createEdge("ExecutionModel", "RuntimeSupport");g.createEdge("ExecutionModel", "StageParsing");g.createEdge("RuntimeSupport", "CodeGeneration");g.createEdge("RuntimeSupport", "ExecutionModel");g.createEdge("StageParsing", "ConLanguage");g.createEdge("StageParsing", "ExecutionModel");g.createEdge("StageParsing", "ParseTree");g.createEdge("StageParsing", "ParsecIntroduction");g.createEdge("AssembleHex", "CodeGeneration");g.createEdge("AssembleHex", "RuntimeSupport");g.createEdge("CodeGeneration", "AssembleHex");g.createEdge("CodeGeneration", "RuntimeSupport");g.createEdge("ConcOverview", "StageParsing");
             g.go();
