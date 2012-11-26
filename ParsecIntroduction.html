@@ -49,11 +49,11 @@ run p input =
 
 parseNumber :: Parser Int
 parseNumber = do
-    numbersAsString &lt;- many  (  char &#39;0&#39; &lt;|&gt; char &#39;1&#39; &lt;|&gt; char &#39;2&#39;
-                            &lt;|&gt; char &#39;3&#39; &lt;|&gt; char &#39;4&#39; &lt;|&gt; char &#39;5&#39;
-                            &lt;|&gt; char &#39;6&#39; &lt;|&gt; char &#39;7&#39; &lt;|&gt; char &#39;8&#39;
-                            &lt;|&gt; char &#39;9&#39;
-                             )
+    numbersAsString &lt;- many1  (  char &#39;0&#39; &lt;|&gt; char &#39;1&#39; &lt;|&gt; char &#39;2&#39;
+                             &lt;|&gt; char &#39;3&#39; &lt;|&gt; char &#39;4&#39; &lt;|&gt; char &#39;5&#39;
+                             &lt;|&gt; char &#39;6&#39; &lt;|&gt; char &#39;7&#39; &lt;|&gt; char &#39;8&#39;
+                             &lt;|&gt; char &#39;9&#39;
+                              )
     --eof
     return (read numbersAsString)</code></pre>
 <p>Try changing the inputs and the parser to see what happens.</p>
